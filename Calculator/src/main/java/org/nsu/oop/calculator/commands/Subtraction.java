@@ -2,9 +2,11 @@ package org.nsu.oop.calculator.commands;
 
 import org.nsu.oop.calculator.runtime.ExecutionContext;
 
+import java.util.List;
+
 public class Subtraction implements Command {
     @Override
-    public void command(Object[] args, ExecutionContext context) {
+    public void runCommand(List<String> args, ExecutionContext context) {
         double a = context.popValue();
         double b = context.popValue();
         context.pushValue(a - b);
