@@ -6,8 +6,13 @@ import java.lang.Double;
 
 
 public class ExecutionContext {
-    final private Stack<Double> stack_ = new Stack<>();
-    final private HashMap<String, Double> map_ = new HashMap<>();
+    final private Stack<Double> stack_;
+    final private HashMap<String, Double> map_;
+
+    public ExecutionContext() {
+        stack_ = new Stack<>();
+        map_ = new HashMap<>();
+    }
 
     public void pushValue(double value) {
         stack_.push(value);

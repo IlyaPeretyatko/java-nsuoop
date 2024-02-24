@@ -8,11 +8,10 @@ import java.lang.Math;
 public class Sqrt implements Command {
     @Override
     public void runCommand(List<String> args, ExecutionContext context) {
-        if (args.isEmpty()) {
-            double value = context.popValue();
-            context.pushValue(Math.sqrt(value));
-        } else {
-            //throw
+        if (!args.isEmpty()) {
+            throw new IllegalArgumentException();
         }
+        double value = context.popValue();
+        context.pushValue(Math.sqrt(value));
     }
 }

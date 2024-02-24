@@ -8,8 +8,9 @@ public class Push implements Command {
     @Override
     public void runCommand(List<String> args, ExecutionContext context) {
         if (args.size() != 1) {
-            // throw
-        } else if (isNumeric(args.getFirst())) {
+            throw new IllegalArgumentException();
+        }
+        if (isNumeric(args.getFirst())) {
             double value = Double.parseDouble(args.getFirst());
             context.pushValue(value);
         } else {
