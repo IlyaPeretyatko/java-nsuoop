@@ -26,9 +26,6 @@ public class ExecutionContext {
     }
 
     public double getValueOfVariable(String key) {
-        if (!map_.containsKey(key)) {
-            //throw
-        }
         return map_.get(key);
     }
 

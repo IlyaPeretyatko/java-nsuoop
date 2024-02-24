@@ -5,4 +5,14 @@ import java.util.List;
 
 public interface Command {
     public void runCommand(List<String> args, ExecutionContext context);
+
+    public default boolean isNumeric(String str) {
+        boolean isOnlyDigits = true;
+        for(int i = 0; i < str.length() && isOnlyDigits; i++) {
+            if(!Character.isDigit(str.charAt(i))) {
+                isOnlyDigits = false;
+            }
+        }
+        return isOnlyDigits;
+    }
 }

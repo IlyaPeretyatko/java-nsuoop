@@ -5,26 +5,38 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ClassLoader;
 import java.lang.Class;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
 public class Creator {
     private final Properties properties;
 
-    public Creator() throws IOException {
+    public Creator() {
         ClassLoader cl = Main.class.getClassLoader();
         properties = new Properties();
         InputStream resourceAsStream = cl.getResourceAsStream("commands.properties");
-        properties.load(resourceAsStream);
+        try {
+            properties.load(resourceAsStream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Command create(String commandName) {
         String cmdName = properties.getProperty(commandName.toUpperCase());
         try {
             return (Command) Class.forName(cmdName).getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-            //throw
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
 
