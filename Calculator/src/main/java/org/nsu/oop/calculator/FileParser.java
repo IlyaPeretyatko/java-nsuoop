@@ -1,4 +1,4 @@
-package org.nsu.oop.calculator.runtime;
+package org.nsu.oop.calculator;
 
 import org.nsu.oop.calculator.commands.Creator;
 import org.nsu.oop.calculator.commands.Command;
@@ -6,6 +6,7 @@ import org.nsu.oop.calculator.commands.Command;
 import java.io.BufferedReader;
 
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Arrays;
@@ -14,22 +15,20 @@ import java.util.ArrayList;
 
 
 public class FileParser {
-    private final BufferedReader reader;
     private String line;
     private String commandName;
     private List<String> args;
     private final ExecutionContext currentContext;
 
 
-    public FileParser(BufferedReader reader) {
-        this.reader = reader;
+    public FileParser() {
         currentContext = new ExecutionContext();
     }
 
-    public void parse() {
-        try {
+    public void parse(FileReader reader) {
+        try (BufferedReader bufferedReader = new BufferedReader(reader)) {
             do {
-                line = reader.readLine();
+                line = bufferedReader.readLine();
                 if (line != null) {
                     parseLine();
                     Creator commandCreator = new Creator();
@@ -39,7 +38,7 @@ public class FileParser {
                 }
             } while (line != null);
         } catch (IOException e) {
-            line = null;
+            throw new RuntimeException(e);
         }
     }
 

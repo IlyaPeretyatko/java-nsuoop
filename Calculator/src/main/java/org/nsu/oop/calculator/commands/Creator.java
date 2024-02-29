@@ -14,8 +14,7 @@ public class Creator {
     public Creator() {
         ClassLoader cl = Main.class.getClassLoader();
         properties = new Properties();
-        InputStream resourceAsStream = cl.getResourceAsStream("commands.properties");
-        try {
+        try (InputStream resourceAsStream = cl.getResourceAsStream("commands.properties")) {
             properties.load(resourceAsStream);
         } catch (IOException e) {
             throw new RuntimeException(e);
