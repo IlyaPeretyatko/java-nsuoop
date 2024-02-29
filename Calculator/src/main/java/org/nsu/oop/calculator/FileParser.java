@@ -33,7 +33,8 @@ public class FileParser {
                     parseLine();
                     Creator commandCreator = new Creator();
                     Command command = commandCreator.create(commandName);
-                    command.runCommand(args, currentContext);
+                    command.initial(args);
+                    command.runCommand(currentContext);
                     args.clear();
                 }
             } while (line != null);

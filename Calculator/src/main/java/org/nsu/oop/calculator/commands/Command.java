@@ -4,7 +4,10 @@ import org.nsu.oop.calculator.ExecutionContext;
 import java.util.List;
 
 public interface Command {
-    void runCommand(List<String> args, ExecutionContext context);
+
+    void runCommand(ExecutionContext context);
+
+    void initial(List<String> args);
 
     default boolean isNumeric(String str) {
         boolean isOnlyDigits = true;

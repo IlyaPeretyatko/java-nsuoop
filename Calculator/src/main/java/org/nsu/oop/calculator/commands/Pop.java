@@ -5,12 +5,17 @@ import org.nsu.oop.calculator.ExecutionContext;
 import java.util.List;
 
 public class Pop implements Command {
+
     @Override
-    public void runCommand(List<String> args, ExecutionContext context) {
+    public void initial(List<String> args) {
         if (!args.isEmpty()) {
             throw new IllegalArgumentException();
         }
-        context.popValue();
-
     }
+
+    @Override
+    public void runCommand(ExecutionContext context) {
+        context.popValue();
+    }
+
 }

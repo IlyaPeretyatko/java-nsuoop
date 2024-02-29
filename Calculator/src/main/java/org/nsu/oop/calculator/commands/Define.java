@@ -5,11 +5,21 @@ import org.nsu.oop.calculator.ExecutionContext;
 import java.util.List;
 
 public class Define implements Command {
+    
+    String variable;
+    Double value;
+
     @Override
-    public void runCommand(List<String> args, ExecutionContext context) {
+    public void initial(List<String> args) {
         if (args.size() != 2 || isNumeric(args.getFirst()) || !isNumeric(args.getLast())) {
             throw new IllegalArgumentException();
         }
-        context.pushVariable(args.getFirst(), Double.parseDouble(args.getLast()));
+        variable = args.getFirst();
+        value = Double.parseDouble(args.getLast());
+    }
+
+    @Override
+    public void runCommand(ExecutionContext context) {
+        context.pushVariable(variable, value);
     }
 }
