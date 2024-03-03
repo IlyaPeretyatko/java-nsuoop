@@ -47,4 +47,28 @@ public class CalculatorTest {
         Assertions.assertEquals(rightOut, outContent.toString());
     }
 
+    @Test
+    public void test3() {
+        Calculator calculator = new Calculator("src/test/java/tests/instructions3.txt");
+        calculator.run();
+        String rightOut = "21.0\r\n";
+        Assertions.assertEquals(rightOut, outContent.toString());
+    }
+
+    @Test
+    public void test4() {
+        Calculator calculator = new Calculator("src/test/java/tests/instructions4.txt");
+        calculator.run();
+        String rightOut = "2.0\r\n";
+        Assertions.assertEquals(rightOut, outContent.toString());
+    }
+
+    @Test
+    public void test5() {
+        Calculator calculator = new Calculator("src/test/java/tests/instructions5.txt");
+        calculator.run();
+        String rightOut = "456.0\r\n";
+        Assertions.assertEquals(rightOut, outContent.toString());
+    }
+
 }

@@ -4,5 +4,4 @@ PUSH 2
 *
 PUSH a
 +
-SQRT
 PRINT
