@@ -7,8 +7,12 @@ import java.lang.ClassLoader;
 import java.lang.Class;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class Creator {
+
+    private static final Logger log = Logger.getLogger(Creator.class.getName());
+
     private final Properties properties;
 
     public Creator() {
@@ -19,10 +23,12 @@ public class Creator {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        log.info("Initialization Creator.");
     }
 
     public Command create(String commandName) {
         String cmdName = properties.getProperty(commandName.toUpperCase());
+        log.info("Get name of class command: " + cmdName + ".");
         try {
             return (Command) Class.forName(cmdName).getDeclaredConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException |

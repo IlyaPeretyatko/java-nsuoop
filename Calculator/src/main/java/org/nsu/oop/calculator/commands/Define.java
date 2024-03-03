@@ -5,7 +5,7 @@ import org.nsu.oop.calculator.ExecutionContext;
 import java.util.List;
 
 public class Define implements Command {
-    
+
     String variable;
     Double value;
 

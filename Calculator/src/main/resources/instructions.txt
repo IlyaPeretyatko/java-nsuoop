@@ -1,4 +1,9 @@
 DEFINE a 4
 PUSH a
 SQRT
+Push 15
+*
 PRINT
+Push 5
++
+Print
