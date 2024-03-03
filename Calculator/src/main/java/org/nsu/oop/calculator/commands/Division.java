@@ -16,6 +16,6 @@ public class Division implements Command {
     public void runCommand(ExecutionContext context) {
         double a = context.popValue();
         double b = context.popValue();
-        context.pushValue(a / b);
+        context.pushValue(b / a);
     }
 }

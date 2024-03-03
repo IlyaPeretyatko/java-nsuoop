@@ -35,7 +35,7 @@ public class FileParser {
             do {
                 log.info("Read line.");
                 line = bufferedReader.readLine();
-                if (line != null) {
+                if (line != null && !line.isEmpty()) {
                     parseLine();
                     Command command = commandCreator.create(commandName);
                     log.info("Initialization command.");
