@@ -5,17 +5,20 @@ import org.nsu.oop.calculator.ExecutionContext;
 import java.util.List;
 
 public class Addition implements Command {
+    ExecutionContext currentContext;
+
     @Override
-    public void initial(List<String> args) {
+    public void initial(List<String> args, ExecutionContext context) {
         if (!args.isEmpty()) {
             throw new IllegalArgumentException();
         }
+        currentContext = context;
     }
 
-    @Override
-    public void runCommand(ExecutionContext context) {
-        double a = context.popValue();
-        double b = context.popValue();
-        context.pushValue(a + b);
+
+    public void runCommand() {
+        double a = currentContext.popValue();
+        double b = currentContext.popValue();
+        currentContext.pushValue(a + b);
     }
 }

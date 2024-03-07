@@ -5,16 +5,19 @@ import org.nsu.oop.calculator.ExecutionContext;
 import java.util.List;
 
 public class Print implements Command {
-    @Override
-    public void runCommand(ExecutionContext context) {
-        System.out.println(context.peekValue());
+
+    ExecutionContext currentContext;
+
+    public void runCommand() {
+        System.out.println(currentContext.peekValue());
     }
 
     @Override
-    public void initial(List<String> args) {
+    public void initial(List<String> args, ExecutionContext context) {
         if (!args.isEmpty()) {
             throw new IllegalArgumentException();
         }
+        currentContext = context;
     }
 
 }

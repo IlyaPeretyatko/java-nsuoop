@@ -7,16 +7,18 @@ import java.lang.Math;
 
 public class Sqrt implements Command {
 
+    ExecutionContext currentContext;
+
     @Override
-    public void initial(List<String> args) {
+    public void initial(List<String> args, ExecutionContext context) {
         if (!args.isEmpty()) {
             throw new IllegalArgumentException();
         }
+        currentContext = context;
     }
 
-    @Override
-    public void runCommand(ExecutionContext context) {
-        double value = context.popValue();
-        context.pushValue(Math.sqrt(value));
+    public void runCommand() {
+        double value = currentContext.popValue();
+        currentContext.pushValue(Math.sqrt(value));
     }
 }

@@ -6,16 +6,19 @@ import java.util.List;
 
 public class Pop implements Command {
 
+    ExecutionContext currentContext;
+
     @Override
-    public void initial(List<String> args) {
+    public void initial(List<String> args, ExecutionContext context) {
         if (!args.isEmpty()) {
             throw new IllegalArgumentException();
         }
+        currentContext = context;
     }
 
-    @Override
-    public void runCommand(ExecutionContext context) {
-        context.popValue();
+
+    public void runCommand() {
+        currentContext.popValue();
     }
 
 }

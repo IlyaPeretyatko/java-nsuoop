@@ -5,17 +5,20 @@ import org.nsu.oop.calculator.ExecutionContext;
 import java.util.List;
 
 public class Subtraction implements Command {
+
+    ExecutionContext currentContext;
+
     @Override
-    public void initial(List<String> args) {
+    public void initial(List<String> args, ExecutionContext context) {
         if (!args.isEmpty()) {
             throw new IllegalArgumentException();
         }
+        currentContext = context;
     }
 
-    @Override
-    public void runCommand(ExecutionContext context) {
-        double a = context.popValue();
-        double b = context.popValue();
-        context.pushValue(b - a);
+    public void runCommand() {
+        double a = currentContext.popValue();
+        double b = currentContext.popValue();
+        currentContext.pushValue(b - a);
     }
 }

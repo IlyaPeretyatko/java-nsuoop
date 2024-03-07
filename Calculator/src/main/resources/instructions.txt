@@ -1,10 +1,4 @@
-DEFINE a 4
-PUSH a
-SQRT
-Push 15
-*
+PUSH 5
+PUSH 6
+POP
 PRINT
-Push 5
-+
-Print
-
