@@ -21,14 +21,16 @@ public class Executor {
 
         for(Method m: clss.getDeclaredMethods()) {
             String parametrs = Arrays.stream(m.getParameters()).map(it -> it.getType().getName()).collect(Collectors.joining(", "));
-            boolean isRunCommand = m.getName().equals("runCommand");
-            if (isRunCommand && size == 0 && parametrs.isEmpty()) {
+            if (!m.getName().equals("runCommand")) {
+                continue;
+            }
+            if (size == 0 && parametrs.isEmpty()) {
                 invokeWithoutParams(m);
-            } else if (isRunCommand && size == 1 && parametrs.equals("java.lang.String") && !isNumeric(args.getFirst())) {
+            } else if (size == 1 && parametrs.equals("java.lang.String") && !isNumeric(args.getFirst())) {
                 invokeWithString(m);
-            } else if (isRunCommand && size == 1 && parametrs.equals("java.lang.Double") && isNumeric(args.getFirst())) {
+            } else if (size == 1 && parametrs.equals("java.lang.Double") && isNumeric(args.getFirst())) {
                 invokeWithDouble(m);
-            } else if (isRunCommand && size == 2 && parametrs.equals("java.lang.String, java.lang.Double")) {
+            } else if (size == 2 && parametrs.equals("java.lang.String, java.lang.Double")) {
                 invokeWithStringDouble(m);
             }
         }
