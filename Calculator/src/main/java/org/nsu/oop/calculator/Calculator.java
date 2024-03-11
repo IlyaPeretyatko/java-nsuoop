@@ -15,12 +15,10 @@ public class Calculator {
     public Calculator() {
         log.info("Initialization Calculator");
         currentContext = new ExecutionContext();
-
     }
 
     public void run(String path) {
-        String pathToInstruction = path;
-        if (pathToInstruction.isEmpty()) {
+        if (path.isEmpty()) {
             try (InputStreamReader inputStreamReader = new InputStreamReader(System.in)) {
                 FileParser consoleParser= new FileParser();
                 consoleParser.parse(inputStreamReader);
@@ -28,7 +26,7 @@ public class Calculator {
                 throw new RuntimeException(e);
             }
         } else {
-            try (FileReader fileReader = new FileReader(pathToInstruction)) {
+            try (FileReader fileReader = new FileReader(path)) {
                 log.info("Open file for reading.");
                 FileParser fileParser = new FileParser();
                 fileParser.parse(fileReader);
