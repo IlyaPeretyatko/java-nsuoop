@@ -35,7 +35,7 @@ public class CalculatorTest {
     public void test1() {
         Calculator calculator = new Calculator("src/test/java/tests/instructions1.txt");
         calculator.run();
-        String rightOut = "30.0\r\n";
+        String rightOut = "30.0\n";
         Assertions.assertEquals(rightOut, outContent.toString());
     }
 
@@ -43,7 +43,7 @@ public class CalculatorTest {
     public void test2() {
         Calculator calculator = new Calculator("src/test/java/tests/instructions2.txt");
         calculator.run();
-        String rightOut = "2.0\r\n";
+        String rightOut = "2.0\n";
         Assertions.assertEquals(rightOut, outContent.toString());
     }
 
@@ -51,7 +51,7 @@ public class CalculatorTest {
     public void test3() {
         Calculator calculator = new Calculator("src/test/java/tests/instructions3.txt");
         calculator.run();
-        String rightOut = "21.0\r\n";
+        String rightOut = "21.0\n";
         Assertions.assertEquals(rightOut, outContent.toString());
     }
 
@@ -59,7 +59,7 @@ public class CalculatorTest {
     public void test4() {
         Calculator calculator = new Calculator("src/test/java/tests/instructions4.txt");
         calculator.run();
-        String rightOut = "2.0\r\n";
+        String rightOut = "2.0\n";
         Assertions.assertEquals(rightOut, outContent.toString());
     }
 
@@ -67,7 +67,7 @@ public class CalculatorTest {
     public void test5() {
         Calculator calculator = new Calculator("src/test/java/tests/instructions5.txt");
         calculator.run();
-        String rightOut = "456.0\r\n";
+        String rightOut = "456.0\n";
         Assertions.assertEquals(rightOut, outContent.toString());
     }
 

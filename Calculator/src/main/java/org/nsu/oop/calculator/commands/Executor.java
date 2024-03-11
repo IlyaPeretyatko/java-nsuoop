@@ -17,20 +17,19 @@ public class Executor {
 
     public void searchMethod() {
         Class<?> clss = currentCommand.getClass();
-        int size = args.size();
 
         for(Method m: clss.getDeclaredMethods()) {
             String parametrs = Arrays.stream(m.getParameters()).map(it -> it.getType().getName()).collect(Collectors.joining(", "));
             if (!m.getName().equals("runCommand")) {
                 continue;
             }
-            if (size == 0 && parametrs.isEmpty()) {
+            if (parametrs.isEmpty()) {
                 invokeWithoutParams(m);
-            } else if (size == 1 && parametrs.equals("java.lang.String") && !isNumeric(args.getFirst())) {
+            } else if (parametrs.equals("java.lang.String") && !isNumeric(args.getFirst())) {
                 invokeWithString(m);
-            } else if (size == 1 && parametrs.equals("java.lang.Double") && isNumeric(args.getFirst())) {
+            } else if (parametrs.equals("java.lang.Double") && isNumeric(args.getFirst())) {
                 invokeWithDouble(m);
-            } else if (size == 2 && parametrs.equals("java.lang.String, java.lang.Double")) {
+            } else if (parametrs.equals("java.lang.String, java.lang.Double")) {
                 invokeWithStringDouble(m);
             }
         }
