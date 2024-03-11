@@ -29,7 +29,7 @@ public class Executor {
                 invokeWithString(m);
             } else if (parametrs.equals("java.lang.Double") && isNumeric(args.getFirst())) {
                 invokeWithDouble(m);
-            } else if (parametrs.equals("java.lang.String, java.lang.Double")) {
+            } else if (parametrs.equals("java.lang.String, java.lang.Double") && !isNumeric(args.getFirst()) && isNumeric(args.getLast())) {
                 invokeWithStringDouble(m);
             }
         }
