@@ -5,6 +5,8 @@ import java.util.List;
 
 public interface Command {
 
-    void initial(List<String> args, ExecutionContext context);
+    void validateArgs(List<String> args);
+
+    List<String> getArgs();
 
 }

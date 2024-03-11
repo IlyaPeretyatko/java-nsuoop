@@ -6,19 +6,24 @@ import java.util.List;
 
 public class Define implements Command {
 
-    ExecutionContext currentContext;
+    private List<String> args;
 
 
     @Override
-    public void initial(List<String> args, ExecutionContext context) {
+    public void validateArgs(List<String> args) {
         if (args.size() != 2) {
             throw new IllegalArgumentException();
         }
-        currentContext = context;
+        this.args = args;
+    }
+
+    @Override
+    public List<String> getArgs() {
+        return args;
     }
 
 
-    public void runCommand(String variable, Double value) {
+    public void runCommand(ExecutionContext currentContext, String variable, Double value) {
         currentContext.pushVariable(variable, value);
     }
 }

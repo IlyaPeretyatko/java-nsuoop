@@ -1,5 +1,7 @@
 package org.nsu.oop.calculator.commands;
 
+import org.nsu.oop.calculator.ExecutionContext;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -8,21 +10,28 @@ import java.util.stream.Collectors;
 
 public class Executor {
     Command currentCommand;
-    List<String> args;
+    ExecutionContext currentContext;
 
-    public Executor(Command command, List<String> args) {
+    public Executor(Command command, ExecutionContext context) {
         currentCommand = command;
-        this.args = args;
+        currentContext = context;
     }
 
     public void searchMethod() {
         Class<?> clss = currentCommand.getClass();
-
-        for(Method m: clss.getDeclaredMethods()) {
-            String parametrs = Arrays.stream(m.getParameters()).map(it -> it.getType().getName()).collect(Collectors.joining(", "));
+        List<String> args = currentCommand.getArgs();
+        for (Method m: clss.getDeclaredMethods()) {
             if (!m.getName().equals("runCommand")) {
                 continue;
             }
+            String params = Arrays.stream(m.getParameters()).map(it -> it.getType().getName()).collect(Collectors.joining(", "));
+            String parametrs;
+            if (args.isEmpty()) {
+                parametrs = params.substring("org.nsu.oop.calculator.commands.Division".toCharArray().length - 1);
+            } else {
+                parametrs = params.substring("org.nsu.oop.calculator.commands.Division, ".toCharArray().length - 1);
+            }
+
             if (parametrs.isEmpty()) {
                 invokeWithoutParams(m);
             } else if (parametrs.equals("java.lang.String") && !isNumeric(args.getFirst())) {
@@ -37,7 +46,7 @@ public class Executor {
 
     private void invokeWithoutParams(Method m) {
         try {
-            m.invoke(currentCommand);
+            m.invoke(currentCommand, currentContext);
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
@@ -45,7 +54,7 @@ public class Executor {
 
     private void invokeWithString(Method m) {
         try {
-            m.invoke(currentCommand, args.getFirst());
+            m.invoke(currentCommand, currentContext, currentCommand.getArgs().getFirst());
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
@@ -53,18 +62,18 @@ public class Executor {
 
     private void invokeWithDouble(Method m) {
         try {
-            m.invoke(currentCommand, Double.parseDouble(args.getFirst()));
+            m.invoke(currentCommand, currentContext, Double.parseDouble(currentCommand.getArgs().getFirst()));
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
     }
 
     private void invokeWithStringDouble(Method m) {
-        if (isNumeric(args.getFirst()) && !isNumeric(args.getLast())) {
+        if (isNumeric(currentCommand.getArgs().getFirst()) && !isNumeric(currentCommand.getArgs().getLast())) {
             throw new IllegalArgumentException();
         }
         try {
-            m.invoke(currentCommand, args.getFirst(), Double.parseDouble(args.getLast()));
+            m.invoke(currentCommand, currentContext, currentCommand.getArgs().getFirst(), Double.parseDouble(currentCommand.getArgs().getLast()));
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }

@@ -33,40 +33,40 @@ public class CalculatorTest {
 
     @Test
     public void test1() {
-        Calculator calculator = new Calculator("src/test/java/tests/instructions1.txt");
-        calculator.run();
+        Calculator calculator = new Calculator();
+        calculator.run("src/test/java/tests/instructions1.txt");
         String rightOut = "30.0\n";
         Assertions.assertEquals(rightOut, outContent.toString());
     }
 
     @Test
     public void test2() {
-        Calculator calculator = new Calculator("src/test/java/tests/instructions2.txt");
-        calculator.run();
+        Calculator calculator = new Calculator();
+        calculator.run("src/test/java/tests/instructions2.txt");
         String rightOut = "2.0\n";
         Assertions.assertEquals(rightOut, outContent.toString());
     }
 
     @Test
     public void test3() {
-        Calculator calculator = new Calculator("src/test/java/tests/instructions3.txt");
-        calculator.run();
+        Calculator calculator = new Calculator();
+        calculator.run("src/test/java/tests/instructions3.txt");
         String rightOut = "21.0\n";
         Assertions.assertEquals(rightOut, outContent.toString());
     }
 
     @Test
     public void test4() {
-        Calculator calculator = new Calculator("src/test/java/tests/instructions4.txt");
-        calculator.run();
+        Calculator calculator = new Calculator();
+        calculator.run("src/test/java/tests/instructions4.txt");
         String rightOut = "2.0\n";
         Assertions.assertEquals(rightOut, outContent.toString());
     }
 
     @Test
     public void test5() {
-        Calculator calculator = new Calculator("src/test/java/tests/instructions5.txt");
-        calculator.run();
+        Calculator calculator = new Calculator();
+        calculator.run("src/test/java/tests/instructions5.txt");
         String rightOut = "456.0\n";
         Assertions.assertEquals(rightOut, outContent.toString());
     }

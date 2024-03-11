@@ -6,22 +6,27 @@ import java.util.List;
 
 public class Push implements Command {
 
-    ExecutionContext currentContext;
+    private List<String> args;
 
 
     @Override
-    public void initial(List<String> args, ExecutionContext context) {
+    public void validateArgs(List<String> args) {
         if (args.size() != 1) {
             throw new IllegalArgumentException();
         }
-        currentContext = context;
+        this.args = args;
     }
 
-    public void runCommand(Double value) {
+    @Override
+    public List<String> getArgs() {
+        return args;
+    }
+
+    public void runCommand(ExecutionContext currentContext, Double value) {
         currentContext.pushValue(value);
     }
 
-    public void runCommand(String variable) {
+    public void runCommand(ExecutionContext currentContext, String variable) {
         double value = currentContext.getValueOfVariable(variable);
         currentContext.pushValue(value);
     }

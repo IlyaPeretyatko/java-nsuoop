@@ -16,19 +16,14 @@
     import java.util.logging.Logger;
 
 
-    public class FileParser {
+    public class FileParser extends Calculator {
 
         private static final Logger log = Logger.getLogger(Calculator.class.getName());
 
         private String line;
         private String commandName;
-        private final ExecutionContext currentContext;
 
 
-        public FileParser() {
-            currentContext = new ExecutionContext();
-            log.info("Initialization FileParser.");
-        }
 
         public void parse(FileReader reader) {
             try (BufferedReader bufferedReader = new BufferedReader(reader)) {
@@ -61,9 +56,9 @@
                     }
                     Command command = commandCreator.create(commandName);
                     log.info("Initialization command.");
-                    command.initial(args, currentContext);
+                    command.validateArgs(args);
                     log.info("Initial command.");
-                    Executor executor = new Executor(command, args);
+                    Executor executor = new Executor(command, currentContext);
                     executor.searchMethod();
                     args.clear();
                 }

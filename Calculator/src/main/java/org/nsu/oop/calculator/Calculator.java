@@ -10,14 +10,16 @@ public class Calculator {
 
     private static final Logger log = Logger.getLogger(Calculator.class.getName());
 
-    private final String pathToInstruction;
+    protected final ExecutionContext currentContext;
 
-    public Calculator(String path) {
+    public Calculator() {
         log.info("Initialization Calculator");
-        pathToInstruction = path;
+        currentContext = new ExecutionContext();
+
     }
 
-    public void run() {
+    public void run(String path) {
+        String pathToInstruction = path;
         if (pathToInstruction.isEmpty()) {
             try (InputStreamReader inputStreamReader = new InputStreamReader(System.in)) {
                 FileParser consoleParser= new FileParser();

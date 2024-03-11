@@ -6,18 +6,23 @@ import java.util.List;
 
 public class Print implements Command {
 
-    ExecutionContext currentContext;
+    private List<String> args;
 
-    public void runCommand() {
+    public void runCommand(ExecutionContext currentContext) {
         System.out.println(currentContext.peekValue());
     }
 
     @Override
-    public void initial(List<String> args, ExecutionContext context) {
+    public void validateArgs(List<String> args) {
         if (!args.isEmpty()) {
             throw new IllegalArgumentException();
         }
-        currentContext = context;
+        this.args = args;
+    }
+
+    @Override
+    public List<String> getArgs() {
+        return args;
     }
 
 }
