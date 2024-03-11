@@ -16,7 +16,7 @@
     import java.util.logging.Logger;
 
 
-    public class FileParser extends Calculator {
+    public class InstructionParser extends Calculator {
 
         private static final Logger log = Logger.getLogger(Calculator.class.getName());
 

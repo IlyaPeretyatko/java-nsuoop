@@ -20,7 +20,7 @@ public class Calculator {
     public void run(String path) {
         if (path.isEmpty()) {
             try (InputStreamReader inputStreamReader = new InputStreamReader(System.in)) {
-                FileParser consoleParser= new FileParser();
+                InstructionParser consoleParser= new InstructionParser();
                 consoleParser.parse(inputStreamReader);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -28,7 +28,7 @@ public class Calculator {
         } else {
             try (FileReader fileReader = new FileReader(path)) {
                 log.info("Open file for reading.");
-                FileParser fileParser = new FileParser();
+                InstructionParser fileParser = new InstructionParser();
                 fileParser.parse(fileReader);
             } catch (IOException e) {
                 throw new RuntimeException(e);
