@@ -71,13 +71,7 @@ public class Executor {
     }
 
     private boolean isNumeric(String str) {
-        boolean isOnlyDigits = true;
-        for(int i = 0; i < str.length() && isOnlyDigits; i++) {
-            if(!Character.isDigit(str.charAt(i))) {
-                isOnlyDigits = false;
-            }
-        }
-        return isOnlyDigits;
+        return str.matches("-?[0-9]+.?[0-9]*");
     }
 
 }

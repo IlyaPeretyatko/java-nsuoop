@@ -9,6 +9,7 @@
 
     import java.io.FileReader;
     import java.io.IOException;
+    import java.io.InputStreamReader;
     import java.util.List;
     import java.util.Arrays;
     import java.util.ArrayList;
@@ -21,7 +22,6 @@
 
         private String line;
         private String commandName;
-        private List<String> args;
         private final ExecutionContext currentContext;
 
 
@@ -32,32 +32,51 @@
 
         public void parse(FileReader reader) {
             try (BufferedReader bufferedReader = new BufferedReader(reader)) {
-                Creator commandCreator = new Creator();
-                do {
-                    log.info("Read line.");
-                    line = bufferedReader.readLine();
-                    if (line != null && !line.isEmpty()) {
-                        parseLine();
-                        Command command = commandCreator.create(commandName);
-                        log.info("Initialization command.");
-                        command.initial(args, currentContext);
-                        log.info("Initial command.");
-                        Executor executor = new Executor(command, args);
-                        executor.searchMethod();
-                        args.clear();
-                    }
-                } while (line != null);
+                launchCommand(bufferedReader);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        public void parse(InputStreamReader reader) {
+            try (BufferedReader bufferedReader = new BufferedReader(reader)) {
+                launchCommand(bufferedReader);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
 
-        private void parseLine() {
+        private void launchCommand(BufferedReader bufferedReader) {
+            Creator commandCreator = new Creator();
+            do {
+                log.info("Read line.");
+                try {
+                    line = bufferedReader.readLine();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                if (line != null && !line.isEmpty()) {
+                    List<String> args = parseLine();
+                    if (commandName.equalsIgnoreCase("EXIT")) {
+                        break;
+                    }
+                    Command command = commandCreator.create(commandName);
+                    log.info("Initialization command.");
+                    command.initial(args, currentContext);
+                    log.info("Initial command.");
+                    Executor executor = new Executor(command, args);
+                    executor.searchMethod();
+                    args.clear();
+                }
+            } while (line != null);
+        }
+
+        private List<String> parseLine() {
             log.info("Parse line.");
             String[] lineSplit = line.split(" ");
             commandName = lineSplit[0];
-            args = new ArrayList<>(Arrays.asList(lineSplit));
+            List<String> args = new ArrayList<>(Arrays.asList(lineSplit));
             args.remove(commandName);
+            return args;
         }
     }
 
