@@ -1,6 +1,7 @@
 package org.nsu.oop.calculator.commands;
 
 import org.nsu.oop.calculator.ExecutionContext;
+import org.nsu.oop.calculator.exception.command.InvalidCountOfArgsException;
 
 import java.util.List;
 import java.lang.Math;
@@ -12,7 +13,7 @@ public class Sqrt implements Command {
     @Override
     public void validateArgs(List<String> args) {
         if (!args.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new InvalidCountOfArgsException("SQRT", 0);
         }
         this.args = args;
     }

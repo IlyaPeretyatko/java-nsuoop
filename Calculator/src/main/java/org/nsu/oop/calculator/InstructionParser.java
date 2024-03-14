@@ -3,6 +3,8 @@
     import org.nsu.oop.calculator.commands.Creator;
     import org.nsu.oop.calculator.commands.Command;
     import org.nsu.oop.calculator.commands.Executor;
+    import org.nsu.oop.calculator.exception.stream.BufferedReaderNotCreatedException;
+    import org.nsu.oop.calculator.exception.stream.ErrorOfReadingException;
 
     import java.io.BufferedReader;
 
@@ -29,14 +31,14 @@
             try (BufferedReader bufferedReader = new BufferedReader(reader)) {
                 launchCommand(bufferedReader);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new BufferedReaderNotCreatedException();
             }
         }
         public void parse(InputStreamReader reader) {
             try (BufferedReader bufferedReader = new BufferedReader(reader)) {
                 launchCommand(bufferedReader);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new BufferedReaderNotCreatedException();
             }
         }
 
@@ -47,7 +49,7 @@
                 try {
                     line = bufferedReader.readLine();
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    throw new ErrorOfReadingException();
                 }
                 if (line != null && !line.isEmpty()) {
                     List<String> args = parseLine();

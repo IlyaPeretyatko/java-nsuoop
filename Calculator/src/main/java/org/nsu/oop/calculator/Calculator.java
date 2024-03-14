@@ -1,6 +1,8 @@
 package org.nsu.oop.calculator;
 
 
+import org.nsu.oop.calculator.exception.stream.ReaderNotCreatedException;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,7 +25,7 @@ public class Calculator {
                 InstructionParser consoleParser= new InstructionParser();
                 consoleParser.parse(inputStreamReader);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new ReaderNotCreatedException();
             }
         } else {
             try (FileReader fileReader = new FileReader(path)) {
@@ -31,7 +33,7 @@ public class Calculator {
                 InstructionParser fileParser = new InstructionParser();
                 fileParser.parse(fileReader);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new ReaderNotCreatedException();
             }
         }
     }

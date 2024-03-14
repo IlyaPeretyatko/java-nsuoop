@@ -1,6 +1,10 @@
 package org.nsu.oop.calculator.commands;
 
 import org.nsu.oop.calculator.Main;
+import org.nsu.oop.calculator.exception.command.CommandNotFoundException;
+import org.nsu.oop.calculator.exception.stream.InputStreamException;
+import org.nsu.oop.calculator.exception.command.InvalidCreateCommandException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ClassLoader;
@@ -21,19 +25,22 @@ public class Creator {
         try (InputStream resourceAsStream = cl.getResourceAsStream("commands.properties")) {
             properties.load(resourceAsStream);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new InputStreamException();
         }
         log.info("Initialization Creator.");
     }
 
     public Command create(String commandName) {
         String cmdName = properties.getProperty(commandName.toUpperCase());
+        if (cmdName == null) {
+            throw new CommandNotFoundException(commandName);
+        }
         log.info("Get name of class command: " + cmdName + ".");
         try {
             return (Command) Class.forName(cmdName).getDeclaredConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException |
                  ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new InvalidCreateCommandException();
         }
     }
 

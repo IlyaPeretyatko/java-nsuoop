@@ -1,6 +1,8 @@
 package org.nsu.oop.calculator.commands;
 
 import org.nsu.oop.calculator.ExecutionContext;
+import org.nsu.oop.calculator.exception.command.InvalidCountOfArgsException;
+
 import java.util.List;
 
 
@@ -12,7 +14,7 @@ public class Push implements Command {
     @Override
     public void validateArgs(List<String> args) {
         if (args.size() != 1) {
-            throw new IllegalArgumentException();
+            throw new InvalidCountOfArgsException("PUSH", 1);
         }
         this.args = args;
     }
