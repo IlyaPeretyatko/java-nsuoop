@@ -25,6 +25,7 @@ public class Creator {
         try (InputStream resourceAsStream = cl.getResourceAsStream("commands.properties")) {
             properties.load(resourceAsStream);
         } catch (IOException e) {
+            log.warning("InputStreamException.");
             throw new InputStreamException();
         }
         log.info("Initialization Creator.");
@@ -33,6 +34,7 @@ public class Creator {
     public Command create(String commandName) {
         String cmdName = properties.getProperty(commandName.toUpperCase());
         if (cmdName == null) {
+            log.warning("CommandNotFoundException.");
             throw new CommandNotFoundException(commandName);
         }
         log.info("Get name of class command: " + cmdName + ".");
@@ -40,6 +42,7 @@ public class Creator {
             return (Command) Class.forName(cmdName).getDeclaredConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException |
                  ClassNotFoundException e) {
+            log.warning("InvalidCreateCommandException.");
             throw new InvalidCreateCommandException();
         }
     }

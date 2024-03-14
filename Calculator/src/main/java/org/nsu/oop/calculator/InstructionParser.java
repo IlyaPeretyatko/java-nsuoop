@@ -18,7 +18,7 @@
     import java.util.logging.Logger;
 
 
-    public class InstructionParser extends Calculator {
+    public class InstructionParser {
 
         private static final Logger log = Logger.getLogger(Calculator.class.getName());
 
@@ -27,40 +27,45 @@
 
 
 
-        public void parse(FileReader reader) {
+        public void parse(ExecutionContext currentContext, FileReader reader) {
             try (BufferedReader bufferedReader = new BufferedReader(reader)) {
-                launchCommand(bufferedReader);
+                launchCommand(currentContext, bufferedReader);
             } catch (IOException e) {
+                log.warning("BufferedReaderNotCreatedException.");
                 throw new BufferedReaderNotCreatedException();
             }
         }
-        public void parse(InputStreamReader reader) {
+        public void parse(ExecutionContext currentContext, InputStreamReader reader) {
             try (BufferedReader bufferedReader = new BufferedReader(reader)) {
-                launchCommand(bufferedReader);
+                launchCommand(currentContext, bufferedReader);
             } catch (IOException e) {
+                log.warning("BufferedReaderNotCreatedException.");
                 throw new BufferedReaderNotCreatedException();
             }
         }
 
-        private void launchCommand(BufferedReader bufferedReader) {
+        private void launchCommand(ExecutionContext currentContext, BufferedReader bufferedReader) {
             Creator commandCreator = new Creator();
             do {
                 log.info("Read line.");
                 try {
                     line = bufferedReader.readLine();
                 } catch (IOException e) {
+                    log.warning("ErrorOfReadingException.");
                     throw new ErrorOfReadingException();
                 }
                 if (line != null && !line.isEmpty()) {
                     List<String> args = parseLine();
                     if (commandName.equalsIgnoreCase("EXIT")) {
+                        log.info("Exit.");
                         break;
                     }
                     Command command = commandCreator.create(commandName);
                     log.info("Initialization command.");
                     command.validateArgs(args);
-                    log.info("Initial command.");
+                    log.info("Validated args.");
                     Executor executor = new Executor(command, currentContext);
+                    log.info("Initialization executor.");
                     executor.searchMethod();
                     args.clear();
                 }

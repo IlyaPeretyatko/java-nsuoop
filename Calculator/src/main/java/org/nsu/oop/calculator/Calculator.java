@@ -12,27 +12,30 @@ public class Calculator {
 
     private static final Logger log = Logger.getLogger(Calculator.class.getName());
 
-    protected final ExecutionContext currentContext;
+    private final ExecutionContext currentContext;
 
     public Calculator() {
-        log.info("Initialization Calculator");
         currentContext = new ExecutionContext();
+        log.info("Initialization Calculator");
     }
 
     public void run(String path) {
         if (path.isEmpty()) {
             try (InputStreamReader inputStreamReader = new InputStreamReader(System.in)) {
+                log.info("Open input stream for reading.");
                 InstructionParser consoleParser= new InstructionParser();
-                consoleParser.parse(inputStreamReader);
+                consoleParser.parse(currentContext, inputStreamReader);
             } catch (IOException e) {
+                log.warning("ReaderNotCreatedException.");
                 throw new ReaderNotCreatedException();
             }
         } else {
             try (FileReader fileReader = new FileReader(path)) {
                 log.info("Open file for reading.");
                 InstructionParser fileParser = new InstructionParser();
-                fileParser.parse(fileReader);
+                fileParser.parse(currentContext, fileReader);
             } catch (IOException e) {
+                log.warning("ReaderNotCreatedException.");
                 throw new ReaderNotCreatedException();
             }
         }
