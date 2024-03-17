@@ -1,4 +1,4 @@
-package org.nsu.oop.snake.model;
+package org.nsu.oop.snake;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,19 +8,18 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
-public class Field extends JPanel implements ActionListener {
-    private final int SIZE = 400;
-    private final int CHUNK_SIZE = 20;
-    private final int CHUNKS = 400;
+public class FieldModel extends JPanel implements ActionListener {
+    private static final int SIZE = 400;
+    private static final int CHUNK_SIZE = 20;
+    private static final int CHUNKS = 400;
     private Image apple;
     private Image snake;
     private Image head;
     private int appleX;
     private int appleY;
-    private int[] x = new int[CHUNKS];
-    private int[] y = new int[CHUNKS];
+    private final int[] x = new int[CHUNKS];
+    private final int[] y = new int[CHUNKS];
     private int sizeOfSnake;
-    private Timer timer;
     private boolean up = false;
     private boolean right = true;
     private boolean down = false;
@@ -28,11 +27,11 @@ public class Field extends JPanel implements ActionListener {
 
     private boolean gameIsRun = true;
 
-    public Field() {
+    public FieldModel() {
         setBackground(Color.CYAN);
         getImages();
         startGame();
-        addKeyListener(new FieldKeyListener());
+        addKeyListener(new Controller());
         setFocusable(true);
     }
 
@@ -43,7 +42,7 @@ public class Field extends JPanel implements ActionListener {
             y[i] = CHUNK_SIZE * 10;
         }
         spawnApple();
-        timer = new Timer(200, this);
+        Timer timer = new Timer(200, this);
         timer.start();
     }
 
@@ -96,6 +95,7 @@ public class Field extends JPanel implements ActionListener {
         for (int i = 1; i < sizeOfSnake; ++i) {
             if (sizeOfSnake > 4 && x[0] == x[i] && y[0] == y[i]) {
                 gameIsRun = false;
+                break;
             }
         }
     }
@@ -103,11 +103,18 @@ public class Field extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (int i = 1; i < sizeOfSnake; ++i) {
-            g.drawImage(snake, x[i], y[i], this);
+        if (gameIsRun) {
+            for (int i = 1; i < sizeOfSnake; ++i) {
+                g.drawImage(snake, x[i], y[i], this);
+            }
+            g.drawImage(apple, appleX, appleY, this);
+            g.drawImage(head, x[0], y[0], this);
+        } else {
+            String str = "Game Over";
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Arial", Font.BOLD, 24));
+            g.drawString(str, SIZE / 2 - 50, SIZE / 2 - 40);
         }
-        g.drawImage(apple, appleX, appleY, this);
-        g.drawImage(head, x[0], y[0], this);
     }
 
     @Override
@@ -120,7 +127,7 @@ public class Field extends JPanel implements ActionListener {
         repaint();
     }
 
-    class FieldKeyListener extends KeyAdapter {
+    class Controller extends KeyAdapter{
         @Override
         public void keyPressed(KeyEvent e) {
             super.keyPressed(e);
@@ -144,4 +151,5 @@ public class Field extends JPanel implements ActionListener {
             }
         }
     }
+
 }
