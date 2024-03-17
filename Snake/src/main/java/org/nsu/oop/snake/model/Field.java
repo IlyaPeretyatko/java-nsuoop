@@ -14,6 +14,7 @@ public class Field extends JPanel implements ActionListener {
     private final int CHUNKS = 400;
     private Image apple;
     private Image snake;
+    private Image head;
     private int appleX;
     private int appleY;
     private int[] x = new int[CHUNKS];
@@ -56,6 +57,8 @@ public class Field extends JPanel implements ActionListener {
         apple = imageIconApple.getImage();
         ImageIcon imageIconSnake = new ImageIcon("src/main/resources/snake.jpg");
         snake = imageIconSnake.getImage();
+        ImageIcon imageIconHead = new ImageIcon("src/main/resources/head.jpg");
+        head = imageIconHead.getImage();
     }
 
     public void move() {
@@ -65,7 +68,9 @@ public class Field extends JPanel implements ActionListener {
         }
         if (up) {
             y[0] -= CHUNK_SIZE;
-            y[0] %= SIZE;
+            if (y[0] < 0) {
+             y[0] += SIZE;
+            }
         } else if (down) {
             y[0] += CHUNK_SIZE;
             y[0] %= SIZE;
@@ -74,7 +79,9 @@ public class Field extends JPanel implements ActionListener {
             x[0] %= SIZE;
         } else if (left) {
             x[0] -= CHUNK_SIZE;
-            x[0] %= SIZE;
+            if (x[0] < 0) {
+                x[0] += SIZE;
+            }
         }
     }
 
@@ -87,8 +94,7 @@ public class Field extends JPanel implements ActionListener {
 
     public void checkCollision() {
         for (int i = 1; i < sizeOfSnake; ++i) {
-            if (sizeOfSnake < 4 && x[0] == x[i] && y[0] == y[i]) {
-                System.out.println("collision");
+            if (sizeOfSnake > 4 && x[0] == x[i] && y[0] == y[i]) {
                 gameIsRun = false;
             }
         }
@@ -97,10 +103,11 @@ public class Field extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(apple, appleX, appleY, this);
-        for (int i = 0; i < sizeOfSnake; ++i) {
+        for (int i = 1; i < sizeOfSnake; ++i) {
             g.drawImage(snake, x[i], y[i], this);
         }
+        g.drawImage(apple, appleX, appleY, this);
+        g.drawImage(head, x[0], y[0], this);
     }
 
     @Override
@@ -118,22 +125,19 @@ public class Field extends JPanel implements ActionListener {
         public void keyPressed(KeyEvent e) {
             super.keyPressed(e);
             int key = e.getKeyCode();
-            if(key == KeyEvent.VK_LEFT && !right){
+            if (key == KeyEvent.VK_LEFT && !right){
                 left = true;
                 up = false;
                 down = false;
-            }
-            if(key == KeyEvent.VK_RIGHT && !left){
+            } else if (key == KeyEvent.VK_RIGHT && !left){
                 right = true;
                 up = false;
                 down = false;
-            }
-            if(key == KeyEvent.VK_UP && !down){
+            } else if (key == KeyEvent.VK_UP && !down){
                 right = false;
                 up = true;
                 left = false;
-            }
-            if(key == KeyEvent.VK_DOWN && !up){
+            } else if (key == KeyEvent.VK_DOWN && !up){
                 right = false;
                 down = true;
                 left = false;
