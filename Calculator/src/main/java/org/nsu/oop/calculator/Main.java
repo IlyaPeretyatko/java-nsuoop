@@ -1,9 +1,72 @@
 package org.nsu.oop.calculator;
 
 
+import org.nsu.oop.calculator.exception.stream.BufferedReaderNotCreatedException;
+import org.nsu.oop.calculator.exception.stream.ReaderNotCreatedException;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.logging.Logger;
+
+
 public class Main {
+
+    private static final Logger log = Logger.getLogger(Calculator.class.getName());
+
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        calculator.run("");
+        try (InputStreamReader reader = new InputStreamReader(System.in)) {
+            log.info("Open stream for reading.");
+            try (BufferedReader bufferedReader = new BufferedReader(reader)) {
+                InstructionParser instructionParser = new InstructionParser();
+                log.info("Initialization InstructionParser.");
+                List<String> arguments;
+                String commandName;
+                while (true) {
+                    arguments = instructionParser.parse(bufferedReader);
+                    if (arguments == null) {
+                        break;
+                    }
+                    commandName = arguments.getFirst();
+                    if (commandName.equalsIgnoreCase("EXIT")) {
+                        break;
+                    }
+                    arguments.remove(commandName);
+                    calculator.run(commandName, arguments);
+                }
+            } catch (IOException e) {
+                log.warning("BufferedReaderNotCreatedException.");
+                throw new BufferedReaderNotCreatedException();
+            }
+        } catch (IOException e) {
+            log.warning("ReaderNotCreatedException.");
+            throw new ReaderNotCreatedException();
+        }
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        try (FileReader fileReader = new FileReader(path)) {
+//            log.info("Open file for reading.");
+//            InstructionParser fileParser = new InstructionParser();
+//            //fileParser.parse(currentContext, fileReader);
+//        } catch (IOException e) {
+//            log.warning("ReaderNotCreatedException.");
+//            throw new ReaderNotCreatedException();
+//        }

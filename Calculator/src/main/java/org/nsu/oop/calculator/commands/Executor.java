@@ -2,11 +2,13 @@ package org.nsu.oop.calculator.commands;
 
 import org.nsu.oop.calculator.Calculator;
 import org.nsu.oop.calculator.ExecutionContext;
+import org.nsu.oop.calculator.exception.command.InvalidCountOfArgsException;
 import org.nsu.oop.calculator.exception.command.InvalidInvokeMethod;
 import org.nsu.oop.calculator.exception.command.MethodNotFoundException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Arrays;
 import java.util.logging.Logger;
@@ -33,26 +35,22 @@ public class Executor {
             if (!m.getName().equals("runCommand")) {
                 continue;
             }
-            String params = Arrays.stream(m.getParameters()).map(it -> it.getType().getName()).collect(Collectors.joining(", "));
-            String parametrs;
-            if (args.isEmpty()) {
-                parametrs = params.substring("org.nsu.oop.calculator.commands.Division".toCharArray().length - 1);
-            } else {
-                parametrs = params.substring("org.nsu.oop.calculator.commands.Division, ".toCharArray().length - 1);
-            }
+            List<Type> parametrs = Arrays.stream(m.getParameters()).map(it -> it.getType()).collect(Collectors.toList());
+            parametrs.remove(parametrs.getFirst());
+            int size = parametrs.size();
             if (parametrs.isEmpty()) {
                 invokeWithoutParams(m);
                 isFound = true;
                 break;
-            } else if (parametrs.equals("java.lang.String") && !isNumeric(args.getFirst())) {
+            } else if (size == 1 && parametrs.getFirst().getTypeName().equals("java.lang.String") && !isNumeric(args.getFirst())) {
                 invokeWithString(m);
                 isFound = true;
                 break;
-            } else if (parametrs.equals("java.lang.Double") && isNumeric(args.getFirst())) {
+            } else if (size == 1 && parametrs.getFirst().getTypeName().equals("java.lang.Double") && isNumeric(args.getFirst())) {
                 invokeWithDouble(m);
                 isFound = true;
                 break;
-            } else if (parametrs.equals("java.lang.String, java.lang.Double") && !isNumeric(args.getFirst()) && isNumeric(args.getLast())) {
+            } else if (size == 2 && parametrs.getFirst().getTypeName().equals("java.lang.String") && parametrs.getLast().getTypeName().equals("java.lang.Double") && !isNumeric(args.getFirst()) && isNumeric(args.getLast())) {
                 invokeWithStringDouble(m);
                 isFound = true;
                 break;
