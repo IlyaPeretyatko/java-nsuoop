@@ -49,24 +49,3 @@ public class Main {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        try (FileReader fileReader = new FileReader(path)) {
-//            log.info("Open file for reading.");
-//            InstructionParser fileParser = new InstructionParser();
-//            //fileParser.parse(currentContext, fileReader);
-//        } catch (IOException e) {
-//            log.warning("ReaderNotCreatedException.");
-//            throw new ReaderNotCreatedException();
-//        }
