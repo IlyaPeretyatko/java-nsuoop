@@ -31,7 +31,7 @@ public class Creator {
         log.info("Initialization Creator.");
     }
 
-    public Command create(String commandName) {
+    public Command create(String commandName) throws CommandNotFoundException, InvalidCreateCommandException {
         String cmdName = properties.getProperty(commandName.toUpperCase());
         if (cmdName == null) {
             log.warning("CommandNotFoundException.");

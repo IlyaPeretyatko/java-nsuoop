@@ -2,6 +2,7 @@ package org.nsu.oop.calculator.commands;
 
 import org.nsu.oop.calculator.ExecutionContext;
 import org.nsu.oop.calculator.exception.command.InvalidCountOfArgsException;
+import org.nsu.oop.calculator.exception.command.StackIsEmptyException;
 
 import java.util.List;
 import java.lang.Math;
@@ -11,7 +12,7 @@ public class Sqrt implements Command {
     private List<String> args;
 
     @Override
-    public void validateArgs(List<String> args) {
+    public void validateArgs(List<String> args) throws InvalidCountOfArgsException {
         if (!args.isEmpty()) {
             throw new InvalidCountOfArgsException("SQRT", 0);
         }
@@ -24,7 +25,11 @@ public class Sqrt implements Command {
     }
 
     public void runCommand(ExecutionContext currentContext) {
-        double value = currentContext.popValue();
-        currentContext.pushValue(Math.sqrt(value));
+        try {
+            double value = currentContext.popValue();
+            currentContext.pushValue(Math.sqrt(value));
+        } catch (StackIsEmptyException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }

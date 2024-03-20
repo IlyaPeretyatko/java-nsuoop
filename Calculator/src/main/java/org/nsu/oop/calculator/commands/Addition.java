@@ -2,6 +2,8 @@ package org.nsu.oop.calculator.commands;
 
 import org.nsu.oop.calculator.ExecutionContext;
 import org.nsu.oop.calculator.exception.command.InvalidCountOfArgsException;
+import org.nsu.oop.calculator.exception.command.StackIsEmptyException;
+
 
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class Addition implements Command {
     private List<String> args;
 
     @Override
-    public void validateArgs(List<String> args) {
+    public void validateArgs(List<String> args) throws InvalidCountOfArgsException {
         if (!args.isEmpty()) {
             throw new InvalidCountOfArgsException("+", 0);
         }
@@ -23,8 +25,12 @@ public class Addition implements Command {
 
 
     public void runCommand(ExecutionContext currentContext) {
-        double a = currentContext.popValue();
-        double b = currentContext.popValue();
-        currentContext.pushValue(a + b);
+        try {
+            double a = currentContext.popValue();
+            double b = currentContext.popValue();
+            currentContext.pushValue(a + b);
+        } catch (StackIsEmptyException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }

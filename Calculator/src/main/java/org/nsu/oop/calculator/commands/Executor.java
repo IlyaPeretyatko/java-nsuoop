@@ -2,8 +2,6 @@ package org.nsu.oop.calculator.commands;
 
 import org.nsu.oop.calculator.Calculator;
 import org.nsu.oop.calculator.ExecutionContext;
-import org.nsu.oop.calculator.exception.command.InvalidCountOfArgsException;
-import org.nsu.oop.calculator.exception.command.InvalidInvokeMethod;
 import org.nsu.oop.calculator.exception.command.MethodNotFoundException;
 
 import java.lang.reflect.InvocationTargetException;
@@ -26,7 +24,7 @@ public class Executor {
         currentContext = context;
     }
 
-    public void searchMethod() {
+    public void searchMethod() throws MethodNotFoundException {
         Class<?> clss = currentCommand.getClass();
         List<String> args = currentCommand.getArgs();
         boolean isFound = false;
@@ -68,7 +66,7 @@ public class Executor {
             m.invoke(currentCommand, currentContext);
         } catch (IllegalAccessException | InvocationTargetException e) {
             log.warning("InvalidInvokeMethod.");
-            throw new InvalidInvokeMethod();
+            System.err.println("Method invoke problem.");
         }
     }
 
@@ -78,7 +76,7 @@ public class Executor {
             m.invoke(currentCommand, currentContext, currentCommand.getArgs().getFirst());
         } catch (IllegalAccessException | InvocationTargetException e) {
             log.warning("InvalidInvokeMethod.");
-            throw new InvalidInvokeMethod();
+            System.err.println("Method invoke problem.");
         }
     }
 
@@ -88,7 +86,7 @@ public class Executor {
             m.invoke(currentCommand, currentContext, Double.parseDouble(currentCommand.getArgs().getFirst()));
         } catch (IllegalAccessException | InvocationTargetException e) {
             log.warning("InvalidInvokeMethod.");
-            throw new InvalidInvokeMethod();
+            System.err.println("Method invoke problem.");
         }
     }
 
@@ -98,7 +96,7 @@ public class Executor {
             m.invoke(currentCommand, currentContext, currentCommand.getArgs().getFirst(), Double.parseDouble(currentCommand.getArgs().getLast()));
         } catch (IllegalAccessException | InvocationTargetException e) {
             log.warning("InvalidInvokeMethod.");
-            throw new InvalidInvokeMethod();
+            System.err.println("Method invoke problem.");
         }
     }
 

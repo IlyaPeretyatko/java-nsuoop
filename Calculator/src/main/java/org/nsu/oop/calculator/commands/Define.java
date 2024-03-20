@@ -11,7 +11,7 @@ public class Define implements Command {
 
 
     @Override
-    public void validateArgs(List<String> args) {
+    public void validateArgs(List<String> args) throws InvalidCountOfArgsException {
         if (args.size() != 2) {
             throw new InvalidCountOfArgsException("DEFINE", 2);
         }

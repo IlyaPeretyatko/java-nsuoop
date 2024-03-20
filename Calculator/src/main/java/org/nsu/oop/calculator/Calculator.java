@@ -4,7 +4,10 @@ package org.nsu.oop.calculator;
 import org.nsu.oop.calculator.commands.Command;
 import org.nsu.oop.calculator.commands.Creator;
 import org.nsu.oop.calculator.commands.Executor;
-import org.nsu.oop.calculator.exception.stream.ReaderNotCreatedException;
+import org.nsu.oop.calculator.exception.command.CommandNotFoundException;
+import org.nsu.oop.calculator.exception.command.InvalidCountOfArgsException;
+import org.nsu.oop.calculator.exception.command.InvalidCreateCommandException;
+import org.nsu.oop.calculator.exception.command.MethodNotFoundException;
 
 
 import java.util.List;
@@ -24,13 +27,18 @@ public class Calculator {
     }
 
     public void run(String commandName, List<String> args) {
-        Command command = commandCreator.create(commandName);
-        log.info("Initialization command.");
-        command.validateArgs(args);
-        log.info("Validated args.");
-        Executor executor = new Executor(command, currentContext);
-        log.info("Initialization executor.");
-        executor.searchMethod();
+        try {
+            Command command = commandCreator.create(commandName);
+            log.info("Initialization command.");
+            command.validateArgs(args);
+            log.info("Validated args.");
+            Executor executor = new Executor(command, currentContext);
+            log.info("Initialization executor.");
+            executor.searchMethod();
+        } catch (MethodNotFoundException | CommandNotFoundException | InvalidCountOfArgsException |
+                 InvalidCreateCommandException e) {
+            System.err.println(e.getMessage());
+        }
 
     }
 }

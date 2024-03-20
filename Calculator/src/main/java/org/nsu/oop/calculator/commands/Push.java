@@ -2,6 +2,7 @@ package org.nsu.oop.calculator.commands;
 
 import org.nsu.oop.calculator.ExecutionContext;
 import org.nsu.oop.calculator.exception.command.InvalidCountOfArgsException;
+import org.nsu.oop.calculator.exception.command.MapNotContainVariableException;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class Push implements Command {
 
 
     @Override
-    public void validateArgs(List<String> args) {
+    public void validateArgs(List<String> args) throws InvalidCountOfArgsException {
         if (args.size() != 1) {
             throw new InvalidCountOfArgsException("PUSH", 1);
         }
@@ -29,7 +30,11 @@ public class Push implements Command {
     }
 
     public void runCommand(ExecutionContext currentContext, String variable) {
-        double value = currentContext.getValueOfVariable(variable);
-        currentContext.pushValue(value);
+        try {
+            double value = currentContext.getValueOfVariable(variable);
+            currentContext.pushValue(value);
+        } catch (MapNotContainVariableException e) {
+            System.err.println(e.getMessage());
+        }
     }
 }
