@@ -35,6 +35,7 @@ public class ExecutionContext {
     public double popValue() throws StackIsEmptyException {
         log.info("Pop value from stack.");
         if (stack_.isEmpty()) {
+            log.warning("StackIsEmptyException");
             throw new StackIsEmptyException();
         }
         return stack_.pop();
@@ -43,6 +44,7 @@ public class ExecutionContext {
     public double peekValue() throws StackIsEmptyException {
         log.info("Peek value from stack.");
         if (stack_.isEmpty()) {
+            log.warning("StackIsEmptyException");
             throw new StackIsEmptyException();
         }
         return stack_.peek();
@@ -52,6 +54,7 @@ public class ExecutionContext {
         log.info("Get value of variable with key \"" + key + "\" from map." );
         Double value = map_.get(key);
         if (value == null) {
+            log.warning("MapNotContainVariableException.");
             throw new MapNotContainVariableException();
         }
         return map_.get(key);

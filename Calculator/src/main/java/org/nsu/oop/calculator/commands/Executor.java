@@ -22,6 +22,7 @@ public class Executor {
     public Executor(Command command, ExecutionContext context) {
         currentCommand = command;
         currentContext = context;
+        log.info("Initialization Executor.");
     }
 
     public void searchMethod() throws MethodNotFoundException {
@@ -65,7 +66,7 @@ public class Executor {
         try {
             m.invoke(currentCommand, currentContext);
         } catch (IllegalAccessException | InvocationTargetException e) {
-            log.warning("InvalidInvokeMethod.");
+            log.warning("Method invoke problem.");
             System.err.println("Method invoke problem.");
         }
     }
@@ -75,7 +76,7 @@ public class Executor {
         try {
             m.invoke(currentCommand, currentContext, currentCommand.getArgs().getFirst());
         } catch (IllegalAccessException | InvocationTargetException e) {
-            log.warning("InvalidInvokeMethod.");
+            log.warning("Method invoke problem.");
             System.err.println("Method invoke problem.");
         }
     }
@@ -85,7 +86,7 @@ public class Executor {
         try {
             m.invoke(currentCommand, currentContext, Double.parseDouble(currentCommand.getArgs().getFirst()));
         } catch (IllegalAccessException | InvocationTargetException e) {
-            log.warning("InvalidInvokeMethod.");
+            log.warning("Method invoke problem.");
             System.err.println("Method invoke problem.");
         }
     }
@@ -95,7 +96,7 @@ public class Executor {
         try {
             m.invoke(currentCommand, currentContext, currentCommand.getArgs().getFirst(), Double.parseDouble(currentCommand.getArgs().getLast()));
         } catch (IllegalAccessException | InvocationTargetException e) {
-            log.warning("InvalidInvokeMethod.");
+            log.warning("Method invoke problem.");
             System.err.println("Method invoke problem.");
         }
     }

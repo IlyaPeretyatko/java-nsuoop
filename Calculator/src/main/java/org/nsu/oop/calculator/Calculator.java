@@ -33,10 +33,10 @@ public class Calculator {
             command.validateArgs(args);
             log.info("Validated args.");
             Executor executor = new Executor(command, currentContext);
-            log.info("Initialization executor.");
             executor.searchMethod();
         } catch (MethodNotFoundException | CommandNotFoundException | InvalidCountOfArgsException |
                  InvalidCreateCommandException e) {
+            log.warning(e.getMessage());
             System.err.println(e.getMessage());
         }
 
