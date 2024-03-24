@@ -72,7 +72,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>org.nsu.oop.snake.Main</mainClass>
+                            <mainClass>org.nsu.oop.snake.SnakeGame</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

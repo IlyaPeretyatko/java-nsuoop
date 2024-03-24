@@ -8,9 +8,11 @@ public class SnakeGame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 435);
         setLocation(400, 400);
-        add(new FieldModel());
+        add(new ViewControllerSwing());
         setVisible(true);
     }
 
-
+    public static void main(String[] args) {
+        SnakeGame game = new SnakeGame();
+    }
 }
