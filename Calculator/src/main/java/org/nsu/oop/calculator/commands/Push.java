@@ -29,12 +29,8 @@ public class Push implements Command {
         currentContext.pushValue(value);
     }
 
-    public void runCommand(ExecutionContext currentContext, String variable) {
-        try {
-            double value = currentContext.getValueOfVariable(variable);
-            currentContext.pushValue(value);
-        } catch (MapNotContainVariableException e) {
-            System.err.println(e.getMessage());
-        }
+    public void runCommand(ExecutionContext currentContext, String variable) throws MapNotContainVariableException {
+        double value = currentContext.getValueOfVariable(variable);
+        currentContext.pushValue(value);
     }
 }

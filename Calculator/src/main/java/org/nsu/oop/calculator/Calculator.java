@@ -4,10 +4,7 @@ package org.nsu.oop.calculator;
 import org.nsu.oop.calculator.commands.Command;
 import org.nsu.oop.calculator.commands.Creator;
 import org.nsu.oop.calculator.commands.Executor;
-import org.nsu.oop.calculator.exception.command.CommandNotFoundException;
-import org.nsu.oop.calculator.exception.command.InvalidCountOfArgsException;
-import org.nsu.oop.calculator.exception.command.InvalidCreateCommandException;
-import org.nsu.oop.calculator.exception.command.MethodNotFoundException;
+import org.nsu.oop.calculator.exception.command.*;
 
 
 import java.util.List;
@@ -35,7 +32,7 @@ public class Calculator {
             Executor executor = new Executor(command, currentContext);
             executor.searchMethod();
         } catch (MethodNotFoundException | CommandNotFoundException | InvalidCountOfArgsException |
-                 InvalidCreateCommandException e) {
+                 InvalidCreateCommandException | StackIsEmptyException | MapNotContainVariableException e) {
             System.err.println(e.getMessage());
         }
 

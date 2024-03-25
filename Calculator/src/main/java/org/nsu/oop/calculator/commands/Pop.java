@@ -24,12 +24,8 @@ public class Pop implements Command {
     }
 
 
-    public void runCommand(ExecutionContext currentContext) {
-        try {
-            currentContext.popValue();
-        } catch (StackIsEmptyException e) {
-            System.err.println(e.getMessage());
-        }
+    public void runCommand(ExecutionContext currentContext) throws StackIsEmptyException {
+        currentContext.popValue();
     }
 
 }

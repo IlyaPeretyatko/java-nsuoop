@@ -10,12 +10,8 @@ public class Print implements Command {
 
     private List<String> args;
 
-    public void runCommand(ExecutionContext currentContext) {
-        try {
-            System.out.println(currentContext.peekValue());
-        } catch (StackIsEmptyException e) {
-            System.err.println(e.getMessage());
-        }
+    public void runCommand(ExecutionContext currentContext) throws StackIsEmptyException {
+        System.out.println(currentContext.peekValue());
     }
 
     @Override

@@ -24,12 +24,8 @@ public class Sqrt implements Command {
         return args;
     }
 
-    public void runCommand(ExecutionContext currentContext) {
-        try {
-            double value = currentContext.popValue();
-            currentContext.pushValue(Math.sqrt(value));
-        } catch (StackIsEmptyException e) {
-            System.err.println(e.getMessage());
-        }
+    public void runCommand(ExecutionContext currentContext) throws StackIsEmptyException {
+        double value = currentContext.popValue();
+        currentContext.pushValue(Math.sqrt(value));
     }
 }

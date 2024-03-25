@@ -22,13 +22,9 @@ public class Multiplication implements Command {
         return args;
     }
 
-    public void runCommand(ExecutionContext currentContext) {
-        try {
-            double a = currentContext.popValue();
-            double b = currentContext.popValue();
-            currentContext.pushValue(a * b);
-        } catch (StackIsEmptyException e) {
-            System.err.println(e.getMessage());
-        }
+    public void runCommand(ExecutionContext currentContext) throws StackIsEmptyException {
+        double a = currentContext.popValue();
+        double b = currentContext.popValue();
+        currentContext.pushValue(a * b);
     }
 }
