@@ -41,15 +41,15 @@ public class Executor {
                 invokeWithoutParams(m);
                 isFound = true;
                 break;
-            } else if (size == 1 && parametrs.getFirst().getTypeName().equals("java.lang.String") && !isNumeric(args.getFirst())) {
+            } else if (size == 1 && parametrs.getFirst().equals(java.lang.String.class) && !isNumeric(args.getFirst())) {
                 invokeWithString(m);
                 isFound = true;
                 break;
-            } else if (size == 1 && parametrs.getFirst().getTypeName().equals("java.lang.Double") && isNumeric(args.getFirst())) {
+            } else if (size == 1 && parametrs.getFirst().equals(java.lang.Double.class) && isNumeric(args.getFirst())) {
                 invokeWithDouble(m);
                 isFound = true;
                 break;
-            } else if (size == 2 && parametrs.getFirst().getTypeName().equals("java.lang.String") && parametrs.getLast().getTypeName().equals("java.lang.Double") && !isNumeric(args.getFirst()) && isNumeric(args.getLast())) {
+            } else if (size == 2 && parametrs.getFirst().equals(java.lang.String.class) && parametrs.getLast().equals(java.lang.Double.class) && !isNumeric(args.getFirst()) && isNumeric(args.getLast())) {
                 invokeWithStringDouble(m);
                 isFound = true;
                 break;
@@ -66,7 +66,7 @@ public class Executor {
         try {
             m.invoke(currentCommand, currentContext);
         } catch (IllegalAccessException | InvocationTargetException e) {
-            System.err.println("Method invoke problem.");
+            log.warning("Method invoke problem.");
         }
     }
 
@@ -75,7 +75,7 @@ public class Executor {
         try {
             m.invoke(currentCommand, currentContext, currentCommand.getArgs().getFirst());
         } catch (IllegalAccessException | InvocationTargetException e) {
-            System.err.println("Method invoke problem.");
+            log.warning("Method invoke problem.");
         }
     }
 
@@ -84,7 +84,7 @@ public class Executor {
         try {
             m.invoke(currentCommand, currentContext, Double.parseDouble(currentCommand.getArgs().getFirst()));
         } catch (IllegalAccessException | InvocationTargetException e) {
-            System.err.println("Method invoke problem.");
+            log.warning("Method invoke problem.");
         }
     }
 
@@ -93,7 +93,7 @@ public class Executor {
         try {
             m.invoke(currentCommand, currentContext, currentCommand.getArgs().getFirst(), Double.parseDouble(currentCommand.getArgs().getLast()));
         } catch (IllegalAccessException | InvocationTargetException e) {
-            System.err.println("Method invoke problem.");
+            log.warning("Method invoke problem.");
         }
     }
 
