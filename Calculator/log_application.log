@@ -1,0 +1,906 @@
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext <init>
+INFO: Initialization ExecutionContext.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator <init>
+INFO: Initialization Creator.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator <init>
+INFO: Initialization Calculator.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.CalculatorTest test1
+INFO: Open stream for reading.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Define.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithStringDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushVariable
+INFO: Push value with key in map: a/10.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithString
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext getValueOfVariable
+INFO: Get value of variable with key "a" from map.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 10.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 2.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Multiplication.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 20.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithString
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext getValueOfVariable
+INFO: Get value of variable with key "a" from map.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 10.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Addition.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 30.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Print.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext peekValue
+INFO: Peek value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext <init>
+INFO: Initialization ExecutionContext.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator <init>
+INFO: Initialization Creator.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator <init>
+INFO: Initialization Calculator.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.CalculatorTest test2
+INFO: Open stream for reading.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 5.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 6.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Pop.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 7.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Subtraction.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: -2.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 14.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Addition.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 12.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 3.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Division.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 4.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Sqrt.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 2.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Print.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext peekValue
+INFO: Peek value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext <init>
+INFO: Initialization ExecutionContext.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator <init>
+INFO: Initialization Creator.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator <init>
+INFO: Initialization Calculator.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.CalculatorTest test3
+INFO: Open stream for reading.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Define.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithStringDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushVariable
+INFO: Push value with key in map: a/30.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Define.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithStringDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushVariable
+INFO: Push value with key in map: b/3.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithString
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext getValueOfVariable
+INFO: Get value of variable with key "a" from map.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 30.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithString
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext getValueOfVariable
+INFO: Get value of variable with key "b" from map.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 3.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Division.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 10.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 11.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Addition.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 21.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Print.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext peekValue
+INFO: Peek value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext <init>
+INFO: Initialization ExecutionContext.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator <init>
+INFO: Initialization Creator.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator <init>
+INFO: Initialization Calculator.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.CalculatorTest test4
+INFO: Open stream for reading.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 1.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 2.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 3.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 4.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 5.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Multiplication.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 20.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Multiplication.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 60.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Multiplication.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 120.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Multiplication.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 120.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 12.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Division.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 10.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 8.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Subtraction.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext popValue
+INFO: Pop value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 2.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Print.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext peekValue
+INFO: Peek value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext <init>
+INFO: Initialization ExecutionContext.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator <init>
+INFO: Initialization Creator.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator <init>
+INFO: Initialization Calculator.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.CalculatorTest test5
+INFO: Open stream for reading.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Define.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithStringDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushVariable
+INFO: Push value with key in map: aboba/123.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Define.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithStringDouble
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushVariable
+INFO: Push value with key in map: bebra/456.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Push.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithString
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext getValueOfVariable
+INFO: Get value of variable with key "bebra" from map.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext pushValue
+INFO: Push value in stack: 456.0.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parseLine
+INFO: Parse line.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Creator create
+INFO: Get name of class command: org.nsu.oop.calculator.commands.Print.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Initialization command.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.Calculator run
+INFO: Validated args.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor <init>
+INFO: Initialization Executor.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor searchMethod
+INFO: Start search method.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.commands.Executor invokeWithoutParams
+INFO: Method is found.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.ExecutionContext peekValue
+INFO: Peek value from stack.
+мар. 25, 2024 8:59:07 PM org.nsu.oop.calculator.InstructionParser parse
+INFO: Read line.

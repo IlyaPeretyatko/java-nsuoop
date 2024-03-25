@@ -2,11 +2,13 @@ package org.nsu.oop.calculator.commands;
 
 import org.nsu.oop.calculator.Calculator;
 import org.nsu.oop.calculator.ExecutionContext;
-import org.nsu.oop.calculator.exception.command.InvalidInvokeMethod;
+import org.nsu.oop.calculator.exception.command.MapNotContainVariableException;
 import org.nsu.oop.calculator.exception.command.MethodNotFoundException;
+import org.nsu.oop.calculator.exception.command.StackIsEmptyException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Arrays;
 import java.util.logging.Logger;
@@ -22,9 +24,10 @@ public class Executor {
     public Executor(Command command, ExecutionContext context) {
         currentCommand = command;
         currentContext = context;
+        log.info("Initialization Executor.");
     }
 
-    public void searchMethod() {
+    public void searchMethod() throws MethodNotFoundException, StackIsEmptyException, MapNotContainVariableException {
         Class<?> clss = currentCommand.getClass();
         List<String> args = currentCommand.getArgs();
         boolean isFound = false;
@@ -33,26 +36,22 @@ public class Executor {
             if (!m.getName().equals("runCommand")) {
                 continue;
             }
-            String params = Arrays.stream(m.getParameters()).map(it -> it.getType().getName()).collect(Collectors.joining(", "));
-            String parametrs;
-            if (args.isEmpty()) {
-                parametrs = params.substring("org.nsu.oop.calculator.commands.Division".toCharArray().length - 1);
-            } else {
-                parametrs = params.substring("org.nsu.oop.calculator.commands.Division, ".toCharArray().length - 1);
-            }
+            List<Type> parametrs = Arrays.stream(m.getParameters()).map(it -> it.getType()).collect(Collectors.toList());
+            parametrs.remove(parametrs.getFirst());
+            int size = parametrs.size();
             if (parametrs.isEmpty()) {
                 invokeWithoutParams(m);
                 isFound = true;
                 break;
-            } else if (parametrs.equals("java.lang.String") && !isNumeric(args.getFirst())) {
+            } else if (size == 1 && parametrs.getFirst().equals(java.lang.String.class) && !isNumeric(args.getFirst())) {
                 invokeWithString(m);
                 isFound = true;
                 break;
-            } else if (parametrs.equals("java.lang.Double") && isNumeric(args.getFirst())) {
+            } else if (size == 1 && parametrs.getFirst().equals(java.lang.Double.class) && isNumeric(args.getFirst())) {
                 invokeWithDouble(m);
                 isFound = true;
                 break;
-            } else if (parametrs.equals("java.lang.String, java.lang.Double") && !isNumeric(args.getFirst()) && isNumeric(args.getLast())) {
+            } else if (size == 2 && parametrs.getFirst().equals(java.lang.String.class) && parametrs.getLast().equals(java.lang.Double.class) && !isNumeric(args.getFirst()) && isNumeric(args.getLast())) {
                 invokeWithStringDouble(m);
                 isFound = true;
                 break;
@@ -64,43 +63,63 @@ public class Executor {
         }
     }
 
-    private void invokeWithoutParams(Method m) {
+    private void invokeWithoutParams(Method m) throws StackIsEmptyException, MapNotContainVariableException {
         log.info("Method is found.");
         try {
             m.invoke(currentCommand, currentContext);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            log.warning("InvalidInvokeMethod.");
-            throw new InvalidInvokeMethod();
+        } catch (IllegalAccessException e) {
+            log.warning("Method invoke problem.");
+        } catch (InvocationTargetException e) {
+            if (e.getCause().getClass().equals(StackIsEmptyException.class)) {
+                throw (StackIsEmptyException) e.getCause();
+            } else if (e.getCause().getClass().equals(MapNotContainVariableException.class)) {
+                throw (MapNotContainVariableException) e.getCause();
+            }
         }
     }
 
-    private void invokeWithString(Method m) {
+    private void invokeWithString(Method m) throws MapNotContainVariableException, StackIsEmptyException {
         log.info("Method is found.");
         try {
             m.invoke(currentCommand, currentContext, currentCommand.getArgs().getFirst());
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            log.warning("InvalidInvokeMethod.");
-            throw new InvalidInvokeMethod();
+        } catch (IllegalAccessException e) {
+            log.warning("Method invoke problem.");
+        } catch (InvocationTargetException e) {
+            if (e.getCause().getClass().equals(StackIsEmptyException.class)) {
+                throw (StackIsEmptyException) e.getCause();
+            } else if (e.getCause().getClass().equals(MapNotContainVariableException.class)) {
+                throw (MapNotContainVariableException) e.getCause();
+            }
         }
     }
 
-    private void invokeWithDouble(Method m) {
+    private void invokeWithDouble(Method m) throws StackIsEmptyException, MapNotContainVariableException {
         log.info("Method is found.");
         try {
             m.invoke(currentCommand, currentContext, Double.parseDouble(currentCommand.getArgs().getFirst()));
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            log.warning("InvalidInvokeMethod.");
-            throw new InvalidInvokeMethod();
+        } catch (IllegalAccessException e) {
+            log.warning("Method invoke problem.");
+        } catch (InvocationTargetException e) {
+            if (e.getCause().getClass().equals(StackIsEmptyException.class)) {
+                throw (StackIsEmptyException) e.getCause();
+            } else if (e.getCause().getClass().equals(MapNotContainVariableException.class)) {
+                throw (MapNotContainVariableException) e.getCause();
+            }
         }
     }
 
-    private void invokeWithStringDouble(Method m) {
+    private void invokeWithStringDouble(Method m) throws StackIsEmptyException, MapNotContainVariableException {
         log.info("Method is found.");
         try {
             m.invoke(currentCommand, currentContext, currentCommand.getArgs().getFirst(), Double.parseDouble(currentCommand.getArgs().getLast()));
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            log.warning("InvalidInvokeMethod.");
-            throw new InvalidInvokeMethod();
+        } catch (IllegalAccessException e) {
+            log.warning("Method invoke problem.");
+        } catch (InvocationTargetException e) {
+            if (e.getCause().getClass().equals(StackIsEmptyException.class)) {
+                throw (StackIsEmptyException) e.getCause();
+            } else if (e.getCause().getClass().equals(MapNotContainVariableException.class)) {
+                throw (MapNotContainVariableException) e.getCause();
+            }
         }
     }
 
