@@ -17,28 +17,23 @@ public class Main {
 
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
-        try (InputStreamReader reader = new InputStreamReader(System.in)) {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
             log.info("Open stream for reading.");
-            try (BufferedReader bufferedReader = new BufferedReader(reader)) {
-                InstructionParser instructionParser = new InstructionParser();
-                log.info("Initialization InstructionParser.");
-                List<String> arguments;
-                String commandName;
-                while (true) {
-                    arguments = instructionParser.parse(bufferedReader);
-                    if (arguments == null) {
-                        break;
-                    }
-                    commandName = arguments.getFirst();
-                    if (commandName.equalsIgnoreCase("EXIT")) {
-                        break;
-                    }
-                    arguments.remove(commandName);
-                    calculator.run(commandName, arguments);
+            InstructionParser instructionParser = new InstructionParser();
+            log.info("Initialization InstructionParser.");
+            List<String> arguments;
+            String commandName;
+            while (true) {
+                arguments = instructionParser.parse(bufferedReader);
+                if (arguments == null) {
+                    break;
                 }
-            } catch (IOException e) {
-                log.warning("BufferedReaderNotCreatedException.");
-                throw new BufferedReaderNotCreatedException();
+                commandName = arguments.getFirst();
+                if (commandName.equalsIgnoreCase("EXIT")) {
+                    break;
+                }
+                arguments.remove(commandName);
+                calculator.run(commandName, arguments);
             }
         } catch (IOException e) {
             log.warning("ReaderNotCreatedException.");

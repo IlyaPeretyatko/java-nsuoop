@@ -36,7 +36,6 @@ public class Calculator {
             executor.searchMethod();
         } catch (MethodNotFoundException | CommandNotFoundException | InvalidCountOfArgsException |
                  InvalidCreateCommandException e) {
-            log.warning(e.getMessage());
             System.err.println(e.getMessage());
         }
 

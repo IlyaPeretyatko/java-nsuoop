@@ -66,7 +66,6 @@ public class Executor {
         try {
             m.invoke(currentCommand, currentContext);
         } catch (IllegalAccessException | InvocationTargetException e) {
-            log.warning("Method invoke problem.");
             System.err.println("Method invoke problem.");
         }
     }
@@ -76,7 +75,6 @@ public class Executor {
         try {
             m.invoke(currentCommand, currentContext, currentCommand.getArgs().getFirst());
         } catch (IllegalAccessException | InvocationTargetException e) {
-            log.warning("Method invoke problem.");
             System.err.println("Method invoke problem.");
         }
     }
@@ -86,7 +84,6 @@ public class Executor {
         try {
             m.invoke(currentCommand, currentContext, Double.parseDouble(currentCommand.getArgs().getFirst()));
         } catch (IllegalAccessException | InvocationTargetException e) {
-            log.warning("Method invoke problem.");
             System.err.println("Method invoke problem.");
         }
     }
@@ -96,7 +93,6 @@ public class Executor {
         try {
             m.invoke(currentCommand, currentContext, currentCommand.getArgs().getFirst(), Double.parseDouble(currentCommand.getArgs().getLast()));
         } catch (IllegalAccessException | InvocationTargetException e) {
-            log.warning("Method invoke problem.");
             System.err.println("Method invoke problem.");
         }
     }
