@@ -1,0 +1,4 @@
+DEFINE aboba 123
+DEFINE bebra 456
+PUSH bebra
+PRINT

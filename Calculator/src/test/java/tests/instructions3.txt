@@ -1,0 +1,8 @@
+DEFINE a 30
+DEFINE b 3
+push a
+push b
+/
+push 11
++
+PRINT
