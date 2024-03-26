@@ -16,6 +16,7 @@ public class Model {
     private boolean down = false;
     private boolean left = false;
 
+
     private boolean isRun = true;
 
     public void setDirection(int direction) {
@@ -88,7 +89,7 @@ public class Model {
     }
 
     public void move() {
-        for (int i = sizeOfSnake; i > 0; --i) {
+        for (int i = sizeOfSnake; i > 0; i--) {
             x[i] = x[i - 1];
             y[i] = y[i - 1];
         }
@@ -120,7 +121,7 @@ public class Model {
 
     public void checkCollision() {
         if (sizeOfSnake > 4) {
-            for (int i = 1; i < sizeOfSnake; ++i) {
+            for (int i = sizeOfSnake; i > 0 ; --i) {
                 if (x[0] == x[i] && y[0] == y[i]) {
                     isRun = false;
                     break;

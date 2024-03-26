@@ -2,10 +2,8 @@ package org.nsu.oop.snake;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
+import java.awt.image.ImageObserver;
 
 import static org.nsu.oop.snake.Model.CHUNK_SIZE;
 import static org.nsu.oop.snake.Model.SIZE;
@@ -19,7 +17,7 @@ public class ViewControllerSwing extends JPanel implements ActionListener {
     Model gameModel = new Model();
 
     public ViewControllerSwing() {
-        setBackground(Color.CYAN);
+        setBackground(Color.GRAY);
         getImages();
         startGame();
         addKeyListener(new Controller());
@@ -33,7 +31,7 @@ public class ViewControllerSwing extends JPanel implements ActionListener {
             gameModel.setY(i, CHUNK_SIZE * 10);
         }
         gameModel.spawnApple();
-        Timer timer = new Timer(125, this);
+        Timer timer = new Timer(100, this);
         timer.start();
     }
 
@@ -53,7 +51,7 @@ public class ViewControllerSwing extends JPanel implements ActionListener {
             g.setColor(Color.BLACK);
             g.setFont(new Font("Arial", Font.BOLD, 24));
             g.drawString("Score: " + (gameModel.getSizeOfSnake() - 3), SIZE / 2 - 50, 25);
-            for (int i = 1; i < gameModel.getSizeOfSnake(); ++i) {
+            for (int i = gameModel.getSizeOfSnake(); i > 0; --i) {
                 g.drawImage(snake, gameModel.getX(i), gameModel.getY(i), this);
             }
             g.drawImage(apple, gameModel.getAppleX(), gameModel.getAppleY(), this);
@@ -66,12 +64,14 @@ public class ViewControllerSwing extends JPanel implements ActionListener {
         }
     }
 
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
         if (gameModel.gameIsRun()) {
-            gameModel.move();
             gameModel.checkApple();
+            gameModel.move();
             gameModel.checkCollision();
         }
     }
@@ -90,7 +90,10 @@ public class ViewControllerSwing extends JPanel implements ActionListener {
             } else if (key == KeyEvent.VK_DOWN){
                 gameModel.setDirection(2);
             }
+
         }
+
     }
+
 
 }
