@@ -13,7 +13,9 @@ public class View extends JPanel implements ActionListener {
     private Image snake;
     private Image head;
 
-    int sizeOfField;
+    private int sizeOfField;
+    private int speed;
+    private Timer timer;
 
     Controller controller = new Controller();
 
@@ -29,7 +31,8 @@ public class View extends JPanel implements ActionListener {
         controller.createSnake();
         controller.callSpawnApple();
         sizeOfField = controller.getSizeOfField();
-        Timer timer = new Timer(100, this);
+        speed = 250;
+        timer = new Timer(speed, this);
         timer.start();
     }
 
@@ -75,6 +78,7 @@ public class View extends JPanel implements ActionListener {
             controller.callCheckApple();
             controller.callMove();
             controller.callCheckCollision();
+
         }
     }
 
@@ -91,6 +95,16 @@ public class View extends JPanel implements ActionListener {
                 controller.setDirection(0);
             } else if (key == KeyEvent.VK_DOWN){
                 controller.setDirection(2);
+            } else if (key == KeyEvent.VK_0) {
+                if (speed != 100) {
+                    speed -= 50;
+                }
+                timer.setDelay(speed);
+            } else if (key == KeyEvent.VK_9) {
+                if (speed != 500) {
+                    speed += 50;
+                }
+                timer.setDelay(speed);
             }
         }
 
