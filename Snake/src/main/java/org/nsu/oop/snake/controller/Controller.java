@@ -56,6 +56,8 @@ public class Controller extends Model {
         return isRun;
     }
 
+    public boolean gameIsWin() { return isWin; }
+
     public void createSnake() {
         sizeOfSnake = 3;
         for (int i = 0; i < sizeOfSnake; ++i) {
@@ -83,5 +85,6 @@ public class Controller extends Model {
     public int getSizeOfField() {
         return SIZE;
     }
+
 
 }

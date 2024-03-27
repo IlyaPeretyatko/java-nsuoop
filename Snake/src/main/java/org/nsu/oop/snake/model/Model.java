@@ -19,6 +19,7 @@ public class Model {
     protected boolean left = false;
 
     protected boolean isRun = true;
+    protected boolean isWin = false;
 
     protected Model() {}
 
@@ -55,6 +56,10 @@ public class Model {
     protected void checkApple() {
         if (x[0] == appleX && y[0] == appleY) {
             sizeOfSnake++;
+            if (sizeOfSnake == 103) {
+                isWin = true;
+                isRun = false;
+            }
             spawnApple();
         }
     }

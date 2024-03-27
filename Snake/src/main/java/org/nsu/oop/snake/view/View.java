@@ -54,6 +54,11 @@ public class View extends JPanel implements ActionListener {
             }
             g.drawImage(apple, controller.getAppleX(), controller.getAppleY(), this);
             g.drawImage(head, controller.getX(0), controller.getY(0), this);
+        } else if (controller.gameIsWin()) {
+            String str = "Win";
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Arial", Font.BOLD, 24));
+            g.drawString(str, sizeOfField / 2 - 20, sizeOfField / 2 - 30);
         } else {
             String str = "Game Over";
             g.setColor(Color.BLACK);
