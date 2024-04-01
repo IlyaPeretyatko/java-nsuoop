@@ -1,7 +1,6 @@
 package org.nsu.oop.snake;
 
-import org.nsu.oop.snake.view.View;
-
+import org.nsu.oop.snake.controller.Controller;
 import javax.swing.*;
 
 public class Main {
@@ -13,7 +12,8 @@ public class Main {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setSize(400, 435);
         jFrame.setLocationRelativeTo(null);
-        jFrame.add(new View());
+        Controller controller = new Controller();
+        jFrame.add(controller.getView());
         jFrame.setVisible(true);
     }
 }

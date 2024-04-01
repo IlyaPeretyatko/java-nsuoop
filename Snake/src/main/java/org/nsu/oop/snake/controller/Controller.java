@@ -2,89 +2,102 @@ package org.nsu.oop.snake.controller;
 
 
 import org.nsu.oop.snake.model.Model;
+import org.nsu.oop.snake.view.View;
 
-public class Controller extends Model {
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
+public class Controller implements ActionListener {
 
-    public int getAppleX() { return appleX; }
+    Model model;
+    View view;
+
+    private int speed;
+    private final Timer timer;
+
+    public Controller() {
+        model = new Model();
+        view = new View(new KeyTrigers(), this);
+        speed = 250;
+        timer = new Timer(speed, this);
+        timer.start();
+        startGame();
+    }
+
+    public View getView() { return view; }
+
+    public void startGame() {
+        model.createSnake();
+        model.spawnApple();
+    }
+
+    public int getAppleX() { return model.getAppleX(); }
 
     public int getAppleY() {
-        return appleY;
+        return model.getAppleY();
     }
 
-    public int getSizeOfSnake() {
-        return this.sizeOfSnake;
-    }
+    public int getSizeOfSnake() { return model.getSizeOfSnake(); }
 
     public int getX(int index) {
+        int[] x = model.getX();
         return x[index];
     }
 
     public int getY(int index) {
+        int[] y = model.getY();
         return y[index];
     }
 
-    public void setDirection(int direction) {
-        if (direction == 0) {
-            if (!down) {
-                right = false;
-                up = true;
-                left = false;
-            }
-        } else if (direction == 1) {
-            if (!left) {
-                right = true;
-                up = false;
-                down = false;
-            }
-        } else if (direction == 2) {
-            if (!up) {
-                right = false;
-                down = true;
-                left = false;
-            }
-        } else if (direction == 3) {
-            if (!right) {
-                left = true;
-                up = false;
-                down = false;
-            }
-        }
-    }
 
     public boolean gameIsRun() {
-        return isRun;
+        return model.isRun();
     }
 
-    public boolean gameIsWin() { return isWin; }
+    public boolean gameIsWin() { return model.isWin(); }
 
-    public void createSnake() {
-        sizeOfSnake = 3;
-        for (int i = 0; i < sizeOfSnake; ++i) {
-            x[i] =  CHUNK_SIZE * (10 - i);
-            y[i] = CHUNK_SIZE * 10;
+    public int getSizeOfField() { return model.getSIZE(); }
+
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        view.repaint();
+        if (gameIsRun()) {
+            model.checkApple();
+            model.move();
+            model.checkCollision();
+
         }
     }
 
-    public void callMove() {
-        move();
+
+    class KeyTrigers extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            super.keyPressed(e);
+            int key = e.getKeyCode();
+            if (key == KeyEvent.VK_LEFT){
+                model.setDirection(3);
+            } else if (key == KeyEvent.VK_RIGHT){
+                model.setDirection(1);
+            } else if (key == KeyEvent.VK_UP){
+                model.setDirection(0);
+            } else if (key == KeyEvent.VK_DOWN){
+                model.setDirection(2);
+            } else if (key == KeyEvent.VK_0) {
+                if (speed != 100) {
+                    speed -= 50;
+                }
+                timer.setDelay(speed);
+            } else if (key == KeyEvent.VK_9) {
+                if (speed != 500) {
+                    speed += 50;
+                }
+                timer.setDelay(speed);
+            }
+        }
     }
-
-    public void callCheckApple() {
-        checkApple();
-    }
-
-    public void callCheckCollision() {
-        checkCollision();
-    }
-
-    public void callSpawnApple() {
-        spawnApple();
-    }
-
-    public int getSizeOfField() {
-        return SIZE;
-    }
-
-
 }

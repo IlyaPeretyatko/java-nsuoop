@@ -3,33 +3,40 @@ package org.nsu.oop.snake.model;
 import java.util.Random;
 
 public class Model {
-    protected final int SIZE = 400;
-    protected final int CHUNK_SIZE = 20;
-    protected final int CHUNKS = 400;
+    private final int SIZE = 400;
+    private final int CHUNK_SIZE = 20;
+    private final int CHUNKS = 400;
 
-    protected int appleX;
-    protected int appleY;
-    protected final int[] x = new int[CHUNKS];
-    protected final int[] y = new int[CHUNKS];
-    protected int sizeOfSnake;
+    private int appleX;
+    private int appleY;
+    private final int[] x = new int[CHUNKS];
+    private final int[] y = new int[CHUNKS];
+    private int sizeOfSnake;
 
-    protected boolean up = false;
-    protected boolean right = true;
-    protected boolean down = false;
-    protected boolean left = false;
+    private boolean up = false;
+    private boolean right = true;
+    private boolean down = false;
+    private boolean left = false;
 
-    protected boolean isRun = true;
-    protected boolean isWin = false;
+    private boolean isRun = true;
+    private boolean isWin = false;
 
-    protected Model() {}
 
-    protected void spawnApple() {
+    public void createSnake() {
+        sizeOfSnake = 3;
+        for (int i = 0; i < sizeOfSnake; ++i) {
+            x[i] =  CHUNK_SIZE * (10 - i);
+            y[i] = CHUNK_SIZE * 10;
+        }
+    }
+
+    public void spawnApple() {
         appleX = new Random().nextInt(20) * CHUNK_SIZE;
         appleY = new Random().nextInt(20) * CHUNK_SIZE;
     }
 
 
-    protected void move() {
+    public void move() {
         for (int i = sizeOfSnake; i > 0; i--) {
             x[i] = x[i - 1];
             y[i] = y[i - 1];
@@ -53,7 +60,7 @@ public class Model {
         }
     }
 
-    protected void checkApple() {
+    public void checkApple() {
         if (x[0] == appleX && y[0] == appleY) {
             sizeOfSnake++;
             if (sizeOfSnake == 103) {
@@ -64,7 +71,7 @@ public class Model {
         }
     }
 
-    protected void checkCollision() {
+    public void checkCollision() {
         if (sizeOfSnake > 4) {
             for (int i = sizeOfSnake; i > 0 ; --i) {
                 if (x[0] == x[i] && y[0] == y[i]) {
@@ -73,6 +80,66 @@ public class Model {
                 }
             }
         }
+    }
+
+    public void setDirection(int direction) {
+        if (direction == 0) {
+            if (!down) {
+                right = false;
+                up = true;
+                left = false;
+            }
+        } else if (direction == 1) {
+            if (!left) {
+                right = true;
+                up = false;
+                down = false;
+            }
+        } else if (direction == 2) {
+            if (!up) {
+                right = false;
+                down = true;
+                left = false;
+            }
+        } else if (direction == 3) {
+            if (!right) {
+                left = true;
+                up = false;
+                down = false;
+            }
+        }
+    }
+
+    public int getAppleX() {
+        return appleX;
+    }
+
+    public boolean isRun() {
+        return isRun;
+    }
+
+    public boolean isWin() {
+        return isWin;
+    }
+
+    public int getSIZE() {
+        return SIZE;
+    }
+
+    public int getSizeOfSnake() {
+        return sizeOfSnake;
+    }
+
+    public int getAppleY() {
+        return appleY;
+    }
+
+    public int[] getX() {
+        return x;
+    }
+
+    public int[] getY() {
+        return y;
     }
 
 }

@@ -7,34 +7,26 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class View extends JPanel implements ActionListener {
+public class View extends JPanel {
+
+    Controller controller;
 
     private Image apple;
     private Image snake;
     private Image head;
 
-    private int sizeOfField;
-    private int speed;
-    private Timer timer;
+    private final int sizeOfField;
 
-    Controller controller = new Controller();
 
-    public View() {
+    public View(KeyListener KeyTrigers, Controller controller) {
         setBackground(Color.GRAY);
         getImages();
-        startGame();
-        addKeyListener(new KeyTrigers());
+        this.controller = controller;
+        sizeOfField = controller.getSizeOfField();
+        addKeyListener(KeyTrigers);
         setFocusable(true);
     }
 
-    public void startGame() {
-        controller.createSnake();
-        controller.callSpawnApple();
-        sizeOfField = controller.getSizeOfField();
-        speed = 250;
-        timer = new Timer(speed, this);
-        timer.start();
-    }
 
     public void getImages() {
         ImageIcon imageIconApple = new ImageIcon("src/main/resources/apple.png");
@@ -71,44 +63,7 @@ public class View extends JPanel implements ActionListener {
     }
 
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        repaint();
-        if (controller.gameIsRun()) {
-            controller.callCheckApple();
-            controller.callMove();
-            controller.callCheckCollision();
 
-        }
-    }
-
-    class KeyTrigers extends KeyAdapter{
-        @Override
-        public void keyPressed(KeyEvent e) {
-            super.keyPressed(e);
-            int key = e.getKeyCode();
-            if (key == KeyEvent.VK_LEFT){
-                controller.setDirection(3);
-            } else if (key == KeyEvent.VK_RIGHT){
-                controller.setDirection(1);
-            } else if (key == KeyEvent.VK_UP){
-                controller.setDirection(0);
-            } else if (key == KeyEvent.VK_DOWN){
-                controller.setDirection(2);
-            } else if (key == KeyEvent.VK_0) {
-                if (speed != 100) {
-                    speed -= 50;
-                }
-                timer.setDelay(speed);
-            } else if (key == KeyEvent.VK_9) {
-                if (speed != 500) {
-                    speed += 50;
-                }
-                timer.setDelay(speed);
-            }
-        }
-
-    }
 
 
 }
