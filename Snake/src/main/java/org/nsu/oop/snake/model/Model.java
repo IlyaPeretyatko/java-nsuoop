@@ -22,21 +22,6 @@ public class Model {
     private boolean isWin = false;
 
 
-    public void setSizeOfSnake(int sizeOfSnake) {
-        this.sizeOfSnake = sizeOfSnake;
-    }
-
-    public int getCHUNKSIZE() {
-        return CHUNK_SIZE;
-    }
-
-    public void setX(int[] x) {
-        this.x = x;
-    }
-
-    public void setY(int[] y) {
-        this.y = y;
-    }
 
     public void spawnApple() {
         appleX = new Random().nextInt(20) * CHUNK_SIZE;
@@ -118,9 +103,6 @@ public class Model {
         }
     }
 
-    public int getAppleX() {
-        return appleX;
-    }
 
     public boolean isRun() {
         return isRun;
@@ -130,12 +112,24 @@ public class Model {
         return isWin;
     }
 
+    public int getCHUNKSIZE() {
+        return CHUNK_SIZE;
+    }
+
     public int getSIZE() {
         return SIZE;
     }
 
+    public void setSizeOfSnake(int sizeOfSnake) {
+        this.sizeOfSnake = sizeOfSnake;
+    }
+
     public int getSizeOfSnake() {
         return sizeOfSnake;
+    }
+
+    public int getAppleX() {
+        return appleX;
     }
 
     public int getAppleY() {
@@ -148,6 +142,14 @@ public class Model {
 
     public int[] getY() {
         return y;
+    }
+
+    public void setX(int[] x) {
+        this.x = x;
+    }
+
+    public void setY(int[] y) {
+        this.y = y;
     }
 
 }

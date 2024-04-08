@@ -27,12 +27,24 @@ public class Controller implements ActionListener {
         startGame();
     }
 
-    public View getView() { return view; }
-
     public void startGame() {
         createSnake();
         model.spawnApple();
     }
+
+    public void createSnake() {
+        model.setSizeOfSnake(3);
+        for (int i = 0; i < model.getSizeOfSnake(); ++i) {
+            int[] x = new int[model.getSIZE()];
+            int[] y = new int[model.getSIZE()];
+            x[i] =  model.getCHUNKSIZE() * (10 - i);
+            y[i] = model.getCHUNKSIZE() * 10;
+            model.setX(x);
+            model.setY(y);
+        }
+    }
+
+    public View getView() { return view; }
 
     public int getAppleX() { return model.getAppleX(); }
 
@@ -51,19 +63,6 @@ public class Controller implements ActionListener {
         int[] y = model.getY();
         return y[index];
     }
-
-    public void createSnake() {
-        model.setSizeOfSnake(3);
-        for (int i = 0; i < model.getSizeOfSnake(); ++i) {
-            int[] x = new int[model.getSIZE()];
-            int[] y = new int[model.getSIZE()];
-            x[i] =  model.getCHUNKSIZE() * (10 - i);
-            y[i] = model.getCHUNKSIZE() * 10;
-            model.setX(x);
-            model.setY(y);
-        }
-    }
-
 
     public boolean gameIsRun() {
         return model.isRun();
