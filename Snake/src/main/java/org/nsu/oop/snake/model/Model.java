@@ -9,8 +9,8 @@ public class Model {
 
     private int appleX;
     private int appleY;
-    private final int[] x = new int[CHUNKS];
-    private final int[] y = new int[CHUNKS];
+    private int[] x = new int[CHUNKS];
+    private int[] y = new int[CHUNKS];
     private int sizeOfSnake;
 
     private boolean up = false;
@@ -22,12 +22,20 @@ public class Model {
     private boolean isWin = false;
 
 
-    public void createSnake() {
-        sizeOfSnake = 3;
-        for (int i = 0; i < sizeOfSnake; ++i) {
-            x[i] =  CHUNK_SIZE * (10 - i);
-            y[i] = CHUNK_SIZE * 10;
-        }
+    public void setSizeOfSnake(int sizeOfSnake) {
+        this.sizeOfSnake = sizeOfSnake;
+    }
+
+    public int getCHUNKSIZE() {
+        return CHUNK_SIZE;
+    }
+
+    public void setX(int[] x) {
+        this.x = x;
+    }
+
+    public void setY(int[] y) {
+        this.y = y;
     }
 
     public void spawnApple() {
