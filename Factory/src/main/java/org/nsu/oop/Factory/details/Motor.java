@@ -1,13 +1,15 @@
 package org.nsu.oop.Factory.details;
 
-public class Motor {
-    private final int id;
+import java.util.UUID;
 
-    public Motor(int id) {
-        this.id = id;
+public class Motor {
+    private final UUID id;
+
+    public Motor() {
+        this.id = UUID.randomUUID();
     }
 
-    public int getId() {
+    public UUID getId() {
         return this.id;
     }
 }

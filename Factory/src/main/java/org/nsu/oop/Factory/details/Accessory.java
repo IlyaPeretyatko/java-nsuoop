@@ -1,13 +1,15 @@
 package org.nsu.oop.Factory.details;
 
-public class Accessory {
-    private final int id;
+import java.util.UUID;
 
-    public Accessory(int id) {
-        this.id = id;
+public class Accessory {
+    private final UUID id;
+
+    public Accessory() {
+        this.id = UUID.randomUUID();
     }
 
-    public int getId() {
+    public UUID getId() {
         return this.id;
     }
 }

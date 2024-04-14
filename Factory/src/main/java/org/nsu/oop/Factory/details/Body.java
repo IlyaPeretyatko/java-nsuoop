@@ -1,13 +1,15 @@
 package org.nsu.oop.Factory.details;
 
-public class Body {
-    private final int id;
+import java.util.UUID;
 
-    public Body(int id) {
-        this.id = id;
+public class Body {
+    private final UUID id;
+
+    public Body() {
+        this.id = UUID.randomUUID();
     }
 
-    public int getId() {
+    public UUID getId() {
         return this.id;
     }
 }
