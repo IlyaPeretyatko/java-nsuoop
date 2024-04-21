@@ -1,7 +1,7 @@
-package org.nsu.oop.Factory.storages;
+package org.nsu.oop.task4.storages;
 
-import org.nsu.oop.Factory.assembling.AssemblingCar;
-import org.nsu.oop.Factory.staff.WorkerTask;
+import org.nsu.oop.task4.assembling.AssemblingCar;
+import org.nsu.oop.task4.staff.WorkerTask;
 
 public class ControllerStorageCar {
 

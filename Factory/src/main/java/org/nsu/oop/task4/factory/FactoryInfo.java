@@ -1,4 +1,4 @@
-package org.nsu.oop.Factory;
+package org.nsu.oop.task4.factory;
 
 import java.io.IOException;
 import java.io.InputStream;

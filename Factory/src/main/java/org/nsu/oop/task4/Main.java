@@ -1,6 +1,8 @@
-package org.nsu.oop.Factory;
+package org.nsu.oop.task4;
 
-import org.nsu.oop.Factory.view.ViewFactory;
+import org.nsu.oop.task4.factory.Factory;
+import org.nsu.oop.task4.factory.FactoryInfo;
+import org.nsu.oop.task4.view.ViewFactory;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;

@@ -1,4 +1,4 @@
-package org.nsu.oop.Factory.threadpool;
+package org.nsu.oop.task4.threadpool;
 
 import java.util.concurrent.BlockingQueue;
 

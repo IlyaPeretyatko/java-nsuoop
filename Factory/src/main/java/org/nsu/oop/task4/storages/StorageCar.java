@@ -1,7 +1,6 @@
-package org.nsu.oop.Factory.storages;
+package org.nsu.oop.task4.storages;
 
-import org.nsu.oop.Factory.FactoryInfo;
-import org.nsu.oop.Factory.details.Car;
+import org.nsu.oop.task4.details.Car;
 
 import java.util.ArrayList;
 import java.util.List;

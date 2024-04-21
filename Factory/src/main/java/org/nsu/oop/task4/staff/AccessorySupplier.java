@@ -1,7 +1,7 @@
-package org.nsu.oop.Factory.staff;
+package org.nsu.oop.task4.staff;
 
-import org.nsu.oop.Factory.details.Accessory;
-import org.nsu.oop.Factory.storages.StorageAccessory;
+import org.nsu.oop.task4.details.Accessory;
+import org.nsu.oop.task4.storages.StorageAccessory;
 
 import java.util.UUID;
 

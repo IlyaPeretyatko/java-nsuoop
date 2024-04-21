@@ -1,8 +1,8 @@
-package org.nsu.oop.Factory;
+package org.nsu.oop.task4.factory;
 
-import org.nsu.oop.Factory.assembling.AssemblingCar;
-import org.nsu.oop.Factory.staff.*;
-import org.nsu.oop.Factory.storages.*;
+import org.nsu.oop.task4.assembling.AssemblingCar;
+import org.nsu.oop.task4.staff.*;
+import org.nsu.oop.task4.storages.*;
 
 import java.io.IOException;
 import java.util.ArrayList;

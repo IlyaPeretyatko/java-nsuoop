@@ -1,11 +1,11 @@
-package org.nsu.oop.Factory.details;
+package org.nsu.oop.task4.details;
 
 import java.util.UUID;
 
-public class Body {
+public class Accessory {
     private final UUID id;
 
-    public Body() {
+    public Accessory() {
         this.id = UUID.randomUUID();
     }
 

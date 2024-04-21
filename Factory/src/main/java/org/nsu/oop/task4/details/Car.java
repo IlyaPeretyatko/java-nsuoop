@@ -1,4 +1,4 @@
-package org.nsu.oop.Factory.details;
+package org.nsu.oop.task4.details;
 
 import java.util.UUID;
 

@@ -1,21 +1,21 @@
-package org.nsu.oop.Factory.storages;
+package org.nsu.oop.task4.storages;
 
-import org.nsu.oop.Factory.details.Motor;
+import org.nsu.oop.task4.details.Accessory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StorageMotor {
+public class StorageAccessory {
     private final int capacity;
 
-    private final List<Motor> details;
+    private final List<Accessory> details;
 
-    public StorageMotor(int capacity) {
+    public StorageAccessory(int capacity) {
         details = new ArrayList<>();
         this.capacity = capacity;
     }
 
-    public synchronized void put(Motor motor) {
+    public synchronized void put(Accessory accessory) {
         while (details.size() == capacity) {
             try {
                 wait();
@@ -23,11 +23,11 @@ public class StorageMotor {
                 System.err.println("InterruptedException");
             }
         }
-        details.add(motor);
+        details.add(accessory);
         notifyAll();
     }
 
-    public synchronized Motor get() {
+    public synchronized Accessory get() {
         while (details.isEmpty()) {
             try {
                 wait();
@@ -35,9 +35,9 @@ public class StorageMotor {
                 System.err.println("InterruptedException");
             }
         }
-        Motor returnMotor = details.getFirst();
-        details.remove(returnMotor);
+        Accessory returnAccessory = details.getFirst();
+        details.remove(returnAccessory);
         notifyAll();
-        return returnMotor;
+        return returnAccessory;
     }
 }

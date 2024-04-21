@@ -1,6 +1,6 @@
-package org.nsu.oop.Factory.staff;
+package org.nsu.oop.task4.staff;
 
-import org.nsu.oop.Factory.threadpool.ThreadTask;
+import org.nsu.oop.task4.threadpool.ThreadTask;
 
 import java.util.UUID;
 

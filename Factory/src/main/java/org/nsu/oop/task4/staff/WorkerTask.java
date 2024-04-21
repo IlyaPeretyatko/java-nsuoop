@@ -1,14 +1,14 @@
-package org.nsu.oop.Factory.staff;
+package org.nsu.oop.task4.staff;
 
-import org.nsu.oop.Factory.details.Accessory;
-import org.nsu.oop.Factory.details.Body;
-import org.nsu.oop.Factory.details.Car;
-import org.nsu.oop.Factory.details.Motor;
-import org.nsu.oop.Factory.storages.StorageAccessory;
-import org.nsu.oop.Factory.storages.StorageBody;
-import org.nsu.oop.Factory.storages.StorageCar;
-import org.nsu.oop.Factory.storages.StorageMotor;
-import org.nsu.oop.Factory.threadpool.Task;
+import org.nsu.oop.task4.details.Accessory;
+import org.nsu.oop.task4.details.Body;
+import org.nsu.oop.task4.details.Car;
+import org.nsu.oop.task4.details.Motor;
+import org.nsu.oop.task4.storages.StorageAccessory;
+import org.nsu.oop.task4.storages.StorageBody;
+import org.nsu.oop.task4.storages.StorageCar;
+import org.nsu.oop.task4.storages.StorageMotor;
+import org.nsu.oop.task4.threadpool.Task;
 
 public class WorkerTask implements Task {
 

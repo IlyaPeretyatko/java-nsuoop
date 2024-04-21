@@ -1,8 +1,8 @@
-package org.nsu.oop.Factory.staff;
+package org.nsu.oop.task4.staff;
 
-import org.nsu.oop.Factory.FactoryInfo;
-import org.nsu.oop.Factory.details.Car;
-import org.nsu.oop.Factory.storages.StorageCar;
+import org.nsu.oop.task4.factory.FactoryInfo;
+import org.nsu.oop.task4.details.Car;
+import org.nsu.oop.task4.storages.StorageCar;
 
 import java.util.UUID;
 import java.util.logging.Logger;
