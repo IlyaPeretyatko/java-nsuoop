@@ -21,7 +21,7 @@ public class Factory {
         StorageMotor storageMotor = new StorageMotor(factoryInfo.getStorageMotorSize());
         StorageBody storageBody = new StorageBody(factoryInfo.getStorageBodySize());
         StorageAccessory storageAccessory = new StorageAccessory(factoryInfo.getStorageAccessorySize());
-        StorageCar storageCar = new StorageCar(factoryInfo.getStorageAutoSize(), factoryInfo);
+        StorageCar storageCar = new StorageCar(factoryInfo.getStorageAutoSize());
 
         bodySupplier = new BodySupplier(storageBody);
         motorSupplier = new MotorSupplier(storageMotor);
