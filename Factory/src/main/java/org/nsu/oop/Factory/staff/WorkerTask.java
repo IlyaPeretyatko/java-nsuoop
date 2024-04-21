@@ -40,6 +40,7 @@ public class WorkerTask implements Task {
             if (accessory != null) {
                 storageAccessory.put(accessory);
             }
+            return;
         }
         Car car = new Car(motor.getId(), body.getId(), accessory.getId());
         storageCar.put(car);

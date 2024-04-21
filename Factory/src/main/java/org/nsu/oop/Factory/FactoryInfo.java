@@ -7,10 +7,16 @@ import java.util.Properties;
 public class FactoryInfo {
 
     private final Properties properties;
+    private int produced;
 
     public FactoryInfo() throws IOException {
         this.properties = new Properties();
         readPropertiesFabric();
+        produced = 0;
+    }
+
+    public void realese() {
+        produced += 1;
     }
 
     private void readPropertiesFabric() throws IOException {

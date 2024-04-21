@@ -16,6 +16,7 @@ public class MotorSupplier extends Thread {
     public MotorSupplier(StorageMotor storage) {
         this.id = UUID.randomUUID();
         this.storage = storage;
+        freq = 1000;
     }
 
     public void setFreq(int freq) {
@@ -29,11 +30,13 @@ public class MotorSupplier extends Thread {
 
     @Override
     public void run() {
-        try {
-            Thread.sleep(freq);
-        } catch (InterruptedException e) {
-            System.err.println("InterruptedException");
+        while (isAlive()) {
+            try {
+                Thread.sleep(freq);
+            } catch (InterruptedException e) {
+                System.err.println("InterruptedException");
+            }
+            storage.put(new Motor());
         }
-        storage.put(new Motor());
     }
 }

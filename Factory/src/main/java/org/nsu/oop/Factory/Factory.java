@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Factory {
 
-    FactoryInfo factoryInfo;
+    public FactoryInfo factoryInfo;
 
     private final StorageMotor storageMotor;
     private final StorageBody storageBody;

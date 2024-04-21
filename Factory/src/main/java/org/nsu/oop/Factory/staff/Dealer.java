@@ -22,6 +22,7 @@ public class Dealer extends Thread {
         id = UUID.randomUUID();
         this.storage = storageCar;
         this.logging = logging;
+        freq = 1000;
     }
 
     public void setFreq(int freq) {
@@ -34,14 +35,16 @@ public class Dealer extends Thread {
 
     @Override
     public void run() {
-        try {
-            Thread.sleep(freq);
-        } catch (InterruptedException e) {
-            System.err.println("InterruptedException");
-        }
-        Car car = storage.get();
-        if (logging) {
-            System.out.println("Car: " + car.getId());
+        while (isAlive()) {
+            try {
+                Thread.sleep(freq);
+            } catch (InterruptedException e) {
+                System.err.println("InterruptedException");
+            }
+            Car car = storage.get();
+            if (logging) {
+                log.info("Dealer: " + getUId() + " Auto: " + car.getId() + " (Body: " + car.getBodyId() + ", Motor: " + car.getMotorId() + ", Accessory: " + car.getAccessoryId() + ")");
+            }
         }
     }
 

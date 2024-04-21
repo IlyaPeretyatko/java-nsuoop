@@ -12,12 +12,14 @@ public class ThreadTask extends Thread {
 
     @Override
     public void run() {
-        Task task;
-        try {
-            task = queue.take();
-        } catch (InterruptedException e) {
-            return;
+        while (isAlive()) {
+            Task task;
+            try {
+                task = queue.take();
+            } catch (InterruptedException e) {
+                return;
+            }
+            task.executeTask();
         }
-        task.executeTask();
     }
 }

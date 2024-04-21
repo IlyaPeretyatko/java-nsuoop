@@ -15,6 +15,7 @@ public class AccessorySupplier extends Thread {
     public AccessorySupplier(StorageAccessory storage) {
         this.id = UUID.randomUUID();
         this.storage = storage;
+        freq = 1000;
     }
 
     public void setFreq(int freq) {
@@ -27,11 +28,13 @@ public class AccessorySupplier extends Thread {
 
     @Override
     public void run() {
-        try {
-            Thread.sleep(freq);
-        } catch (InterruptedException e) {
-            System.err.println("InterruptedException");
+        while (isAlive()) {
+            try {
+                Thread.sleep(freq);
+            } catch (InterruptedException e) {
+                System.err.println("InterruptedException");
+            }
+            storage.put(new Accessory());
         }
-        storage.put(new Accessory());
     }
 }
