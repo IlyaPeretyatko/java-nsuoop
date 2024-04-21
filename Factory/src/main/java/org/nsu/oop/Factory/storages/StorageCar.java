@@ -1,5 +1,7 @@
 package org.nsu.oop.Factory.storages;
 
+import org.nsu.oop.Factory.FactoryInfo;
+import org.nsu.oop.Factory.assembling.AssemblingCar;
 import org.nsu.oop.Factory.details.Car;
 
 import java.util.ArrayList;
@@ -8,44 +10,55 @@ import java.util.List;
 public class StorageCar {
     private final int capacity;
 
-    private final List<Car> details;
+    private final FactoryInfo factoryInfo;
 
-    public StorageCar(int capacity) {
-        details = new ArrayList<>();
+    private ControllerStorageCar controllerStorageCar;
+
+    private final List<Car> cars;
+
+    public StorageCar(int capacity, FactoryInfo factoryInfo) {
+        cars = new ArrayList<>();
         this.capacity = capacity;
+        this.factoryInfo = factoryInfo;
     }
 
     public int getSize() {
-        return details.size();
+        return cars.size();
     }
 
     public int getCapacity() {
         return capacity;
     }
 
+    public void setControllerStorageCar(ControllerStorageCar controllerStorageCar) {
+        this.controllerStorageCar = controllerStorageCar;
+    }
+
     public synchronized void put(Car car) {
-        while (details.size() == capacity) {
+        while (cars.size() == capacity) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 System.err.println("InterruptedException");
             }
         }
-        details.add(car);
+        cars.add(car);
         notifyAll();
     }
 
     public synchronized Car get() {
-        while (details.isEmpty()) {
+        while (cars.isEmpty()) {
             try {
                 wait();
             } catch (InterruptedException e) {
                 System.err.println("InterruptedException");
             }
         }
-        Car returnCar = details.getFirst();
-        details.remove(returnCar);
+        Car returnCar = cars.getFirst();
+        cars.remove(returnCar);
+        factoryInfo.realese();
         notifyAll();
+        controllerStorageCar.estimateStorageCar();
         return returnCar;
     }
 }

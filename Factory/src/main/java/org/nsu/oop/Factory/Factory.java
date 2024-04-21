@@ -10,30 +10,18 @@ import java.util.List;
 
 public class Factory {
 
-    public FactoryInfo factoryInfo;
-
-    private final StorageMotor storageMotor;
-    private final StorageBody storageBody;
-    private final StorageAccessory storageAccessory;
-    private final StorageCar storageCar;
-
-    private final ControllerStorageCar controllerStorageCar;
-
     private final BodySupplier bodySupplier;
     private final MotorSupplier motorSupplier;
     private final List<AccessorySupplier> accessorySupplierList;
     private final List<Dealer> dealerList;
-
     private final AssemblingCar assemblingCar;
 
-    public Factory() throws IOException {
-        factoryInfo = new FactoryInfo();
+    public Factory(FactoryInfo factoryInfo) throws IOException {
 
-        storageMotor = new StorageMotor(factoryInfo.getStorageMotorSize());
-        storageBody = new StorageBody(factoryInfo.getStorageBodySize());
-        storageAccessory = new StorageAccessory(factoryInfo.getStorageAccessorySize());
-        storageCar = new StorageCar(factoryInfo.getStorageAutoSize());
-
+        StorageMotor storageMotor = new StorageMotor(factoryInfo.getStorageMotorSize());
+        StorageBody storageBody = new StorageBody(factoryInfo.getStorageBodySize());
+        StorageAccessory storageAccessory = new StorageAccessory(factoryInfo.getStorageAccessorySize());
+        StorageCar storageCar = new StorageCar(factoryInfo.getStorageAutoSize(), factoryInfo);
 
         bodySupplier = new BodySupplier(storageBody);
         motorSupplier = new MotorSupplier(storageMotor);
@@ -46,9 +34,11 @@ public class Factory {
             dealerList.add(new Dealer(storageCar, factoryInfo.getLogSale()));
         }
 
-        assemblingCar = new AssemblingCar(factoryInfo.getWorkers());
+        assemblingCar = new AssemblingCar(factoryInfo.getWorkers(), factoryInfo);
 
-        controllerStorageCar = new ControllerStorageCar(storageBody, storageMotor, storageAccessory, storageCar, assemblingCar);
+        ControllerStorageCar controllerStorageCar = new ControllerStorageCar(storageBody, storageMotor, storageAccessory, storageCar, assemblingCar);
+
+        storageCar.setControllerStorageCar(controllerStorageCar);
     }
 
     public void setFreqBodySupplier(int freq) {
@@ -69,6 +59,10 @@ public class Factory {
         for (Dealer dealer : dealerList) {
             dealer.setFreq(freq);
         }
+    }
+
+    public int getInQueue() {
+        return assemblingCar.getQueueSize();
     }
 
 

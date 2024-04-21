@@ -12,7 +12,6 @@ public class FactoryInfo {
     public FactoryInfo() throws IOException {
         this.properties = new Properties();
         readPropertiesFabric();
-        produced = 0;
     }
 
     public void realese() {
@@ -25,6 +24,8 @@ public class FactoryInfo {
             properties.load(resourceAsStream);
         }
     }
+
+    public int getProduced() { return produced; }
 
     public int getStorageBodySize() {
         return Integer.parseInt(properties.getProperty("StorageBodySize"));

@@ -28,10 +28,10 @@ public class ControllerStorageCar {
 
     public void estimateStorageCar() {
         int capacity = storageCar.getCapacity();
-        int inOrder = assemblingCar.getQueueSize();
+        int inQueue = assemblingCar.getQueueSize();
         int inStorage = storageCar.getSize();
-        if (inOrder +  inStorage < capacity) {
-            for (int i = 0; i < capacity - inOrder - inStorage; ++i) {
+        if (inQueue + inStorage < capacity) {
+            for (int i = 0; i < capacity - inQueue - inStorage; ++i) {
                 assemblingCar();
             }
         }
