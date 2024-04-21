@@ -5,8 +5,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         try {
-            FactoryInfo factoryInfo = new FactoryInfo();
-
+            Factory factory = new Factory();
         } catch (IOException e) {
             System.out.println("Не удалось считать характеристики фабркии.");
         }

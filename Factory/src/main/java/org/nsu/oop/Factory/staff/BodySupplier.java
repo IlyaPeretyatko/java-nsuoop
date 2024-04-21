@@ -1,4 +1,4 @@
-package org.nsu.oop.Factory.providers;
+package org.nsu.oop.Factory.staff;
 
 import org.nsu.oop.Factory.details.Body;
 import org.nsu.oop.Factory.storages.StorageBody;

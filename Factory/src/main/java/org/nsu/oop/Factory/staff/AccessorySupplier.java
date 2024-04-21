@@ -1,19 +1,18 @@
-package org.nsu.oop.Factory.providers;
+package org.nsu.oop.Factory.staff;
 
-
-import org.nsu.oop.Factory.details.Motor;
-import org.nsu.oop.Factory.storages.StorageMotor;
+import org.nsu.oop.Factory.details.Accessory;
+import org.nsu.oop.Factory.storages.StorageAccessory;
 
 import java.util.UUID;
 
-public class MotorSupplier extends Thread {
+public class AccessorySupplier extends Thread {
     private final UUID id;
 
-    private final StorageMotor storage;
+    private final StorageAccessory storage;
 
     private int freq;
 
-    public MotorSupplier(StorageMotor storage) {
+    public AccessorySupplier(StorageAccessory storage) {
         this.id = UUID.randomUUID();
         this.storage = storage;
     }
@@ -21,7 +20,6 @@ public class MotorSupplier extends Thread {
     public void setFreq(int freq) {
         this.freq = freq;
     }
-
 
     public UUID getUId() {
         return id;
@@ -34,6 +32,6 @@ public class MotorSupplier extends Thread {
         } catch (InterruptedException e) {
             System.err.println("InterruptedException");
         }
-        storage.put(new Motor());
+        storage.put(new Accessory());
     }
 }
