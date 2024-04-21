@@ -8,8 +8,8 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class Main {
-
     public static JFrame jFrame;
+
     public static void main(String[] args) {
         try {
             FactoryInfo factoryInfo = new FactoryInfo();
@@ -37,4 +37,5 @@ public class Main {
             System.out.println("Не удалось считать характеристики фабркии.");
         }
     }
+
 }

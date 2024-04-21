@@ -1,25 +1,22 @@
 package org.nsu.oop.Factory.storages;
 
 import org.nsu.oop.Factory.FactoryInfo;
-import org.nsu.oop.Factory.assembling.AssemblingCar;
 import org.nsu.oop.Factory.details.Car;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StorageCar {
-    private final int capacity;
 
-    private final FactoryInfo factoryInfo;
+    private final int capacity;
 
     private ControllerStorageCar controllerStorageCar;
 
     private final List<Car> cars;
 
-    public StorageCar(int capacity, FactoryInfo factoryInfo) {
+    public StorageCar(int capacity) {
         cars = new ArrayList<>();
         this.capacity = capacity;
-        this.factoryInfo = factoryInfo;
     }
 
     public int getSize() {
@@ -56,9 +53,8 @@ public class StorageCar {
         }
         Car returnCar = cars.getFirst();
         cars.remove(returnCar);
-        factoryInfo.realese();
-        notifyAll();
         controllerStorageCar.estimateStorageCar();
+        notifyAll();
         return returnCar;
     }
 }

@@ -31,7 +31,7 @@ public class Factory {
         }
         dealerList = new ArrayList<>();
         for (int i = 0; i < factoryInfo.getDealers(); ++i) {
-            dealerList.add(new Dealer(storageCar, factoryInfo.getLogSale()));
+            dealerList.add(new Dealer(storageCar, factoryInfo, factoryInfo.getLogSale()));
         }
 
         assemblingCar = new AssemblingCar(factoryInfo.getWorkers(), factoryInfo);

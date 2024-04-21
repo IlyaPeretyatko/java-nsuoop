@@ -1,5 +1,6 @@
 package org.nsu.oop.Factory.staff;
 
+import org.nsu.oop.Factory.FactoryInfo;
 import org.nsu.oop.Factory.details.Car;
 import org.nsu.oop.Factory.storages.StorageCar;
 
@@ -13,13 +14,14 @@ public class Dealer extends Thread {
     private final UUID id;
 
     private final StorageCar storage;
-
+    private final FactoryInfo factoryInfo;
     private final boolean logging;
 
     private int freq;
 
-    public Dealer(StorageCar storageCar, boolean logging) {
+    public Dealer(StorageCar storageCar, FactoryInfo factoryInfo, boolean logging) {
         id = UUID.randomUUID();
+        this.factoryInfo = factoryInfo;
         this.storage = storageCar;
         this.logging = logging;
         freq = 1000;
@@ -42,6 +44,7 @@ public class Dealer extends Thread {
                 System.err.println("InterruptedException");
             }
             Car car = storage.get();
+            factoryInfo.realese();
             if (logging) {
                 log.info("Dealer: " + getUId() + " Auto: " + car.getId() + " (Body: " + car.getBodyId() + ", Motor: " + car.getMotorId() + ", Accessory: " + car.getAccessoryId() + ")");
             }
