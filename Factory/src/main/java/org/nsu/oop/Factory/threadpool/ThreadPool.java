@@ -15,6 +15,10 @@ public class ThreadPool {
         queue = new LinkedBlockingQueue<>();
     }
 
+    public int getQueueSize() {
+        return queue.size();
+    }
+
     public boolean addTask(Task task) {
         return queue.offer(task);
     }

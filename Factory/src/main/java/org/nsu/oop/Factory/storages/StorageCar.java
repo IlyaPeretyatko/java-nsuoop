@@ -15,6 +15,14 @@ public class StorageCar {
         this.capacity = capacity;
     }
 
+    public int getSize() {
+        return details.size();
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
     public synchronized void put(Car car) {
         while (details.size() == capacity) {
             try {

@@ -1,14 +1,14 @@
-package org.nsu.oop.Factory;
+package org.nsu.oop.Factory.assembling;
 
 import org.nsu.oop.Factory.staff.Worker;
 import org.nsu.oop.Factory.threadpool.Task;
 import org.nsu.oop.Factory.threadpool.ThreadPool;
 
-public class AssemblyCar {
+public class AssemblingCar {
 
     ThreadPool threadPool;
 
-    public AssemblyCar(int countWorkers) {
+    public AssemblingCar(int countWorkers) {
         threadPool = new ThreadPool();
         for (int i = 0; i < countWorkers; ++i) {
             threadPool.addThread(new Worker());
@@ -17,6 +17,10 @@ public class AssemblyCar {
 
     public boolean addTask(Task task) {
         return threadPool.addTask(task);
+    }
+
+    public int getQueueSize() {
+        return threadPool.getQueueSize();
     }
 
     public void start() {

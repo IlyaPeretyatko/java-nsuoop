@@ -4,8 +4,12 @@ import org.nsu.oop.Factory.details.Car;
 import org.nsu.oop.Factory.storages.StorageCar;
 
 import java.util.UUID;
+import java.util.logging.Logger;
 
 public class Dealer extends Thread {
+
+    private static final Logger log = Logger.getLogger(Dealer.class.getName());
+
     private final UUID id;
 
     private final StorageCar storage;
@@ -37,7 +41,7 @@ public class Dealer extends Thread {
         }
         Car car = storage.get();
         if (logging) {
-            // log
+            System.out.println("Car: " + car.getId());
         }
     }
 
