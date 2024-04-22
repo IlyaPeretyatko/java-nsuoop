@@ -33,6 +33,7 @@ public class Worker extends Thread {
             try {
                 task = queue.take();
                 task.executeTask();
+                Thread.sleep(1000);
                 log.info("Worker ID: " + getUId() + " assembled car ID: " + task.getIdDetail() + " and put in storage of car.");
             } catch (InterruptedException e) {
                 return;
