@@ -40,13 +40,13 @@ public class Dealer extends Thread {
         while (isAlive()) {
             try {
                 Thread.sleep(freq);
+                Car car = storage.get();
+                if (logging) {
+                    log.info("Dealer: " + getUId() + " Auto: " + car.getId() + " (Body: " + car.getBodyId() + ", Motor: " + car.getMotorId() + ", Accessory: " + car.getAccessoryId() + ")");
+                }
+                factoryInfo.realese();
             } catch (InterruptedException e) {
-                System.err.println("InterruptedException");
-            }
-            Car car = storage.get();
-            factoryInfo.realese();
-            if (logging) {
-                log.info("Dealer: " + getUId() + " Auto: " + car.getId() + " (Body: " + car.getBodyId() + ", Motor: " + car.getMotorId() + ", Accessory: " + car.getAccessoryId() + ")");
+                return;
             }
         }
     }

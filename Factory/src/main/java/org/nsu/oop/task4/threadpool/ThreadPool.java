@@ -1,5 +1,7 @@
 package org.nsu.oop.task4.threadpool;
 
+import org.nsu.oop.task4.staff.Worker;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -7,7 +9,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class ThreadPool {
 
-    private final List<ThreadTask> threads;
+    private final List<Worker> threads;
     private final BlockingQueue<Task> queue;
 
     public ThreadPool() {
@@ -23,19 +25,19 @@ public class ThreadPool {
         return queue.offer(task);
     }
 
-    public void addThread(ThreadTask threadTask) {
+    public void addThread(Worker threadTask) {
         threads.add(threadTask);
     }
 
     public void start() {
-        for (ThreadTask thread : threads) {
+        for (Worker thread : threads) {
             thread.setQueue(queue);
             thread.start();
         }
     }
 
     public void stop() {
-        for (ThreadTask thread : threads) {
+        for (Worker thread : threads) {
             thread.interrupt();
         }
     }

@@ -17,7 +17,7 @@ public class ViewFactory extends JPanel implements ActionListener {
         this.factory = factory;
         this.factoryInfo = factoryInfo;
         setBackground(Color.LIGHT_GRAY);
-        Timer timer = new Timer(500, this);
+        Timer timer = new Timer(100, this);
         timer.start();
         factory.start();
     }
@@ -35,7 +35,11 @@ public class ViewFactory extends JPanel implements ActionListener {
         g.drawString("Count of Workers: " + factoryInfo.getWorkers(), 10, 150);
         g.drawString("Count of Dealers: " + factoryInfo.getWorkers(), 10, 175);
         g.drawString("Produced cars: " + factoryInfo.getProduced(), 10, 200);
-        g.drawString("Cars in order: " + factory.getInQueue(), 10, 220);
+        g.drawString("Cars in order: " + factory.getInQueue(), 10, 225);
+        g.drawString("Cars in storage: " + factory.getInStorageCar(), 10, 250);
+        g.drawString("Bodies in storage: " + factory.getInStorageBody(), 10, 275);
+        g.drawString("Motors in storage: " + factory.getInStorageMotor(), 10, 300);
+        g.drawString("Accessories in storage: " + factory.getInStorageAccessory(), 10, 325);
 
     }
 

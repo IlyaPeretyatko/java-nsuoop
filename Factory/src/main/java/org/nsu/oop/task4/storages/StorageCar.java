@@ -30,25 +30,17 @@ public class StorageCar {
         this.controllerStorageCar = controllerStorageCar;
     }
 
-    public synchronized void put(Car car) {
+    public synchronized void put(Car car) throws InterruptedException {
         while (cars.size() == capacity) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                System.err.println("InterruptedException");
-            }
+            wait();
         }
         cars.add(car);
         notifyAll();
     }
 
-    public synchronized Car get() {
+    public synchronized Car get() throws InterruptedException {
         while (cars.isEmpty()) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                System.err.println("InterruptedException");
-            }
+             wait();
         }
         Car returnCar = cars.getFirst();
         cars.remove(returnCar);

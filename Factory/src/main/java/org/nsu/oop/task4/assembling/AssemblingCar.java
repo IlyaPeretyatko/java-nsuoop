@@ -1,9 +1,9 @@
 package org.nsu.oop.task4.assembling;
 
 import org.nsu.oop.task4.factory.FactoryInfo;
-import org.nsu.oop.task4.staff.Worker;
 import org.nsu.oop.task4.threadpool.Task;
 import org.nsu.oop.task4.threadpool.ThreadPool;
+import org.nsu.oop.task4.staff.Worker;
 
 public class AssemblingCar {
 
