@@ -4,9 +4,14 @@ import org.nsu.oop.task4.assembling.AssemblingCar;
 import org.nsu.oop.task4.details.Accessory;
 import org.nsu.oop.task4.details.Body;
 import org.nsu.oop.task4.details.Motor;
+import org.nsu.oop.task4.staff.Worker;
 import org.nsu.oop.task4.staff.WorkerTask;
 
+import java.util.logging.Logger;
+
 public class ControllerStorageCar {
+
+    private static final Logger log = Logger.getLogger(ControllerStorageCar.class.getName());
 
     private final Storage<Body> storageBody;
     private final Storage<Motor> storageMotor;
@@ -37,6 +42,7 @@ public class ControllerStorageCar {
             for (int i = 0; i < capacity - inQueue - inStorage; ++i) {
                 assemblingCar();
             }
+            log.info(capacity - inQueue - inStorage + " cars have been added to the production queue.");
         }
     }
 }
