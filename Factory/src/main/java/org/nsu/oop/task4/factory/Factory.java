@@ -57,26 +57,22 @@ public class Factory {
 
     public void setFreqBodySupplier(int freq) {
         bodySupplier.setFreq(freq);
-        log.info("Change frequency of body supplier. Freq: " + freq + ".");
     }
 
     public void setFreqMotorSupplier(int freq) {
         motorSupplier.setFreq(freq);
-        log.info("Change frequency of motor supplier. Freq: " + freq + ".");
     }
 
     public void setFreqAccessorySupplier(int freq) {
         for (Supplier<Accessory> accessorySupplier : accessorySupplierList) {
             accessorySupplier.setFreq(freq);
         }
-        log.info("Change frequency of accessory suppliers. Freq: " + freq + ".");
     }
 
     public void setFreqDealer(int freq) {
         for (Dealer dealer : dealerList) {
             dealer.setFreq(freq);
         }
-        log.info("Change frequency of dealers. Freq: " + freq + ".");
     }
 
     public int getInQueue() {

@@ -64,7 +64,7 @@ public class ViewFactory extends JPanel implements ActionListener {
         factory.setFreqBodySupplier(sliders.get(0).getSliderValue());
         factory.setFreqMotorSupplier(sliders.get(1).getSliderValue());
         factory.setFreqAccessorySupplier(sliders.get(2).getSliderValue());
-        factory.setFreqAccessorySupplier(sliders.get(2).getSliderValue());
+        factory.setFreqDealer(sliders.get(3).getSliderValue());
     }
 
     @Override
