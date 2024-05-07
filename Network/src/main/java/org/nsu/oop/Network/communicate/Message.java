@@ -20,7 +20,6 @@ public class Message implements Serializable {
         this.nameUsers = null;
     }
 
-
     public Message(MessageType messageType, List<String> nameUsers) {
         this.messageType = messageType;
         this.nameUsers = nameUsers;
@@ -33,5 +32,9 @@ public class Message implements Serializable {
 
     public String getText() {
         return text;
+    }
+
+    public List<String> getNameUsers() {
+        return nameUsers;
     }
 }

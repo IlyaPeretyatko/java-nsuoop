@@ -1,41 +1,115 @@
 package org.nsu.oop.Network.cient;
 
+import org.nsu.oop.Network.communicate.Message;
+import org.nsu.oop.Network.communicate.MessageManager;
+import org.nsu.oop.Network.communicate.MessageType;
+
 import java.net.*;
 import java.io.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Client {
+
+    private String name;
+
     private Socket clientSocket;
-    private PrintWriter out;
-    private BufferedReader in;
 
-    public void startConnection(String ip, int port) {
-        try {
-            clientSocket = new Socket(ip, port);
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        } catch (IOException e) {
-            System.err.println("IOException client: start connection.");
+    private static ViewClient viewClient;
+
+    private MessageManager messageManager;
+
+    Set<String> nameUsers;
+
+    private boolean isConnect;
+
+    public void startConnection() {
+        while (!isConnect) {
+            try {
+                clientSocket = new Socket();
+                String ip = viewClient.getServerAddressFromOptionPane();
+                int port = viewClient.getPortServerFromOptionPane();
+                clientSocket.connect(new InetSocketAddress(ip, port), 1000);
+                isConnect = true;
+            } catch (IOException e) {
+                viewClient.errorDialogWindow("Not connected.");
+            }
         }
-    }
-
-    public void sendMessage(String msg) {
-        out.println(msg);
     }
 
     public void stopConnection() {
         try {
-            in.close();
-            out.close();
-            clientSocket.close();
+            if (isConnect) {
+                messageManager.send(new Message(MessageType.DISABLE_USER, name));
+                clientSocket.close();
+                isConnect = false;
+            }
         } catch (IOException e) {
-            System.err.println("IOException client: stop connection.");
+            viewClient.errorDialogWindow("Error of stopping connection.");
         }
     }
 
-    public static void main(String[] args) {
+    private void loginUser() throws IOException, ClassNotFoundException {
+        while (true) {
+            Message message = this.messageManager.receive();
+            if (message.getMessageType() == MessageType.REQUEST_NAME_USER) {
+                String name = viewClient.getNameUser();
+                messageManager.send(new Message(MessageType.USER_NAME, name));
+            } else if (message.getMessageType() == MessageType.NAME_USED) {
+                viewClient.errorDialogWindow("Имя занято.");
+                String name = viewClient.getNameUser();
+                messageManager.send(new Message(MessageType.USER_NAME, name));
+            } else if (message.getMessageType() == MessageType.NAME_ACCEPTED) {
+                viewClient.addMessage("Сервер: Вы подключились!");
+                nameUsers = new HashSet<>(message.getNameUsers());
+                viewClient.refreshListUsers(nameUsers);
+                break;
+            }
+        }
+    }
+
+    private void communicatingWithServer() throws IOException, ClassNotFoundException {
+        while (isConnect) {
+            Message message = this.messageManager.receive();
+            if (message.getMessageType() == MessageType.USER_ADDED) {
+                String name = message.getText();
+                if (!nameUsers.contains(this.name)) {
+                    nameUsers.add(name);
+                    viewClient.refreshListUsers(nameUsers);
+                    viewClient.addMessage("Сервер: " + name + " подключился.");
+                }
+            } else if (message.getMessageType() == MessageType.TEXT_MESSAGE) {
+                viewClient.addMessage(message.getText());
+            } else if (message.getMessageType() == MessageType.DISABLE_USER) {
+                String name = message.getText();
+                nameUsers.remove(name);
+                viewClient.refreshListUsers(nameUsers);
+            }
+        }
+    }
+
+    public void start() throws IOException, ClassNotFoundException {
+        while (true) {
+            System.out.println(555);
+            if (isConnect) {
+                try (MessageManager messageManager = new MessageManager(clientSocket)) {
+                    this.messageManager = messageManager;
+                    loginUser();
+                    communicatingWithServer();
+                    break;
+                }
+            }
+        }
+    }
+
+    public boolean getIsConnect() {
+        return isConnect;
+    }
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Client client = new Client();
-        client.startConnection("127.0.0.1", 6666);
-        client.sendMessage("aboba");
-        client.stopConnection();
+        viewClient = new ViewClient(client);
+        viewClient.initFrameClient();
+        client.start();
     }
 }

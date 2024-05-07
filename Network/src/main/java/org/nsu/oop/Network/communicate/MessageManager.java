@@ -26,8 +26,7 @@ public class MessageManager implements Closeable {
 
     public Message receive() throws IOException, ClassNotFoundException {
         synchronized (this.in) {
-            Message message = (Message) in.readObject();
-            return message;
+            return (Message) in.readObject();
         }
     }
 

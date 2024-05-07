@@ -52,7 +52,7 @@ public class Server {
                 messageManager.send(new Message(MessageType.REQUEST_NAME_USER));
                 Message answer = messageManager.receive();
                 String name = answer.getText();
-                if (name != null && !name.isEmpty() && !users.containsKey(name)) {
+                if (name != null && !name.isEmpty() && !users.containsKey(name) && answer.getMessageType() == MessageType.USER_NAME) {
                     users.put(name, messageManager);
                     List<String> nameUsers = new ArrayList<>(users.keySet());
                     messageManager.send(new Message(MessageType.NAME_ACCEPTED, nameUsers));
@@ -91,8 +91,10 @@ public class Server {
         }
     }
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException {
+        Server server = new Server();
+        server.start(6666);
+        server.stop();
     }
 
 }
