@@ -27,6 +27,7 @@ public class Server {
 
     public void stop() throws IOException {
         sendEachUser(new Message(MessageType.SERVER_STOP));
+        users.clear();
     }
 
     private void sendEachUser(Message message) throws IOException {

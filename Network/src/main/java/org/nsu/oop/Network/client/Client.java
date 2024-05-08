@@ -97,7 +97,6 @@ public class Client {
                     break;
                 }
             } else if (message.getMessageType() == MessageType.SERVER_STOP) {
-                stopConnection();
                 break;
             }
         }
