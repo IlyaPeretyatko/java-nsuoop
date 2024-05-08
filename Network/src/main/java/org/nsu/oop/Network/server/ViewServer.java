@@ -25,6 +25,7 @@ public class ViewServer {
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         jFrame.setVisible(true);
+        jFrame.setResizable(false);
 
         jFrame.addWindowListener(new WindowAdapter() {
             @Override
