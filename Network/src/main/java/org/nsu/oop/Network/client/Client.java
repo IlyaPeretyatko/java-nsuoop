@@ -36,6 +36,8 @@ public class Client {
                     loginUser();
                     communicatingWithServer();
                 }
+                clientSocket.close();
+                System.exit(0);
             } catch (IOException | ClassNotFoundException e) {
                 viewClient.errorDialogWindow("Not connected.");
             }
@@ -46,7 +48,6 @@ public class Client {
         try {
             if (isConnect) {
                 messageManager.send(new Message(MessageType.DISABLE_USER, name));
-                clientSocket.close();
                 isConnect = false;
             }
         } catch (IOException e) {
@@ -92,9 +93,12 @@ public class Client {
                 nameUsers.remove(name);
                 viewClient.refreshListUsers(nameUsers);
                 viewClient.addMessage("Сервер: " + name + " отключился.\n");
+                if (name.equals(this.name)) {
+                    break;
+                }
             } else if (message.getMessageType() == MessageType.SERVER_STOP) {
                 stopConnection();
-                System.exit(0);
+                break;
             }
         }
     }

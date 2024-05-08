@@ -7,13 +7,11 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class MessageManager implements Closeable {
-    private final Socket socket;
     private final ObjectOutputStream out;
     private final ObjectInputStream in;
 
 
     public MessageManager(Socket socket) throws IOException {
-        this.socket = socket;
         this.out = new ObjectOutputStream(socket.getOutputStream());
         this.in = new ObjectInputStream(socket.getInputStream());
     }
@@ -34,7 +32,6 @@ public class MessageManager implements Closeable {
     public void close() throws IOException {
         in.close();
         out.close();
-        socket.close();
     }
 
 }

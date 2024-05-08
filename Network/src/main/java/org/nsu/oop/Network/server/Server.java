@@ -67,8 +67,8 @@ public class Server {
                     String msg = name + ": " + message.getText();
                     sendEachUser(new Message(MessageType.TEXT_MESSAGE, msg));
                 } else if (message.getMessageType() == MessageType.DISABLE_USER) {
-                    users.remove(name);
                     sendEachUser(new Message(MessageType.REMOVED_USER, name));
+                    users.remove(name);
                     break;
                 }
             }
