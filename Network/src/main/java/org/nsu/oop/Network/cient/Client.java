@@ -60,10 +60,12 @@ public class Client {
             if (message.getMessageType() == MessageType.REQUEST_NAME_USER) {
                 String name = viewClient.getNameUser();
                 messageManager.send(new Message(MessageType.USER_NAME, name));
+                this.name = name;
             } else if (message.getMessageType() == MessageType.NAME_USED) {
                 viewClient.errorDialogWindow("Имя занято.");
                 String name = viewClient.getNameUser();
                 messageManager.send(new Message(MessageType.USER_NAME, name));
+                this.name = name;
             } else if (message.getMessageType() == MessageType.NAME_ACCEPTED) {
                 viewClient.addMessage("Сервер: Вы подключились!\n");
                 nameUsers = new HashSet<>(message.getNameUsers());
@@ -78,7 +80,7 @@ public class Client {
             Message message = this.messageManager.receive();
             if (message.getMessageType() == MessageType.USER_ADDED) {
                 String name = message.getText();
-                if (!nameUsers.contains(this.name)) {
+                if (!name.equals(this.name)) {
                     nameUsers.add(name);
                     viewClient.refreshListUsers(nameUsers);
                     viewClient.addMessage("Сервер: " + name + " подключился.\n");
@@ -89,6 +91,7 @@ public class Client {
                 String name = message.getText();
                 nameUsers.remove(name);
                 viewClient.refreshListUsers(nameUsers);
+                viewClient.addMessage("Сервер: " + name + " отключился.\n");
             }
         }
     }
@@ -105,7 +108,7 @@ public class Client {
         return isConnect;
     }
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
         Client client = new Client();
         viewClient = new ViewClient(client);
         viewClient.initFrameClient();
