@@ -15,8 +15,7 @@ public class ViewClient {
     private JTextArea users = new JTextArea(30, 15);
     private JPanel panel = new JPanel();
     private JTextField textField = new JTextField(40);
-    private JButton buttonDisable = new JButton("Отключиться");
-    private JButton buttonConnect = new JButton("Подключиться");
+    private JButton buttonPrint = new JButton("Отправить");
 
     public ViewClient(Client client) {
         this.client = client;
@@ -28,8 +27,7 @@ public class ViewClient {
         frame.add(new JScrollPane(messages), BorderLayout.CENTER);
         frame.add(new JScrollPane(users), BorderLayout.EAST);
         panel.add(textField);
-        panel.add(buttonConnect);
-        panel.add(buttonDisable);
+        panel.add(buttonPrint);
         frame.add(panel, BorderLayout.SOUTH);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -44,17 +42,11 @@ public class ViewClient {
             }
         });
 
-        buttonDisable.addActionListener(new ActionListener() {
+        buttonPrint.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    client.stopConnection();
-            }
-        });
-
-        buttonConnect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                client.startConnection();
+                //client.sendMessageOnServer(textField.getText());
+                textField.setText("");
             }
         });
 

@@ -6,6 +6,7 @@ import org.nsu.oop.Network.communicate.MessageType;
 
 import java.net.*;
 import java.io.*;
+import java.sql.SQLOutput;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,14 +25,19 @@ public class Client {
     private boolean isConnect;
 
     public void startConnection() {
-        while (!isConnect) {
+        if (!isConnect) {
             try {
-                clientSocket = new Socket();
                 String ip = viewClient.getServerAddressFromOptionPane();
                 int port = viewClient.getPortServerFromOptionPane();
+                clientSocket = new Socket();
                 clientSocket.connect(new InetSocketAddress(ip, port), 1000);
                 isConnect = true;
-            } catch (IOException e) {
+                try (MessageManager messageManager = new MessageManager(clientSocket)) {
+                    this.messageManager = messageManager;
+                    loginUser();
+                    communicatingWithServer();
+                }
+            } catch (IOException | ClassNotFoundException e) {
                 viewClient.errorDialogWindow("Not connected.");
             }
         }
@@ -60,7 +66,7 @@ public class Client {
                 String name = viewClient.getNameUser();
                 messageManager.send(new Message(MessageType.USER_NAME, name));
             } else if (message.getMessageType() == MessageType.NAME_ACCEPTED) {
-                viewClient.addMessage("Сервер: Вы подключились!");
+                viewClient.addMessage("Сервер: Вы подключились!\n");
                 nameUsers = new HashSet<>(message.getNameUsers());
                 viewClient.refreshListUsers(nameUsers);
                 break;
@@ -76,7 +82,7 @@ public class Client {
                 if (!nameUsers.contains(this.name)) {
                     nameUsers.add(name);
                     viewClient.refreshListUsers(nameUsers);
-                    viewClient.addMessage("Сервер: " + name + " подключился.");
+                    viewClient.addMessage("Сервер: " + name + " подключился.\n");
                 }
             } else if (message.getMessageType() == MessageType.TEXT_MESSAGE) {
                 viewClient.addMessage(message.getText());
@@ -84,20 +90,6 @@ public class Client {
                 String name = message.getText();
                 nameUsers.remove(name);
                 viewClient.refreshListUsers(nameUsers);
-            }
-        }
-    }
-
-    public void start() throws IOException, ClassNotFoundException {
-        while (true) {
-            System.out.println(555);
-            if (isConnect) {
-                try (MessageManager messageManager = new MessageManager(clientSocket)) {
-                    this.messageManager = messageManager;
-                    loginUser();
-                    communicatingWithServer();
-                    break;
-                }
             }
         }
     }
@@ -110,6 +102,6 @@ public class Client {
         Client client = new Client();
         viewClient = new ViewClient(client);
         viewClient.initFrameClient();
-        client.start();
+        client.startConnection();
     }
 }
