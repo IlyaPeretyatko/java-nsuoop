@@ -1,4 +1,4 @@
-package org.nsu.oop.Network.cient;
+package org.nsu.oop.Network.client;
 
 import org.nsu.oop.Network.communicate.Message;
 import org.nsu.oop.Network.communicate.MessageType;
@@ -13,10 +13,10 @@ import java.util.Set;
 
 public class ViewClient {
     private final Client client;
-    private JFrame frame = new JFrame("Чат");
+    private JFrame jFrame = new JFrame("Чат");
     private JTextArea messages = new JTextArea(30, 20);
     private JTextArea users = new JTextArea(30, 15);
-    private JPanel panel = new JPanel();
+    private JPanel jPanel = new JPanel();
     private JTextField textField = new JTextField(40);
     private JButton buttonPrint = new JButton("Отправить");
 
@@ -24,20 +24,20 @@ public class ViewClient {
         this.client = client;
     }
 
-    protected void initFrameClient() {
+    protected void displayFrame() {
         messages.setEditable(false);
         users.setEditable(false);
-        frame.add(new JScrollPane(messages), BorderLayout.CENTER);
-        frame.add(new JScrollPane(users), BorderLayout.EAST);
-        panel.add(textField);
-        panel.add(buttonPrint);
-        frame.add(panel, BorderLayout.SOUTH);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.setVisible(true);
+        jFrame.add(new JScrollPane(messages), BorderLayout.CENTER);
+        jFrame.add(new JScrollPane(users), BorderLayout.EAST);
+        jPanel.add(textField);
+        jPanel.add(buttonPrint);
+        jFrame.add(jPanel, BorderLayout.SOUTH);
+        jFrame.pack();
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        jFrame.setVisible(true);
 
-        frame.addWindowListener(new WindowAdapter() {
+        jFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 client.stopConnection();
@@ -81,7 +81,7 @@ public class ViewClient {
     protected String getServerAddressFromOptionPane() {
         while (true) {
             String addressServer = JOptionPane.showInputDialog(
-                    frame, "Введите адрес сервера:",
+                    jFrame, "Введите адрес сервера:",
                     "Ввод адреса сервера",
                     JOptionPane.QUESTION_MESSAGE
             );
@@ -92,7 +92,7 @@ public class ViewClient {
     protected int getPortServerFromOptionPane() {
         while (true) {
             String port = JOptionPane.showInputDialog(
-                    frame, "Введите порт сервера:",
+                    jFrame, "Введите порт сервера:",
                     "Ввод порта сервера",
                     JOptionPane.QUESTION_MESSAGE
             );
@@ -100,7 +100,7 @@ public class ViewClient {
                 return Integer.parseInt(port.trim());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(
-                        frame, "Введен неккоректный порт сервера. Попробуйте еще раз.",
+                        jFrame, "Введен неккоректный порт сервера. Попробуйте еще раз.",
                         "Ошибка ввода порта сервера", JOptionPane.ERROR_MESSAGE
                 );
             }
@@ -109,7 +109,7 @@ public class ViewClient {
 
     protected String getNameUser() {
         return JOptionPane.showInputDialog(
-                frame, "Введите имя пользователя:",
+                jFrame, "Введите имя пользователя:",
                 "Ввод имени пользователя",
                 JOptionPane.QUESTION_MESSAGE
         );
@@ -117,7 +117,7 @@ public class ViewClient {
 
     protected void errorDialogWindow(String text) {
         JOptionPane.showMessageDialog(
-                frame, text,
+                jFrame, text,
                 "Ошибка", JOptionPane.ERROR_MESSAGE
         );
     }

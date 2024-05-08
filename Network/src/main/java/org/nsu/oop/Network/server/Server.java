@@ -11,6 +11,8 @@ import java.util.*;
 
 public class Server {
 
+    private static ViewServer viewServer;
+
     private ServerSocket serverSocket;
 
     private final Map<String, MessageManager> users = new Hashtable<>();
@@ -93,6 +95,8 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         Server server = new Server();
+        viewServer = new ViewServer(server);
+        viewServer.displayFrame();
         server.start(6666);
     }
 

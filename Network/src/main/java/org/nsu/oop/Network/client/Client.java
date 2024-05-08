@@ -1,4 +1,4 @@
-package org.nsu.oop.Network.cient;
+package org.nsu.oop.Network.client;
 
 import org.nsu.oop.Network.communicate.Message;
 import org.nsu.oop.Network.communicate.MessageManager;
@@ -111,7 +111,7 @@ public class Client {
     public static void main(String[] args) {
         Client client = new Client();
         viewClient = new ViewClient(client);
-        viewClient.initFrameClient();
+        viewClient.displayFrame();
         client.startConnection();
     }
 }
