@@ -13,13 +13,10 @@ public class Server {
 
     private final Map<String, MessageManager> users = new Hashtable<>();
 
-    List<Thread> handlers = new ArrayList<>();
-
     public void start(int port) throws IOException {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             while (true) {
                 Thread handler = new Thread(new ClientHandler(serverSocket.accept()));
-                handlers.add(handler);
                 handler.start();
             }
         }
