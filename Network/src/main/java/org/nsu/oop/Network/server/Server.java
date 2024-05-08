@@ -13,18 +13,26 @@ public class Server {
 
     private final Map<String, MessageManager> users = new Hashtable<>();
 
+    private ServerSocket serverSocket;
+
+    private boolean isRun;
+
     public void start(int port) throws IOException {
-        try (ServerSocket serverSocket = new ServerSocket(port)) {
-            while (true) {
-                Thread handler = new Thread(new ClientHandler(serverSocket.accept()));
-                handler.start();
-            }
+        serverSocket = new ServerSocket(port);
+        isRun = true;
+        while (true) {
+            Thread handler = new Thread(new ClientHandler(serverSocket.accept()));
+            handler.start();
         }
     }
 
     public void stop() throws IOException {
-        sendEachUser(new Message(MessageType.SERVER_STOP));
-        users.clear();
+        if (isRun) {
+            sendEachUser(new Message(MessageType.SERVER_STOP));
+            serverSocket.close();
+            users.clear();
+            isRun = false;
+        }
     }
 
     private void sendEachUser(Message message) throws IOException {
