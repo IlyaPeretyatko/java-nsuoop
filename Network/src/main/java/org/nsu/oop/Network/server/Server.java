@@ -71,8 +71,8 @@ public class Server {
                     String msg = name + ": " + message.getText();
                     sendEachUser(new Message(MessageType.TEXT_MESSAGE, msg));
                 } else if (message.getMessageType() == MessageType.DISABLE_USER) {
-                    sendEachUser(new Message(MessageType.REMOVED_USER, name));
                     users.remove(name);
+                    sendEachUser(new Message(MessageType.REMOVED_USER, name));
                     break;
                 }
             }
@@ -94,7 +94,6 @@ public class Server {
     public static void main(String[] args) throws IOException {
         Server server = new Server();
         server.start(6666);
-        server.stop();
     }
 
 }

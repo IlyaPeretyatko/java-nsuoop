@@ -1,5 +1,8 @@
 package org.nsu.oop.Network.cient;
 
+import org.nsu.oop.Network.communicate.Message;
+import org.nsu.oop.Network.communicate.MessageType;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -45,7 +48,7 @@ public class ViewClient {
         buttonPrint.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //client.sendMessageOnServer(textField.getText());
+                client.sendTextToOtherClients(new Message(MessageType.TEXT_MESSAGE, textField.getText()));
                 textField.setText("");
             }
         });
@@ -53,7 +56,7 @@ public class ViewClient {
         textField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //client.sendMessageOnServer(textField.getText());
+                client.sendTextToOtherClients(new Message(MessageType.TEXT_MESSAGE, textField.getText()));
                 textField.setText("");
             }
         });

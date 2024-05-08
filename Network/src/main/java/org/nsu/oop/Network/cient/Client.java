@@ -6,7 +6,6 @@ import org.nsu.oop.Network.communicate.MessageType;
 
 import java.net.*;
 import java.io.*;
-import java.sql.SQLOutput;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -85,12 +84,20 @@ public class Client {
                     viewClient.addMessage("Сервер: " + name + " подключился.\n");
                 }
             } else if (message.getMessageType() == MessageType.TEXT_MESSAGE) {
-                viewClient.addMessage(message.getText());
-            } else if (message.getMessageType() == MessageType.DISABLE_USER) {
+                viewClient.addMessage(message.getText() + "\n");
+            } else if (message.getMessageType() == MessageType.REMOVED_USER) {
                 String name = message.getText();
                 nameUsers.remove(name);
                 viewClient.refreshListUsers(nameUsers);
             }
+        }
+    }
+
+    public void sendTextToOtherClients(Message message) {
+        try {
+            messageManager.send(message);
+        } catch (IOException e) {
+            viewClient.errorDialogWindow("Ошибка отправки сообщения другим клиентам.");
         }
     }
 
