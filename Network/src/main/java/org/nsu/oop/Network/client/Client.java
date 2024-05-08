@@ -92,6 +92,9 @@ public class Client {
                 nameUsers.remove(name);
                 viewClient.refreshListUsers(nameUsers);
                 viewClient.addMessage("Сервер: " + name + " отключился.\n");
+            } else if (message.getMessageType() == MessageType.SERVER_STOP) {
+                stopConnection();
+                System.exit(0);
             }
         }
     }

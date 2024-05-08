@@ -11,28 +11,22 @@ import java.util.*;
 
 public class Server {
 
-    private static ViewServer viewServer;
-
-    private ServerSocket serverSocket;
-
     private final Map<String, MessageManager> users = new Hashtable<>();
 
     List<Thread> handlers = new ArrayList<>();
 
     public void start(int port) throws IOException {
-        serverSocket = new ServerSocket(port);
-        while (true) {
-            Thread handler = new Thread(new ClientHandler(serverSocket.accept()));
-            handlers.add(handler);
-            handler.start();
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            while (true) {
+                Thread handler = new Thread(new ClientHandler(serverSocket.accept()));
+                handlers.add(handler);
+                handler.start();
+            }
         }
     }
 
     public void stop() throws IOException {
-        serverSocket.close();
-        for (Thread handler : handlers) {
-            handler.interrupt();
-        }
+        sendEachUser(new Message(MessageType.SERVER_STOP));
     }
 
     private void sendEachUser(Message message) throws IOException {
@@ -95,7 +89,7 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         Server server = new Server();
-        viewServer = new ViewServer(server);
+        ViewServer viewServer = new ViewServer(server);
         viewServer.displayFrame();
         server.start(6666);
     }

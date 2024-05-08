@@ -32,10 +32,10 @@ public class ViewServer {
             public void windowClosing(WindowEvent e) {
                 try {
                     server.stop();
+                    System.exit(0);
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    errorDialogWindow("Error of stopping server.");
                 }
-                System.exit(0);
             }
         });
 
@@ -45,10 +45,18 @@ public class ViewServer {
                 try {
                     server.stop();
                 } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                    errorDialogWindow("Error of stopping server.");
                 }
             }
         });
 
     }
+
+    private void errorDialogWindow(String text) {
+        JOptionPane.showMessageDialog(
+                jFrame, text,
+                "Ошибка", JOptionPane.ERROR_MESSAGE
+        );
+    }
+
 }

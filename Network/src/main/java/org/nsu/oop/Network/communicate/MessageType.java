@@ -9,5 +9,6 @@ public enum MessageType {
     NAME_USED,
     USER_ADDED,
     DISABLE_USER,
-    REMOVED_USER;
+    REMOVED_USER,
+    SERVER_STOP;
 }
