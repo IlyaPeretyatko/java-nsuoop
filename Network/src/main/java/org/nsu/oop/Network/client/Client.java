@@ -25,7 +25,13 @@ public class Client {
         if (!isConnect) {
             try {
                 String ip = viewClient.getServerAddressFromOptionPane();
-                int port = viewClient.getPortServerFromOptionPane();
+                if (ip == null) {
+                    System.exit(0);
+                }
+                Integer port = viewClient.getPortServerFromOptionPane();
+                if (port == null) {
+                    System.exit(0);
+                }
                 Socket clientSocket = new Socket();
                 clientSocket.connect(new InetSocketAddress(ip, port), 1000);
                 isConnect = true;

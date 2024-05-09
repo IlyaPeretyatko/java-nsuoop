@@ -79,23 +79,23 @@ public class ViewClient {
 
 
     protected String getServerAddressFromOptionPane() {
-        while (true) {
-            String addressServer = JOptionPane.showInputDialog(
-                    jFrame, "Введите адрес сервера:",
-                    "Ввод адреса сервера",
-                    JOptionPane.QUESTION_MESSAGE
-            );
-            return addressServer;
-        }
+        return JOptionPane.showInputDialog(
+                jFrame, "Введите адрес сервера:",
+                "Ввод адреса сервера",
+                JOptionPane.QUESTION_MESSAGE
+        );
     }
 
-    protected int getPortServerFromOptionPane() {
+    protected Integer getPortServerFromOptionPane() {
         while (true) {
             String port = JOptionPane.showInputDialog(
                     jFrame, "Введите порт сервера:",
                     "Ввод порта сервера",
                     JOptionPane.QUESTION_MESSAGE
             );
+            if (port == null) {
+                return null;
+            }
             try {
                 return Integer.parseInt(port.trim());
             } catch (Exception e) {

@@ -29,9 +29,9 @@ public class Server {
     public void stop() throws IOException {
         if (isRun) {
             sendEachUser(new Message(MessageType.SERVER_STOP));
-            serverSocket.close();
             users.clear();
             isRun = false;
+            serverSocket.close();
         }
     }
 
@@ -50,8 +50,8 @@ public class Server {
         }
 
         private String requestUserName(MessageManager messageManager) throws IOException, ClassNotFoundException {
+            messageManager.send(new Message(MessageType.REQUEST_NAME_USER));
             while (true) {
-                messageManager.send(new Message(MessageType.REQUEST_NAME_USER));
                 Message answer = messageManager.receive();
                 String name = answer.getText();
                 if (name != null && !name.isEmpty() && !users.containsKey(name) && answer.getMessageType() == MessageType.USER_NAME) {
