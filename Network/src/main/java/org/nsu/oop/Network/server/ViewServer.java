@@ -10,9 +10,9 @@ import java.io.IOException;
 
 public class ViewServer {
     private final Server server;
-    private JFrame jFrame = new JFrame("Сервер");
-    private JPanel jPanel = new JPanel();
-    private JButton buttonStop = new JButton("Остановить сервер");
+    private final JFrame jFrame = new JFrame("Сервер");
+    private final JPanel jPanel = new JPanel();
+    private final JButton buttonStop = new JButton("Остановить сервер");
 
     public ViewServer(Server server) {
         this.server = server;

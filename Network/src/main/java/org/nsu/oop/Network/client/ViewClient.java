@@ -13,12 +13,12 @@ import java.util.Set;
 
 public class ViewClient {
     private final Client client;
-    private JFrame jFrame = new JFrame("Чат");
-    private JTextArea messages = new JTextArea(30, 20);
-    private JTextArea users = new JTextArea(30, 15);
-    private JPanel jPanel = new JPanel();
-    private JTextField textField = new JTextField(40);
-    private JButton buttonPrint = new JButton("Отправить");
+    private final JFrame jFrame = new JFrame("Чат");
+    private final JTextArea messages = new JTextArea(30, 20);
+    private final JTextArea users = new JTextArea(30, 15);
+    private final JPanel jPanel = new JPanel();
+    private final JTextField textField = new JTextField(40);
+    private final JButton buttonPrint = new JButton("Отправить");
 
     public ViewClient(Client client) {
         this.client = client;

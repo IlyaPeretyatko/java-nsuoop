@@ -13,13 +13,11 @@ public class Client {
 
     private String name;
 
-    private Socket clientSocket;
+    Set<String> nameUsers;
 
     private static ViewClient viewClient;
 
     private MessageManager messageManager;
-
-    Set<String> nameUsers;
 
     private boolean isConnect;
 
@@ -28,7 +26,7 @@ public class Client {
             try {
                 String ip = viewClient.getServerAddressFromOptionPane();
                 int port = viewClient.getPortServerFromOptionPane();
-                clientSocket = new Socket();
+                Socket clientSocket = new Socket();
                 clientSocket.connect(new InetSocketAddress(ip, port), 1000);
                 isConnect = true;
                 try (MessageManager messageManager = new MessageManager(clientSocket)) {
