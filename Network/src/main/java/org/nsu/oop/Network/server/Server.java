@@ -6,96 +6,99 @@ import org.nsu.oop.Network.communicate.MessageType;
 
 import java.net.*;
 import java.io.*;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 import java.util.*;
 
 
 public class Server {
 
-    private final Map<String, MessageManager> users = new Hashtable<>();
+    private final Map<String, SelectionKey> users = new Hashtable<>();
 
-    private ServerSocket serverSocket;
+    private static ViewServer viewServer;
 
     private boolean isRun;
 
-    public void start(int port) throws IOException {
-        serverSocket = new ServerSocket(port);
-        isRun = true;
-        while (true) {
-            Thread handler = new Thread(new ClientHandler(serverSocket.accept()));
-            handler.start();
+    public void start(int port) {
+        try (Selector selector = Selector.open();
+             ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()) {
+            serverSocketChannel.bind(new InetSocketAddress("127.0.0.1", port));
+            isRun = true;
+            serverSocketChannel.configureBlocking(false);
+            serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+            while (true) {
+                selector.select();
+                Set<SelectionKey> selectedKeys = selector.selectedKeys();
+                Iterator<SelectionKey> iter = selectedKeys.iterator();
+                if (!isRun) {
+                    serverSocketChannel.close();
+                    break;
+                }
+                while (iter.hasNext()) {
+                    SelectionKey key = iter.next();
+                    if (key.isAcceptable()) {
+                        SocketChannel socketChannel = serverSocketChannel.accept();
+                        socketChannel.configureBlocking(false);
+                        socketChannel.register(selector, SelectionKey.OP_READ);
+                        MessageManager messageManager = new MessageManager(socketChannel);
+                        messageManager.send(new Message(MessageType.REQUEST_NAME_USER));
+                    }
+                    if (key.isReadable()) {
+                        interactionWithClients(key);
+                    }
+                    iter.remove();
+                }
+                if (!isRun) {
+                    sendEachUser(new Message(MessageType.SERVER_STOP));
+                    serverSocketChannel.close();
+                    break;
+                }
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            viewServer.errorDialogWindow("Server error.");
         }
     }
 
-    public void stop() throws IOException {
-        if (isRun) {
-            sendEachUser(new Message(MessageType.SERVER_STOP));
-            users.clear();
-            isRun = false;
-            serverSocket.close();
-        }
+    public void stop() {
+        isRun = false;
     }
 
     private void sendEachUser(Message message) throws IOException {
-        for (Map.Entry<String, MessageManager> user : users.entrySet()) {
-            MessageManager messageManager = user.getValue();
+        for (Map.Entry<String, SelectionKey> user : users.entrySet()) {
+            SocketChannel socketChannel = (SocketChannel) user.getValue().channel();
+            MessageManager messageManager = new MessageManager(socketChannel);
             messageManager.send(message);
         }
     }
 
-    private class ClientHandler implements Runnable {
-        private final Socket clientSocket;
-
-        public ClientHandler(Socket socket) {
-            this.clientSocket = socket;
-        }
-
-        private String requestUserName(MessageManager messageManager) throws IOException, ClassNotFoundException {
-            messageManager.send(new Message(MessageType.REQUEST_NAME_USER));
-            while (true) {
-                Message answer = messageManager.receive();
-                String name = answer.getText();
-                if (name != null && !name.isEmpty() && !users.containsKey(name) && answer.getMessageType() == MessageType.USER_NAME) {
-                    users.put(name, messageManager);
-                    List<String> nameUsers = new ArrayList<>(users.keySet());
-                    messageManager.send(new Message(MessageType.NAME_ACCEPTED, nameUsers));
-                    sendEachUser(new Message(MessageType.USER_ADDED, name));
-                    return name;
-                } else {
-                    messageManager.send(new Message(MessageType.NAME_USED));
-                }
+    private void interactionWithClients(SelectionKey key) throws IOException, ClassNotFoundException {
+        SocketChannel socketChannel = (SocketChannel) key.channel();
+        MessageManager messageManager = new MessageManager(socketChannel);
+        Message message = messageManager.receive();
+        if (message.getMessageType() == MessageType.USER_NAME) {
+            String name = message.getText();
+            if (name != null && !name.isEmpty() && !users.containsKey(name)) {
+                users.put(name, key);
+                List<String> nameUsers = new ArrayList<>(users.keySet());
+                messageManager.send(new Message(MessageType.NAME_ACCEPTED, nameUsers));
+                sendEachUser(new Message(MessageType.USER_ADDED, name));
+            } else {
+                messageManager.send(new Message(MessageType.NAME_USED));
             }
-        }
-
-        private void messaging(MessageManager messageManager, String name) throws IOException, ClassNotFoundException {
-            while (true) {
-                Message message = messageManager.receive();
-                if (message.getMessageType() == MessageType.TEXT_MESSAGE) {
-                    String msg = name + ": " + message.getText();
-                    sendEachUser(new Message(MessageType.TEXT_MESSAGE, msg));
-                } else if (message.getMessageType() == MessageType.DISABLE_USER) {
-                    sendEachUser(new Message(MessageType.REMOVED_USER, name));
-                    users.remove(name);
-                    break;
-                }
-            }
-        }
-
-        @Override
-        public void run() {
-            try (MessageManager messageManager = new MessageManager(clientSocket)) {
-                String name = requestUserName(messageManager);
-                messaging(messageManager, name);
-            } catch (IOException e) {
-                System.err.println("IOException client handler: run.");
-            } catch (ClassNotFoundException e) {
-                System.err.println("ClassNotFoundException client handler: request user name.");
-            }
+        }  else if (message.getMessageType() == MessageType.TEXT_MESSAGE) {
+            sendEachUser(new Message(MessageType.TEXT_MESSAGE, message.getText()));
+        } else if (message.getMessageType() == MessageType.DISABLE_USER) {
+            String name = message.getText();
+            sendEachUser(new Message(MessageType.REMOVED_USER, name));
+            users.remove(name);
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Server server = new Server();
-        ViewServer viewServer = new ViewServer(server);
+        viewServer = new ViewServer(server);
         viewServer.displayFrame();
         server.start(6666);
     }

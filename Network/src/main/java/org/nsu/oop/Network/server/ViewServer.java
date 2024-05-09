@@ -30,29 +30,21 @@ public class ViewServer {
         jFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                try {
-                    server.stop();
-                    System.exit(0);
-                } catch (IOException ex) {
-                    errorDialogWindow("Error of stopping server.");
-                }
+                server.stop();
+                System.exit(0);
             }
         });
 
         buttonStop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    server.stop();
-                } catch (IOException ex) {
-                    errorDialogWindow("Error of stopping server.");
-                }
+                server.stop();
             }
         });
 
     }
 
-    private void errorDialogWindow(String text) {
+    protected void errorDialogWindow(String text) {
         JOptionPane.showMessageDialog(
                 jFrame, text,
                 "Ошибка", JOptionPane.ERROR_MESSAGE

@@ -1,37 +1,40 @@
 package org.nsu.oop.Network.communicate;
 
-import java.io.Closeable;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
 
-public class MessageManager implements Closeable {
-    private final ObjectOutputStream out;
-    private final ObjectInputStream in;
+public class MessageManager {
+
+    private final SocketChannel socketChannel;
 
 
-    public MessageManager(Socket socket) throws IOException {
-        this.out = new ObjectOutputStream(socket.getOutputStream());
-        this.in = new ObjectInputStream(socket.getInputStream());
+    public MessageManager(SocketChannel socketChannel) throws IOException {
+        this.socketChannel = socketChannel;
     }
 
     public void send(Message message) throws IOException {
-        synchronized (this.out) {
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutput out = new ObjectOutputStream(baos)) {
             out.writeObject(message);
+            byte[] msg = baos.toByteArray();
+            ByteBuffer buffer = ByteBuffer.wrap(msg);
+            while (buffer.hasRemaining()) {
+                socketChannel.write(buffer);
+            };
         }
     }
 
     public Message receive() throws IOException, ClassNotFoundException {
-        synchronized (this.in) {
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        int bytesRead = socketChannel.read(buffer);
+        byte[] receivedBytes = new byte[bytesRead];
+        buffer.flip();
+        buffer.get(receivedBytes); // Копируем данные из буфера в массив байтов
+        try (ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(receivedBytes))) {
             return (Message) in.readObject();
         }
     }
 
-    @Override
-    public void close() throws IOException {
-        in.close();
-        out.close();
-    }
 
 }

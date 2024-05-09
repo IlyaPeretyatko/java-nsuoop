@@ -48,7 +48,7 @@ public class ViewClient {
         buttonPrint.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                client.sendTextToOtherClients(new Message(MessageType.TEXT_MESSAGE, textField.getText()));
+                client.sendTextToOtherClients(textField.getText());
                 textField.setText("");
             }
         });
@@ -56,7 +56,7 @@ public class ViewClient {
         textField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                client.sendTextToOtherClients(new Message(MessageType.TEXT_MESSAGE, textField.getText()));
+                client.sendTextToOtherClients(textField.getText());
                 textField.setText("");
             }
         });
@@ -76,7 +76,6 @@ public class ViewClient {
             users.append(text.toString());
         }
     }
-
 
     protected String getServerAddressFromOptionPane() {
         return JOptionPane.showInputDialog(

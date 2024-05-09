@@ -6,6 +6,9 @@ import org.nsu.oop.Network.communicate.MessageType;
 
 import java.net.*;
 import java.io.*;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.SocketChannel;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,29 +25,33 @@ public class Client {
     private boolean isConnect;
 
     public void startConnection() {
-        if (!isConnect) {
-            try {
-                String ip = viewClient.getServerAddressFromOptionPane();
-                if (ip == null) {
-                    System.exit(0);
-                }
-                Integer port = viewClient.getPortServerFromOptionPane();
-                if (port == null) {
-                    System.exit(0);
-                }
-                Socket clientSocket = new Socket();
-                clientSocket.connect(new InetSocketAddress(ip, port), 1000);
-                isConnect = true;
-                try (MessageManager messageManager = new MessageManager(clientSocket)) {
-                    this.messageManager = messageManager;
-                    loginUser();
-                    communicatingWithServer();
-                }
-                clientSocket.close();
+        try {
+            String ip = viewClient.getServerAddressFromOptionPane();
+            if (ip == null) {
                 System.exit(0);
-            } catch (IOException | ClassNotFoundException e) {
-                viewClient.errorDialogWindow("Not connected.");
             }
+            Integer port = viewClient.getPortServerFromOptionPane();
+            if (port == null) {
+                System.exit(0);
+            }
+            Selector selector = Selector.open();
+            SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress(ip, port));
+            socketChannel.configureBlocking(false);
+            SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
+            messageManager = new MessageManager(socketChannel);
+            isConnect = true;
+            while (true) {
+                selector.select();
+                if (key.isReadable()) {
+                    interaactionWithServer();
+                }
+                if (!isConnect) {
+                    socketChannel.close();
+                    break;
+                }
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            viewClient.errorDialogWindow("Not connected.");
         }
     }
 
@@ -52,63 +59,52 @@ public class Client {
         try {
             if (isConnect) {
                 messageManager.send(new Message(MessageType.DISABLE_USER, name));
-                isConnect = false;
             }
         } catch (IOException e) {
             viewClient.errorDialogWindow("Error of stopping connection.");
         }
     }
 
-    private void loginUser() throws IOException, ClassNotFoundException {
-        while (true) {
-            Message message = this.messageManager.receive();
-            if (message.getMessageType() == MessageType.REQUEST_NAME_USER) {
-                String name = viewClient.getNameUser();
-                messageManager.send(new Message(MessageType.USER_NAME, name));
-                this.name = name;
-            } else if (message.getMessageType() == MessageType.NAME_USED) {
-                viewClient.errorDialogWindow("Имя занято.");
-                String name = viewClient.getNameUser();
-                messageManager.send(new Message(MessageType.USER_NAME, name));
-                this.name = name;
-            } else if (message.getMessageType() == MessageType.NAME_ACCEPTED) {
-                viewClient.addMessage("Сервер: Вы подключились!\n");
-                nameUsers = new HashSet<>(message.getNameUsers());
+    private void interaactionWithServer() throws IOException, ClassNotFoundException {
+        Message message = messageManager.receive();
+        if (message.getMessageType() == MessageType.REQUEST_NAME_USER) {
+            String name = viewClient.getNameUser();
+            messageManager.send(new Message(MessageType.USER_NAME, name));
+            this.name = name;
+        } else if (message.getMessageType() == MessageType.NAME_USED) {
+            viewClient.errorDialogWindow("Имя занято.");
+            String name = viewClient.getNameUser();
+            messageManager.send(new Message(MessageType.USER_NAME, name));
+            this.name = name;
+        } else if (message.getMessageType() == MessageType.NAME_ACCEPTED) {
+            viewClient.addMessage("Сервер: Вы подключились!\n");
+            nameUsers = new HashSet<>(message.getNameUsers());
+            viewClient.refreshListUsers(nameUsers);
+        } else if (message.getMessageType() == MessageType.USER_ADDED) {
+            String name = message.getText();
+            if (!name.equals(this.name)) {
+                nameUsers.add(name);
                 viewClient.refreshListUsers(nameUsers);
-                break;
+                viewClient.addMessage("Сервер: " + name + " подключился.\n");
             }
+        } else if (message.getMessageType() == MessageType.TEXT_MESSAGE) {
+            viewClient.addMessage(message.getText() + "\n");
+        } else if (message.getMessageType() == MessageType.REMOVED_USER) {
+            String name = message.getText();
+            nameUsers.remove(name);
+            viewClient.refreshListUsers(nameUsers);
+            viewClient.addMessage("Сервер: " + name + " отключился.\n");
+            if (name.equals(this.name)) {
+                isConnect = false;
+            }
+        } else if (message.getMessageType() == MessageType.SERVER_STOP) {
+            isConnect = false;
         }
     }
 
-    private void communicatingWithServer() throws IOException, ClassNotFoundException {
-        while (isConnect) {
-            Message message = this.messageManager.receive();
-            if (message.getMessageType() == MessageType.USER_ADDED) {
-                String name = message.getText();
-                if (!name.equals(this.name)) {
-                    nameUsers.add(name);
-                    viewClient.refreshListUsers(nameUsers);
-                    viewClient.addMessage("Сервер: " + name + " подключился.\n");
-                }
-            } else if (message.getMessageType() == MessageType.TEXT_MESSAGE) {
-                viewClient.addMessage(message.getText() + "\n");
-            } else if (message.getMessageType() == MessageType.REMOVED_USER) {
-                String name = message.getText();
-                nameUsers.remove(name);
-                viewClient.refreshListUsers(nameUsers);
-                viewClient.addMessage("Сервер: " + name + " отключился.\n");
-                if (name.equals(this.name)) {
-                    break;
-                }
-            } else if (message.getMessageType() == MessageType.SERVER_STOP) {
-                break;
-            }
-        }
-    }
-
-    public void sendTextToOtherClients(Message message) {
+    public void sendTextToOtherClients(String msg) {
         try {
-            messageManager.send(message);
+            messageManager.send(new Message(MessageType.TEXT_MESSAGE, name + ": " + msg));
         } catch (IOException e) {
             viewClient.errorDialogWindow("Ошибка отправки сообщения другим клиентам.");
         }
