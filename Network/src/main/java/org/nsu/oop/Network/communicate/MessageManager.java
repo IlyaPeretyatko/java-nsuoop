@@ -30,7 +30,7 @@ public class MessageManager {
         int bytesRead = socketChannel.read(buffer);
         byte[] receivedBytes = new byte[bytesRead];
         buffer.flip();
-        buffer.get(receivedBytes); // Копируем данные из буфера в массив байтов
+        buffer.get(receivedBytes);
         try (ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(receivedBytes))) {
             return (Message) in.readObject();
         }

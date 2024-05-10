@@ -15,6 +15,8 @@ import java.util.*;
 
 public class Server {
 
+    private ServerSocketChannel serverSocketChannel;
+
     private final Map<String, SelectionKey> users = new Hashtable<>();
 
     private static ViewServer viewServer;
@@ -24,6 +26,7 @@ public class Server {
     public void start(int port) {
         try (Selector selector = Selector.open();
              ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()) {
+            this.serverSocketChannel = serverSocketChannel;
             serverSocketChannel.bind(new InetSocketAddress("127.0.0.1", port));
             isRun = true;
             serverSocketChannel.configureBlocking(false);
@@ -32,10 +35,6 @@ public class Server {
                 selector.select();
                 Set<SelectionKey> selectedKeys = selector.selectedKeys();
                 Iterator<SelectionKey> iter = selectedKeys.iterator();
-                if (!isRun) {
-                    serverSocketChannel.close();
-                    break;
-                }
                 while (iter.hasNext()) {
                     SelectionKey key = iter.next();
                     if (key.isAcceptable()) {
@@ -51,18 +50,24 @@ public class Server {
                     iter.remove();
                 }
                 if (!isRun) {
-                    sendEachUser(new Message(MessageType.SERVER_STOP));
                     serverSocketChannel.close();
                     break;
                 }
             }
+            System.exit(0);
         } catch (IOException | ClassNotFoundException e) {
-            viewServer.errorDialogWindow("Server error.");
+            viewServer.errorDialogWindow("Error of working server..");
         }
     }
 
     public void stop() {
-        isRun = false;
+        try {
+            sendEachUser(new Message(MessageType.SERVER_STOP));
+            isRun = false;
+            serverSocketChannel.close();
+        } catch (IOException e) {
+            viewServer.errorDialogWindow("Error of stopping server.");
+        }
     }
 
     private void sendEachUser(Message message) throws IOException {
@@ -93,6 +98,8 @@ public class Server {
             String name = message.getText();
             sendEachUser(new Message(MessageType.REMOVED_USER, name));
             users.remove(name);
+        } else if (message.getMessageType() == MessageType.SERVER_STOP) {
+            socketChannel.close();
         }
     }
 

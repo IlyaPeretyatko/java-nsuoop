@@ -50,6 +50,7 @@ public class Client {
                     break;
                 }
             }
+            System.exit(0);
         } catch (IOException | ClassNotFoundException e) {
             viewClient.errorDialogWindow("Not connected.");
         }
@@ -98,6 +99,7 @@ public class Client {
                 isConnect = false;
             }
         } else if (message.getMessageType() == MessageType.SERVER_STOP) {
+            messageManager.send(new Message(MessageType.SERVER_STOP));
             isConnect = false;
         }
     }
