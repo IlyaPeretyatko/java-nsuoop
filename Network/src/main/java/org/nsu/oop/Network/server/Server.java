@@ -17,6 +17,8 @@ public class Server {
 
     private ServerSocketChannel serverSocketChannel;
 
+    private Selector selector;
+
     private final Map<String, SelectionKey> users = new Hashtable<>();
 
     private static ViewServer viewServer;
@@ -24,46 +26,54 @@ public class Server {
     private boolean isRun;
 
     public void start(int port) {
-        try (Selector selector = Selector.open();
-             ServerSocketChannel serverSocketChannel = ServerSocketChannel.open()) {
-            this.serverSocketChannel = serverSocketChannel;
-            serverSocketChannel.bind(new InetSocketAddress("127.0.0.1", port));
+        try {
+            upServer(port);
             isRun = true;
-            serverSocketChannel.configureBlocking(false);
-            serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-            while (true) {
-                selector.select();
-                Set<SelectionKey> selectedKeys = selector.selectedKeys();
-                Iterator<SelectionKey> iter = selectedKeys.iterator();
-                while (iter.hasNext()) {
-                    SelectionKey key = iter.next();
-                    if (key.isAcceptable()) {
-                        SocketChannel socketChannel = serverSocketChannel.accept();
-                        socketChannel.configureBlocking(false);
-                        socketChannel.register(selector, SelectionKey.OP_READ);
-                        MessageManager messageManager = new MessageManager(socketChannel);
-                        messageManager.send(new Message(MessageType.REQUEST_NAME_USER));
-                    }
-                    if (key.isReadable()) {
-                        interactionWithClients(key);
-                    }
-                    iter.remove();
-                }
-            }
+            clientsProcessing();
         } catch (IOException | ClassNotFoundException e) {
             viewServer.errorDialogWindow("Error of working server..");
+        }
+    }
+
+    private void upServer(int port) throws IOException {
+        selector = Selector.open();
+        serverSocketChannel = ServerSocketChannel.open();
+        serverSocketChannel.bind(new InetSocketAddress("127.0.0.1", port));
+        serverSocketChannel.configureBlocking(false);
+        serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+    }
+
+    private void clientsProcessing() throws IOException, ClassNotFoundException {
+        while (isRun) {
+            selector.select();
+            Set<SelectionKey> selectedKeys = selector.selectedKeys();
+            Iterator<SelectionKey> iter = selectedKeys.iterator();
+            while (iter.hasNext()) {
+                SelectionKey key = iter.next();
+                if (key.isAcceptable()) {
+                    SocketChannel socketChannel = serverSocketChannel.accept();
+                    socketChannel.configureBlocking(false);
+                    socketChannel.register(selector, SelectionKey.OP_READ);
+                    MessageManager messageManager = new MessageManager(socketChannel);
+                    messageManager.send(new Message(MessageType.REQUEST_NAME_USER));
+                }
+                if (key.isReadable()) {
+                    interactionWithClients(key);
+                }
+                iter.remove();
+            }
         }
     }
 
     public void stop() {
         try {
             if (isRun) {
+                isRun = false;
                 sendEachUser(new Message(MessageType.SERVER_STOP));
                 for (Map.Entry<String, SelectionKey> user : users.entrySet()) {
                     user.getValue().channel().close();
                 }
                 serverSocketChannel.close();
-                isRun = false;
             }
         } catch (IOException e) {
             viewServer.errorDialogWindow("Error of stopping server.");
@@ -99,8 +109,6 @@ public class Server {
             users.get(name).channel().close();
             users.remove(name);
             sendEachUser(new Message(MessageType.REMOVED_USER, name));
-        } else if (message.getMessageType() == MessageType.SERVER_STOP) {
-            socketChannel.close();
         }
     }
 

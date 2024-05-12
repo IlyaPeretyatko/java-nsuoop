@@ -24,6 +24,8 @@ public class Client {
 
     private SocketChannel socketChannel;
 
+    private Selector selector;
+
     private boolean isConnect;
 
     public void startConnection() {
@@ -31,9 +33,10 @@ public class Client {
             connectToServer();
             isConnect = true;
             messageManager = new MessageManager(socketChannel);
-            Selector selector = Selector.open();
+            selector = Selector.open();
             SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
             messageProcessing(selector, key);
+
         } catch (IOException | ClassNotFoundException e) {
             viewClient.errorDialogWindow("Not connected.");
         }
@@ -67,6 +70,7 @@ public class Client {
                 isConnect = false;
                 messageManager.send(new Message(MessageType.DISABLE_USER, name));
                 socketChannel.close();
+                selector.close();
                 System.exit(0);
             }
         } catch (IOException e) {
