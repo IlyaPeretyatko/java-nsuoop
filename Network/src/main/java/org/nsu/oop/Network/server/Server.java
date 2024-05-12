@@ -49,12 +49,7 @@ public class Server {
                     }
                     iter.remove();
                 }
-                if (!isRun) {
-                    serverSocketChannel.close();
-                    break;
-                }
             }
-            System.exit(0);
         } catch (IOException | ClassNotFoundException e) {
             viewServer.errorDialogWindow("Error of working server..");
         }
@@ -62,9 +57,14 @@ public class Server {
 
     public void stop() {
         try {
-            sendEachUser(new Message(MessageType.SERVER_STOP));
-            isRun = false;
-            serverSocketChannel.close();
+            if (isRun) {
+                sendEachUser(new Message(MessageType.SERVER_STOP));
+                for (Map.Entry<String, SelectionKey> user : users.entrySet()) {
+                    user.getValue().channel().close();
+                }
+                serverSocketChannel.close();
+                isRun = false;
+            }
         } catch (IOException e) {
             viewServer.errorDialogWindow("Error of stopping server.");
         }
@@ -96,8 +96,9 @@ public class Server {
             sendEachUser(new Message(MessageType.TEXT_MESSAGE, message.getText()));
         } else if (message.getMessageType() == MessageType.DISABLE_USER) {
             String name = message.getText();
-            sendEachUser(new Message(MessageType.REMOVED_USER, name));
+            users.get(name).channel().close();
             users.remove(name);
+            sendEachUser(new Message(MessageType.REMOVED_USER, name));
         } else if (message.getMessageType() == MessageType.SERVER_STOP) {
             socketChannel.close();
         }

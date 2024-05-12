@@ -22,51 +22,59 @@ public class Client {
 
     private MessageManager messageManager;
 
+    private SocketChannel socketChannel;
+
     private boolean isConnect;
 
     public void startConnection() {
         try {
-            String ip = viewClient.getServerAddressFromOptionPane();
-            if (ip == null) {
-                System.exit(0);
-            }
-            Integer port = viewClient.getPortServerFromOptionPane();
-            if (port == null) {
-                System.exit(0);
-            }
-            Selector selector = Selector.open();
-            SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress(ip, port));
-            socketChannel.configureBlocking(false);
-            SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
-            messageManager = new MessageManager(socketChannel);
+            connectToServer();
             isConnect = true;
-            while (true) {
-                selector.select();
-                if (key.isReadable()) {
-                    interaactionWithServer();
-                }
-                if (!isConnect) {
-                    socketChannel.close();
-                    break;
-                }
-            }
-            System.exit(0);
+            messageManager = new MessageManager(socketChannel);
+            Selector selector = Selector.open();
+            SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
+            messageProcessing(selector, key);
         } catch (IOException | ClassNotFoundException e) {
             viewClient.errorDialogWindow("Not connected.");
+        }
+    }
+
+    private void connectToServer() throws IOException {
+        String ip = viewClient.getServerAddressFromOptionPane();
+        if (ip == null) {
+            System.exit(0);
+        }
+        Integer port = viewClient.getPortServerFromOptionPane();
+        if (port == null) {
+            System.exit(0);
+        }
+        socketChannel = SocketChannel.open(new InetSocketAddress(ip, port));
+        socketChannel.configureBlocking(false);
+    }
+
+    private void messageProcessing(Selector selector, SelectionKey key) throws IOException, ClassNotFoundException {
+        while (isConnect) {
+            selector.select();
+            if (key.isReadable()) {
+                interactionWithServer();
+            }
         }
     }
 
     public void stopConnection() {
         try {
             if (isConnect) {
+                isConnect = false;
                 messageManager.send(new Message(MessageType.DISABLE_USER, name));
+                socketChannel.close();
+                System.exit(0);
             }
         } catch (IOException e) {
             viewClient.errorDialogWindow("Error of stopping connection.");
         }
     }
 
-    private void interaactionWithServer() throws IOException, ClassNotFoundException {
+    private void interactionWithServer() throws IOException, ClassNotFoundException {
         Message message = messageManager.receive();
         if (message.getMessageType() == MessageType.REQUEST_NAME_USER) {
             String name = viewClient.getNameUser();
@@ -95,12 +103,9 @@ public class Client {
             nameUsers.remove(name);
             viewClient.refreshListUsers(nameUsers);
             viewClient.addMessage("Сервер: " + name + " отключился.\n");
-            if (name.equals(this.name)) {
-                isConnect = false;
-            }
         } else if (message.getMessageType() == MessageType.SERVER_STOP) {
-            messageManager.send(new Message(MessageType.SERVER_STOP));
-            isConnect = false;
+            socketChannel.close();
+            System.exit(0);
         }
     }
 
