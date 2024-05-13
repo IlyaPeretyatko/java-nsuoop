@@ -44,13 +44,7 @@ public class Client {
 
     private void connectToServer() throws IOException {
         String ip = viewClient.getServerAddressFromOptionPane();
-        if (ip == null) {
-            System.exit(0);
-        }
         Integer port = viewClient.getPortServerFromOptionPane();
-        if (port == null) {
-            System.exit(0);
-        }
         socketChannel = SocketChannel.open(new InetSocketAddress(ip, port));
         socketChannel.configureBlocking(false);
     }
@@ -85,7 +79,7 @@ public class Client {
             messageManager.send(new Message(MessageType.USER_NAME, name));
             this.name = name;
         } else if (message.getMessageType() == MessageType.NAME_USED) {
-            viewClient.errorDialogWindow("Имя занято.");
+            viewClient.errorDialogWindow("Имя занято или не подходит.");
             String name = viewClient.getNameUser();
             messageManager.send(new Message(MessageType.USER_NAME, name));
             this.name = name;

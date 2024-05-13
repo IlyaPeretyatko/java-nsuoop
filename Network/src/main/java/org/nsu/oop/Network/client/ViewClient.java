@@ -78,11 +78,14 @@ public class ViewClient {
     }
 
     protected String getServerAddressFromOptionPane() {
-        return JOptionPane.showInputDialog(
+        String ip = JOptionPane.showInputDialog(
                 jFrame, "Введите адрес сервера:",
                 "Ввод адреса сервера",
-                JOptionPane.QUESTION_MESSAGE
-        );
+                JOptionPane.QUESTION_MESSAGE);
+        if (ip == null) {
+            System.exit(0);
+        }
+        return ip;
     }
 
     protected Integer getPortServerFromOptionPane() {
@@ -93,11 +96,11 @@ public class ViewClient {
                     JOptionPane.QUESTION_MESSAGE
             );
             if (port == null) {
-                return null;
+                System.exit(0);
             }
             try {
-                return Integer.parseInt(port.trim());
-            } catch (Exception e) {
+                return Integer.parseInt(port);
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(
                         jFrame, "Введен неккоректный порт сервера. Попробуйте еще раз.",
                         "Ошибка ввода порта сервера", JOptionPane.ERROR_MESSAGE
