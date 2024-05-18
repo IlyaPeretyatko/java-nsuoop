@@ -4,8 +4,10 @@ import org.nsu.oop.Network.communicate.Message;
 import org.nsu.oop.Network.communicate.MessageManager;
 import org.nsu.oop.Network.communicate.MessageType;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.net.*;
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -21,6 +23,8 @@ public class Server {
 
     private final Map<String, SelectionKey> users = new Hashtable<>();
 
+    private final Map<SelectionKey, Boolean> protocols = new Hashtable<>();
+
     private static ViewServer viewServer;
 
     private boolean isRun;
@@ -30,7 +34,7 @@ public class Server {
             upServer(port);
             isRun = true;
             clientsProcessing();
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException | ParserConfigurationException e) {
             viewServer.errorDialogWindow("Error of working server..");
         }
     }
@@ -43,7 +47,7 @@ public class Server {
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
     }
 
-    private void clientsProcessing() throws IOException, ClassNotFoundException {
+    private void clientsProcessing() throws IOException, ClassNotFoundException, ParserConfigurationException {
         while (isRun) {
             selector.select();
             Set<SelectionKey> selectedKeys = selector.selectedKeys();
@@ -51,11 +55,7 @@ public class Server {
             while (iter.hasNext()) {
                 SelectionKey key = iter.next();
                 if (key.isAcceptable()) {
-                    SocketChannel socketChannel = serverSocketChannel.accept();
-                    socketChannel.configureBlocking(false);
-                    socketChannel.register(selector, SelectionKey.OP_READ);
-                    MessageManager messageManager = new MessageManager(socketChannel);
-                    messageManager.send(new Message(MessageType.REQUEST_NAME_USER));
+                    connectingUser();
                 }
                 if (key.isReadable()) {
                     interactionWithClients(key);
@@ -75,22 +75,36 @@ public class Server {
                 }
                 serverSocketChannel.close();
             }
-        } catch (IOException e) {
+        } catch (IOException | ParserConfigurationException e) {
             viewServer.errorDialogWindow("Error of stopping server.");
         }
     }
 
-    private void sendEachUser(Message message) throws IOException {
+    private void sendEachUser(Message message) throws IOException, ParserConfigurationException {
         for (Map.Entry<String, SelectionKey> user : users.entrySet()) {
             SocketChannel socketChannel = (SocketChannel) user.getValue().channel();
-            MessageManager messageManager = new MessageManager(socketChannel);
+            MessageManager messageManager = new MessageManager(socketChannel, protocols.get(user.getValue()));
             messageManager.send(message);
         }
     }
 
-    private void interactionWithClients(SelectionKey key) throws IOException, ClassNotFoundException {
+    private void connectingUser() throws IOException, ParserConfigurationException {
+        SocketChannel socketChannel = serverSocketChannel.accept();
+        socketChannel.configureBlocking(false);
+        SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
+        ByteBuffer buffer = ByteBuffer.allocate(1);
+        socketChannel.read(buffer);
+        buffer.rewind();
+        byte receivedByte = buffer.get();
+        boolean isXmlProtocol = receivedByte == 1;
+        protocols.put(key, isXmlProtocol);
+        MessageManager messageManager = new MessageManager(socketChannel, isXmlProtocol);
+        messageManager.send(new Message(MessageType.REQUEST_NAME_USER));
+    }
+
+    private void interactionWithClients(SelectionKey key) throws IOException, ClassNotFoundException, ParserConfigurationException {
         SocketChannel socketChannel = (SocketChannel) key.channel();
-        MessageManager messageManager = new MessageManager(socketChannel);
+        MessageManager messageManager = new MessageManager(socketChannel, protocols.get(key));
         Message message = messageManager.receive();
         if (message.getMessageType() == MessageType.USER_NAME) {
             String name = message.getText();
@@ -106,8 +120,10 @@ public class Server {
             sendEachUser(new Message(MessageType.TEXT_MESSAGE, message.getText()));
         } else if (message.getMessageType() == MessageType.DISABLE_USER) {
             String name = message.getText();
-            users.get(name).channel().close();
+            SelectionKey keyDisabled = users.get(name);
+            keyDisabled.channel().close();
             users.remove(name);
+            protocols.remove(keyDisabled);
             sendEachUser(new Message(MessageType.REMOVED_USER, name));
         }
     }

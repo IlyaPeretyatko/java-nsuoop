@@ -4,9 +4,15 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Message implements Serializable {
-    private MessageType messageType;
-    private String text;
-    private List<String> nameUsers;
+    private final MessageType messageType;
+    private final String text;
+    private final List<String> nameUsers;
+
+    public Message(MessageType messageType, String text, List<String> nameUsers) {
+        this.messageType = messageType;
+        this.text = text;
+        this.nameUsers = nameUsers;
+    }
 
     public Message(MessageType messageType) {
         this.messageType = messageType;

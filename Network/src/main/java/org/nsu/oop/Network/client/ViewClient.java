@@ -117,6 +117,15 @@ public class ViewClient {
         );
     }
 
+    protected boolean getProtocolUser() {
+        int result = JOptionPane.showConfirmDialog(jFrame,
+                "Использовать протокол XML для передачи сообщений?",
+                 "Выбор протокала",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+        return result == JOptionPane.YES_OPTION;
+    }
+
     protected void errorDialogWindow(String text) {
         JOptionPane.showMessageDialog(
                 jFrame, text,
