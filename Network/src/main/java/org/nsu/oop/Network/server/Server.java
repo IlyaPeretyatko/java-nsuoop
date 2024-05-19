@@ -100,7 +100,6 @@ public class Server {
         }
         buffer.flip();
         boolean isXmlProtocol = buffer.get() == 1;
-        System.out.println(isXmlProtocol);
         protocols.put(key, isXmlProtocol);
         MessageManager messageManager = new MessageManager(socketChannel, isXmlProtocol);
         messageManager.send(new Message(MessageType.REQUEST_NAME_USER));

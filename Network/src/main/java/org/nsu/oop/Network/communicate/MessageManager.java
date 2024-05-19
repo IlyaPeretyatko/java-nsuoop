@@ -121,11 +121,23 @@ public class MessageManager {
     private Document receiveXml() throws IOException, ParserConfigurationException {
         try {
             ByteBuffer buffer = ByteBuffer.allocate(4);
-            socketChannel.read(buffer);
+            while (true) {
+                int receivedBytes = 0;
+                receivedBytes += socketChannel.read(buffer);
+                if (receivedBytes == 4) {
+                    break;
+                }
+            }
             buffer.flip();
             int size = buffer.getInt();
             ByteBuffer bufferForXml = ByteBuffer.allocate(size);
-            socketChannel.read(bufferForXml);
+            while (true) {
+                int receivedBytes = 0;
+                receivedBytes += socketChannel.read(bufferForXml);
+                if (receivedBytes == size) {
+                    break;
+                }
+            }
             bufferForXml.flip();
             byte[] stringByte = new byte[size];
             bufferForXml.get(stringByte);

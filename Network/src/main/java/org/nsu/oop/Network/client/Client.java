@@ -26,6 +26,8 @@ public class Client {
 
     private SocketChannel socketChannel;
 
+    private SelectionKey selectionKey;
+
     private Selector selector;
 
     private boolean isXmlProtocol;
@@ -38,8 +40,8 @@ public class Client {
             isConnect = true;
             messageManager = new MessageManager(socketChannel, isXmlProtocol);
             selector = Selector.open();
-            SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
-            messageProcessing(selector, key);
+            selectionKey = socketChannel.register(selector, SelectionKey.OP_READ);
+            messageProcessing(selector);
         } catch (IOException | ClassNotFoundException | ParserConfigurationException e) {
             viewClient.errorDialogWindow("Not connected.");
         }
@@ -60,10 +62,10 @@ public class Client {
         }
     }
 
-    private void messageProcessing(Selector selector, SelectionKey key) throws IOException, ClassNotFoundException, ParserConfigurationException {
+    private void messageProcessing(Selector selector) throws IOException, ClassNotFoundException, ParserConfigurationException {
         while (isConnect) {
             selector.select();
-            if (key.isReadable()) {
+            if (selectionKey.isReadable()) {
                 interactionWithServer();
             }
         }
@@ -74,8 +76,9 @@ public class Client {
             if (isConnect) {
                 isConnect = false;
                 messageManager.send(new Message(MessageType.DISABLE_USER, name));
-                socketChannel.close();
                 selector.close();
+                selectionKey.cancel();
+                socketChannel.close();
                 System.exit(0);
             }
         } catch (IOException | ParserConfigurationException e) {
