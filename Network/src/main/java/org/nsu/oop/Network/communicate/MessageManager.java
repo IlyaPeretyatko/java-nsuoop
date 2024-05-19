@@ -37,7 +37,6 @@ public class MessageManager {
         if (isXmlProtocol) {
             Document document = createXmlDocument(message);
             String msg = convertDocumentToString(document);
-            System.out.println(msg);
             int len = msg.length();
             sendXml(len, msg);
         } else {
@@ -114,7 +113,9 @@ public class MessageManager {
         buffer.putInt(len);
         buffer.put(xml.getBytes());
         buffer.flip();
-        socketChannel.write(buffer);
+        while (buffer.hasRemaining()) {
+            socketChannel.write(buffer);
+        }
     }
 
     private Document receiveXml() throws IOException, ParserConfigurationException {
@@ -129,21 +130,21 @@ public class MessageManager {
             byte[] stringByte = new byte[size];
             bufferForXml.get(stringByte);
             String xml = new String(stringByte, StandardCharsets.UTF_8);
-            InputSource is = new InputSource(new StringReader(xml));
-            return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(is);
+            InputSource inputSource = new InputSource(new StringReader(xml));
+            return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputSource);
         } catch (SAXException e) {
             throw new IOException();
         }
     }
 
     private Message convertDocumentToMessage(Document document) {
-        MessageType messageType = MessageType.valueOf(document.getDocumentElement().getElementsByTagName("type").item(0).getNodeValue());
+        MessageType messageType = MessageType.valueOf(document.getDocumentElement().getElementsByTagName("type").item(0).getTextContent());
         String text;
-        NodeList nodeListText = document.getDocumentElement().getElementsByTagName("user");
+        NodeList nodeListText = document.getDocumentElement().getElementsByTagName("text");
         if (nodeListText.getLength() == 0) {
             text = null;
         } else {
-            text = nodeListText.item(0).getNodeValue();
+            text = nodeListText.item(0).getTextContent();
         }
         List<String> nameUsers;
         NodeList nodeListUsers = document.getDocumentElement().getElementsByTagName("user");
@@ -152,10 +153,9 @@ public class MessageManager {
         } else {
             nameUsers = new ArrayList<>();
             for (int i = 0; i < nodeListUsers.getLength(); i++) {
-                nameUsers.add(nodeListUsers.item(i).getNodeValue());
+                nameUsers.add(nodeListUsers.item(i).getTextContent());
             }
         }
-        System.out.println(messageType.toString() + " " + text);
         return new Message(messageType, text, nameUsers);
     }
 

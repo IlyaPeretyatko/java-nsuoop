@@ -40,7 +40,6 @@ public class Client {
             selector = Selector.open();
             SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
             messageProcessing(selector, key);
-
         } catch (IOException | ClassNotFoundException | ParserConfigurationException e) {
             viewClient.errorDialogWindow("Not connected.");
         }
@@ -56,7 +55,9 @@ public class Client {
         ByteBuffer buffer = ByteBuffer.allocate(1);
         buffer.put(byteToSend);
         buffer.flip();
-        socketChannel.write(buffer);
+        while (buffer.hasRemaining()) {
+            socketChannel.write(buffer);
+        }
     }
 
     private void messageProcessing(Selector selector, SelectionKey key) throws IOException, ClassNotFoundException, ParserConfigurationException {

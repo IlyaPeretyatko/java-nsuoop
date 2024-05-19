@@ -93,10 +93,14 @@ public class Server {
         socketChannel.configureBlocking(false);
         SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
         ByteBuffer buffer = ByteBuffer.allocate(1);
-        socketChannel.read(buffer);
-        buffer.rewind();
-        byte receivedByte = buffer.get();
-        boolean isXmlProtocol = receivedByte == 1;
+        while (true) {
+            if (socketChannel.read(buffer) == 1) {
+                break;
+            }
+        }
+        buffer.flip();
+        boolean isXmlProtocol = buffer.get() == 1;
+        System.out.println(isXmlProtocol);
         protocols.put(key, isXmlProtocol);
         MessageManager messageManager = new MessageManager(socketChannel, isXmlProtocol);
         messageManager.send(new Message(MessageType.REQUEST_NAME_USER));
