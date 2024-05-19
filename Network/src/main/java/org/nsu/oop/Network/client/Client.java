@@ -116,8 +116,7 @@ public class Client {
             viewClient.refreshListUsers(nameUsers);
             viewClient.addMessage("Сервер: " + name + " отключился.\n");
         } else if (message.getMessageType() == MessageType.SERVER_STOP) {
-            socketChannel.close();
-            System.exit(0);
+            stopConnection();
         }
     }
 
