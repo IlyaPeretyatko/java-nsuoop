@@ -1,8 +1,5 @@
 package org.nsu.oop.Network.client;
 
-import org.nsu.oop.Network.communicate.Message;
-import org.nsu.oop.Network.communicate.MessageType;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

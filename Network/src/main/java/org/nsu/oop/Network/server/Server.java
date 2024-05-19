@@ -13,9 +13,12 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.*;
+import java.util.logging.Logger;
 
 
 public class Server {
+
+    private static final Logger log = Logger.getLogger(Server.class.getName());
 
     private ServerSocketChannel serverSocketChannel;
 
@@ -35,7 +38,8 @@ public class Server {
             isRun = true;
             clientsProcessing();
         } catch (IOException | ClassNotFoundException | ParserConfigurationException e) {
-            viewServer.errorDialogWindow("Error of working server..");
+            viewServer.errorDialogWindow("Error of working server.");
+            log.warning("Error of working server.");
         }
     }
 
@@ -45,6 +49,7 @@ public class Server {
         serverSocketChannel.bind(new InetSocketAddress("127.0.0.1", port));
         serverSocketChannel.configureBlocking(false);
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+        log.info("Server is up!.");
     }
 
     private void clientsProcessing() throws IOException, ClassNotFoundException, ParserConfigurationException {
@@ -74,9 +79,11 @@ public class Server {
                     user.getValue().channel().close();
                 }
                 serverSocketChannel.close();
+                log.info("Server is down!");
             }
         } catch (IOException | ParserConfigurationException e) {
             viewServer.errorDialogWindow("Error of stopping server.");
+            log.warning("Error of stopping server.");
         }
     }
 
@@ -101,6 +108,7 @@ public class Server {
         buffer.flip();
         boolean isXmlProtocol = buffer.get() == 1;
         protocols.put(key, isXmlProtocol);
+        log.info("Client is connected. SelectionKey: " + key + ". Xml protocol: " + isXmlProtocol + ".");
         MessageManager messageManager = new MessageManager(socketChannel, isXmlProtocol);
         messageManager.send(new Message(MessageType.REQUEST_NAME_USER));
     }
@@ -116,17 +124,20 @@ public class Server {
                 List<String> nameUsers = new ArrayList<>(users.keySet());
                 messageManager.send(new Message(MessageType.NAME_ACCEPTED, nameUsers));
                 sendEachUser(new Message(MessageType.USER_ADDED, name));
+                log.info("Client logined. Name: " + name + ". SelectionKey: " + key + ".");
             } else {
                 messageManager.send(new Message(MessageType.NAME_USED));
             }
         }  else if (message.getMessageType() == MessageType.TEXT_MESSAGE) {
             sendEachUser(new Message(MessageType.TEXT_MESSAGE, message.getText()));
+            log.info(message.getText());
         } else if (message.getMessageType() == MessageType.DISABLE_USER) {
             String name = message.getText();
             SelectionKey keyDisabled = users.get(name);
             keyDisabled.channel().close();
             users.remove(name);
             protocols.remove(keyDisabled);
+            log.info("User disabled. Name: " + name + ".");
             sendEachUser(new Message(MessageType.REMOVED_USER, name));
         }
     }
