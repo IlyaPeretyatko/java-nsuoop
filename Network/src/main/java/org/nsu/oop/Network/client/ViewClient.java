@@ -42,6 +42,7 @@ public class ViewClient {
             @Override
             public void windowClosing(WindowEvent e) {
                 client.stopConnection();
+                System.exit(0);
             }
         });
 

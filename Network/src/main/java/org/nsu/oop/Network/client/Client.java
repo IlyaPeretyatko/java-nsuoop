@@ -79,7 +79,6 @@ public class Client {
                 selector.close();
                 selectionKey.cancel();
                 socketChannel.close();
-                System.exit(0);
             }
         } catch (IOException | ParserConfigurationException e) {
             viewClient.errorDialogWindow("Error of stopping connection.");
