@@ -18,7 +18,7 @@ public class Client {
 
     private String name;
 
-    Set<String> nameUsers;
+    private Set<String> nameUsers;
 
     private static ViewClient viewClient;
 
