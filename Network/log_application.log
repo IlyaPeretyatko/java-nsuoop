@@ -1,0 +1,18 @@
+мая 30, 2024 2:36:58 PM org.nsu.oop.Network.server.Server upServer
+INFO: Server is up!.
+мая 30, 2024 2:37:10 PM org.nsu.oop.Network.server.Server connectingUser
+INFO: Client is connected. SelectionKey: channel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:6666 remote=/127.0.0.1:54650], selector=sun.nio.ch.EPollSelectorImpl@458c1321, interestOps=1, readyOps=0. Xml protocol: false.
+мая 30, 2024 2:37:12 PM org.nsu.oop.Network.server.Server interactionWithClients
+INFO: Client logined. Name: ilya. SelectionKey: channel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:6666 remote=/127.0.0.1:54650], selector=sun.nio.ch.EPollSelectorImpl@458c1321, interestOps=1, readyOps=1.
+мая 30, 2024 2:37:48 PM org.nsu.oop.Network.server.Server connectingUser
+INFO: Client is connected. SelectionKey: channel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:6666 remote=/127.0.0.1:40852], selector=sun.nio.ch.EPollSelectorImpl@458c1321, interestOps=1, readyOps=0. Xml protocol: false.
+мая 30, 2024 2:37:51 PM org.nsu.oop.Network.server.Server interactionWithClients
+INFO: Client logined. Name: 6666. SelectionKey: channel=java.nio.channels.SocketChannel[connected local=/127.0.0.1:6666 remote=/127.0.0.1:40852], selector=sun.nio.ch.EPollSelectorImpl@458c1321, interestOps=1, readyOps=1.
+мая 30, 2024 2:37:54 PM org.nsu.oop.Network.server.Server interactionWithClients
+INFO: 6666: dsfds
+мая 30, 2024 2:38:07 PM org.nsu.oop.Network.server.Server interactionWithClients
+INFO: ilya: mm
+мая 30, 2024 2:38:10 PM org.nsu.oop.Network.server.Server interactionWithClients
+INFO: User disabled. Name: ilya.
+мая 30, 2024 2:38:11 PM org.nsu.oop.Network.server.Server interactionWithClients
+INFO: User disabled. Name: 6666.

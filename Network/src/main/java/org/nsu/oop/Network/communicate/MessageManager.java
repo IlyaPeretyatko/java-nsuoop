@@ -40,15 +40,7 @@ public class MessageManager {
             int len = msg.length();
             sendXml(len, msg);
         } else {
-            try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                 ObjectOutput out = new ObjectOutputStream(baos)) {
-                out.writeObject(message);
-                byte[] msg = baos.toByteArray();
-                ByteBuffer buffer = ByteBuffer.wrap(msg);
-                while (buffer.hasRemaining()) {
-                    socketChannel.write(buffer);
-                }
-            }
+            sendSerialize(message);
         }
     }
 
@@ -57,14 +49,7 @@ public class MessageManager {
             Document document = receiveXml();
             return convertDocumentToMessage(document);
         } else {
-            ByteBuffer buffer = ByteBuffer.allocate(2048);
-            int bytesRead = socketChannel.read(buffer);
-            byte[] receivedBytes = new byte[bytesRead];
-            buffer.flip();
-            buffer.get(receivedBytes);
-            try (ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(receivedBytes))) {
-                return (Message) in.readObject();
-            }
+            return receiveDeserialize();
         }
     }
 
@@ -108,6 +93,22 @@ public class MessageManager {
         }
     }
 
+    private void sendSerialize(Message message) throws IOException {
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+             ObjectOutput out = new ObjectOutputStream(baos)) {
+            out.writeObject(message);
+            byte[] msg = baos.toByteArray();
+            int len = msg.length;
+            ByteBuffer buffer = ByteBuffer.allocate(4 + len);
+            buffer.putInt(len);
+            buffer.put(msg);
+            buffer.flip();
+            while (buffer.hasRemaining()) {
+                socketChannel.write(buffer);
+            }
+        }
+    }
+
     private void sendXml(int len, String xml) throws IOException {
         ByteBuffer buffer = ByteBuffer.allocate(4 + len);
         buffer.putInt(len);
@@ -121,23 +122,17 @@ public class MessageManager {
     private Document receiveXml() throws IOException, ParserConfigurationException {
         try {
             ByteBuffer buffer = ByteBuffer.allocate(4);
-            while (true) {
-                int receivedBytes = 0;
+            int receivedBytes = 0;
+            do {
                 receivedBytes += socketChannel.read(buffer);
-                if (receivedBytes == 4) {
-                    break;
-                }
-            }
+            } while (receivedBytes != 4);
             buffer.flip();
             int size = buffer.getInt();
             ByteBuffer bufferForXml = ByteBuffer.allocate(size);
-            while (true) {
-                int receivedBytes = 0;
+            receivedBytes = 0;
+            do {
                 receivedBytes += socketChannel.read(bufferForXml);
-                if (receivedBytes == size) {
-                    break;
-                }
-            }
+            } while (receivedBytes != size);
             bufferForXml.flip();
             byte[] stringByte = new byte[size];
             bufferForXml.get(stringByte);
@@ -146,6 +141,27 @@ public class MessageManager {
             return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(inputSource);
         } catch (SAXException e) {
             throw new IOException();
+        }
+    }
+
+    private Message receiveDeserialize() throws IOException, ClassNotFoundException {
+        ByteBuffer buffer = ByteBuffer.allocate(4);
+        int receivedBytes = 0;
+        do {
+            receivedBytes += socketChannel.read(buffer);
+        } while (receivedBytes != 4);
+        buffer.flip();
+        int size = buffer.getInt();
+        ByteBuffer bufferForMessage = ByteBuffer.allocate(size);
+        receivedBytes = 0;
+        do {
+            receivedBytes += socketChannel.read(bufferForMessage);
+        } while (receivedBytes != size);
+        bufferForMessage.flip();
+        byte[] seqBytes = new byte[size];
+        bufferForMessage.get(seqBytes);
+        try (ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(seqBytes))) {
+            return (Message) in.readObject();
         }
     }
 
